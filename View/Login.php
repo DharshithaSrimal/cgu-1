@@ -8,8 +8,8 @@
   <meta name="description" content="Career Guidance Unit - System">
   <meta name="author" content="CGU-UOK">
 
-  <link rel="stylesheet" href="res/css/Login.css">
-  <?php $loadingPositon = 'header'; include 'Common/CommonResources.php'; ?>
+  <link rel="stylesheet" href="../res/css/Login.css">
+  <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 
 </head>
 
@@ -28,9 +28,9 @@
         <input id="submitLogin" type="button" value="Submit">
     </div>
 </div>
-  <?php $loadingPositon = 'footer'; include 'Common/CommonResources.php'; ?>
+  <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 </body>
-<script src="res/js/Login.js"></script>
+<script src="../res/js/Login.js"></script>
 </html>
 
 <?php
