@@ -23,8 +23,10 @@
     <div>
         <label>Student Number:</label>
         <input id="stuNumber" type="text">
+
         <label>Password :</label>
         <input id="password" type="password">
+        
         <input id="submitLogin" type="button" value="Submit">
     </div>
 </div>
