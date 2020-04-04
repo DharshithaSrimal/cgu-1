@@ -1,11 +1,18 @@
 <?php 
 class DbCon{
-    private $servername = "us-cdbr-iron-east-01.cleardb.net";
-    private $username = "bc000a9d35d22f";
-    private $password = "6580f159";
-    private $dbname = "heroku_6d77d31d03d7e6f";
+    private $servername;
+    private $username;
+    private $password;
+    private $dbname;
 
     public static function connection() {
+
+         $servername = "us-cdbr-iron-east-01.cleardb.net";
+         $username = "bc000a9d35d22f";
+         $password = "6580f159";
+         $dbname = "heroku_6d77d31d03d7e6f";
+
+        $conn = null;
         try {
             $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             // set the PDO error mode to exception

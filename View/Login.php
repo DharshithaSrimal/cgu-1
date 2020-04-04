@@ -36,7 +36,10 @@
 </html>
 
 <?php
+    include_once '..\Model\User.php';
 
-$sdsd = "";
+    session_start();
+
+    echo (unserialize($_SESSION["current_user"])->getFname()) ;
 ?>
 
