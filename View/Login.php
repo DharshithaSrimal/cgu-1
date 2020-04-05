@@ -37,9 +37,21 @@
 
 <?php
     include_once '..\Model\User.php';
-
     session_start();
 
-    echo (unserialize($_SESSION["current_user"])->getFname()) ;
+    if($_SESSION["current_user"] != null){
+        echo ("
+            <div>
+            <br>
+                <p>Logged in as".unserialize($_SESSION['current_user'])->getFname()."</p>
+                <p>will be redirected to CGU home... </p>
+            </div>
+            "
+        );
+
+        header("Location: ../View/Home.php");
+        exit();
+    }
+
 ?>
 
