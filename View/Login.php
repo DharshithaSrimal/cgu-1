@@ -49,7 +49,7 @@
             "
         );
 
-        header("Location: ../View/Home.php");
+        header("Location: ./Home.php");
         exit();
     }
 
