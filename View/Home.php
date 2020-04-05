@@ -26,7 +26,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     </div>
     <div>
         <?php
-            include_once '..\Model\User.php';
+            include_once '../Model/User.php';
 
             if(isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null){
                 echo ("
