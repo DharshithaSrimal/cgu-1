@@ -28,12 +28,12 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         <?php
             include_once '..\Model\User.php';
 
-            if(!isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null){
+            if(isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null){
                 echo ("
-                <br>
-                <div>
-                    <p>Logged in as ".unserialize($_SESSION['current_user'])->getFname()."</p>
-                </div>
+                    <br>
+                    <div>
+                        <p>Logged in as ".unserialize($_SESSION['current_user'])->getFname()."</p>
+                    </div>
                 "
                 );
             }
