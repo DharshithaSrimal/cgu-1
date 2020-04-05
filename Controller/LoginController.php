@@ -1,18 +1,32 @@
-<?php 
+<?php
     include_once '..\Common\DbCon.php';
     include_once '..\Model\User.php';
 
-    $userName=$_POST['userName'];
-    $pw=$_POST['pw'];
-    //echo $userName;
+    session_start();
 
-    function verifyUser($userName,$pw){
+    $userName;
+    $pw;
+    $method;
 
-        $con = DbCon::connection();
-        $sql="select * from user where user.user_id = '".$userName."' and user.password = '".$pw."'";
-        $res=$con->query($sql);
-        $conn = null; //closing connection
-        if($res)
+    if(!empty($_POST['method'])) {
+        $method =$_POST['method'];
+    }
+    if(!empty($_POST['userName'])) {
+        $userName=$_POST['userName'];
+    }
+    if(!empty($_POST['pw'])) {
+        $pw=$_POST['pw'];
+    }
+
+    if($method == 'login' && isset($pw) && isset($userName)){
+        //echo $userName;
+        function verifyUser($userName,$pw){
+
+            $con = DbCon::connection();
+            $sql="select * from user where user.user_id = '".$userName."' and user.password = '".$pw."'";
+            $res=$con->query($sql);
+            $conn = null; //closing connection
+            if($res)
             {
                 $user_obj = new User();
                 while($row = $res->fetch(PDO::FETCH_BOTH)){
@@ -26,15 +40,21 @@
                 }
                 return $user_obj;
             }
-        else
+            else
             {
                 return null;
             }
+        }
+        $curr_user = verifyUser($userName,$pw);
+        $_SESSION["current_user"] = serialize($curr_user);
+        echo "login success";
     }
 
-    session_start();
-    $curr_user = verifyUser($userName,$pw);
-    var_dump(serialize($curr_user));
-    $_SESSION["current_user"] = serialize($curr_user);
+
+    if($method == 'logout'){
+        session_unset();
+        session_destroy();
+        echo "logout success";
+    }
 
 ?>

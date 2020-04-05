@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
+    header("Location: ./Login.php");
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,10 +15,6 @@
     <meta name="author" content="CGU-UOK">
     <link rel="stylesheet" href="../res/css/Home.css">
     <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
-    <?php
-        session_start();
-    ?>
-
 </head>
 
 <body>
@@ -24,7 +28,7 @@
         <?php
             include_once '..\Model\User.php';
 
-            if($_SESSION["current_user"] != null){
+            if(!isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null){
                 echo ("
                 <br>
                 <div>
@@ -35,6 +39,7 @@
             }
         ?>
     </div>
+    <button id="btnLogout">Logout</button>
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 </body>

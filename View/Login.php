@@ -39,7 +39,7 @@
     include_once '..\Model\User.php';
     session_start();
 
-    if($_SESSION["current_user"] != null){
+    if(isset($_SESSION["current_user"])&& $_SESSION["current_user"]!= null){
         echo ("
             <div>
             <br>
