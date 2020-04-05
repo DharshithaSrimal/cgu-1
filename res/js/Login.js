@@ -11,10 +11,13 @@ $("#submitLogin").click(function(){
       data: 'pw='+pw+'&userName='+userName+'&method='+method,
       cache: false,
       success: function(result){
-
+          //alert(result)
           if(result == "login success"){
-              window.location.replace("../View/Login.php");
+              window.location.replace("../View/Home.php");
           }
+          if(result == "login failed"){
+           $("#errorMsg").text("Login failed. Check user name and password again");
+        }
   
       }
   });

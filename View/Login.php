@@ -27,7 +27,10 @@
         <label>Password :</label>
         <input id="password" type="password">
         
+        
         <input id="submitLogin" type="button" value="Submit">
+
+        <p id="errorMsg"></p>
     </div>
 </div>
   <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>

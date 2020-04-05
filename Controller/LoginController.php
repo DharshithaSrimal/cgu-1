@@ -1,6 +1,6 @@
 <?php
-    include_once '..\Common\DbCon.php';
-    include_once '..\Model\User.php';
+    include_once '../Common/DbCon.php';
+    include_once '../Model/User.php';
 
     session_start();
 
@@ -46,8 +46,16 @@
             }
         }
         $curr_user = verifyUser($userName,$pw);
-        $_SESSION["current_user"] = serialize($curr_user);
-        echo "login success";
+        if( $curr_user->getFname() != null){
+            $_SESSION["current_user"] = serialize($curr_user);
+            echo "login success";
+        }
+        else
+        {
+            echo "login failed";
+        }
+
+       
     }
 
 
