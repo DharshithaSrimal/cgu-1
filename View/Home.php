@@ -21,8 +21,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
 <div>
     <div>
-        <h1>Career Guidance Unit - UOK</h1>
-        <h2>Home</h2>
+
     </div>
     <div>
         <?php
@@ -32,14 +31,14 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                 echo ("
                     <br>
                     <div>
-                        <p>Logged in as ".unserialize($_SESSION['current_user'])->getFname()."</p>
+                        <p>Welcome ".unserialize($_SESSION['current_user'])->getFname()."</p>
                     </div>
                 "
                 );
             }
         ?>
     </div>
-    <button id="btnLogout">Logout</button>
+
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 </body>
