@@ -45,6 +45,7 @@
                 return null;
             }
         }
+
         $curr_user = verifyUser($userName,$pw);
         if( $curr_user->getFname() != null){
             $_SESSION["current_user"] = serialize($curr_user);

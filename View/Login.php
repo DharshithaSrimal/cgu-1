@@ -9,7 +9,9 @@
   <meta name="author" content="CGU-UOK">
 
   <link rel="stylesheet" href="../res/css/Login.css">
-  <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
+  <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap.css'>
+  <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap-grid.css'>
+<!--  --><?php //$loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 
 </head>
 

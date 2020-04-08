@@ -77,6 +77,30 @@
 
         private $rate;
         private $fac_id;
+        private $facName;
+        private $degName;
+
+
+        public function getDegName()
+        {
+            return $this->degName;
+        }
+
+        public function setDegName($degName)
+        {
+            $this->degName = $degName;
+        }
+
+        public function getFacName()
+        {
+            return $this->facName;
+        }
+
+        public function setFacName($facName)
+        {
+            $this->facName = $facName;
+        }
+
         private $deg_id;
     
         function __construct(){
