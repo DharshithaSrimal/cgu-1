@@ -1,68 +1,58 @@
 <?php
     include_once '../Common/DbCon.php';
     include_once '../Model/User.php';
+    require_once "Mail.php";
 
     session_start();
 
-    $userName;
-    $pw;
     $method;
 
     if(!empty($_POST['method'])) {
-        $method =$_POST['method'];
-    }
-    if(!empty($_POST['userName'])) {
-        $userName=$_POST['userName'];
-    }
-    if(!empty($_POST['pw'])) {
-        $pw=$_POST['pw'];
+        $method = $_POST['method'];
     }
 
-    if($method == 'login' && isset($pw) && isset($userName)){
-        //echo $userName;
-        function verifyUser($userName,$pw){
+    if($method == 'verify_email'){
 
-            $con = DbCon::connection();
-            $sql="select * from user where user.user_id = '".$userName."' and user.password = '".$pw."'";
-            $res=$con->query($sql);
-            $conn = null; //closing connection
-            if($res)
-            {
-                $user_obj = new User();
-                while($row = $res->fetch(PDO::FETCH_BOTH)){
-                    $user_obj->setFname($row["fname"]);
-                    $user_obj->setLname($row["lname"]);
-                    $user_obj->setEmail($row["email"]);
-                    $user_obj->setDob($row["dob"]);
-                    $user_obj->setUser_id($row["user_id"]);
-                    $user_obj->setTpnumber($row["tpnumber"]);
-                    $user_obj->setImage($row["image"]);
-                }
-                return $user_obj;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        $curr_user = verifyUser($userName,$pw);
-        if( $curr_user->getFname() != null){
-            $_SESSION["current_user"] = serialize($curr_user);
-            echo "login success";
-        }
-        else
-        {
-            echo "login failed";
+        $smtp = Mail::factory('smtp', array(
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => '465',
+            'auth' => true,
+            'username' => 'gmail.com',
+            'password' => ''
+        ));
+
+
+        $firstName =$_POST['firstName'];
+        $lastName =$_POST['lastName'];
+        $email =$_POST['email'];
+
+        $from = '<cgu@noreply.com>';
+        $to = '<'.$email.'>';
+        $subject = 'Hi!';
+        $body = "Hi ".$firstName.",\n\nYour verification code is ".$verCode;
+
+        $headers = array(
+            'From' => $from,
+            'To' => $to,
+            'Subject' => $subject
+        );
+
+        $mail = $smtp->send($to, $headers, $body);
+
+        if (PEAR::isError($mail)) {
+            echo('<p>' . $mail->getMessage() . '</p>');
+        } else {
+            echo('<p>Message successfully sent!</p>');
         }
 
-       
     }
 
+    if($method == 'create_account'){
 
-    if($method == 'logout'){
-        session_unset();
-        session_destroy();
-        echo "logout success";
+    }
+
+    function generateVerificationCode(){
+        return rand(100000,1000000)
     }
 
 ?>
