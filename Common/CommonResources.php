@@ -7,11 +7,11 @@ if($loadingPositon == "header"){
             <div class=\"collapse navbar-collapse\"
                 id=\"navcol-1\">
                 <ul class=\"nav navbar-nav\">
-                    <li class=\"nav-item\" role=\"presentation\"><a class=\"nav-link\" href=\"#\">About Us</a></li>
+                    <li class=\"nav-item\" role=\"presentation\"><a class=\"nav-link\" href=\"../View/Profile.php\">About Us</a></li>
                     <li class=\"nav-item\" role=\"presentation\"><a class=\"nav-link\" href=\"#\">Contact Us</a></li>
                     <li class=\"nav-item\" role=\"presentation\"><a class=\"nav-link\" href=\"#\">My Profile</a></li>
                 </ul>
-                <button id=\"btnLogout\">Logout</button>
+                <button id=\"btnLogout\">Log out now</button>
             </div>
         </div>
         </nav>
