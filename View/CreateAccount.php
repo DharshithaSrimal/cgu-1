@@ -131,7 +131,7 @@
                         <div class="col-sm-9">
                             <input type="text" placeholder="Enter the verification code" id="verificationCode" name="verificationCode" class="form-control" >
                             <p id="verificationError"></p>
-                            <button>Resend</button>
+                            <button Id="btnResendVer">Resend</button>
                         </div>
                     </div>
                 </form>

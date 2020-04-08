@@ -42,15 +42,29 @@ $("#btnNextCreateAccount").click(function () {
                 //cache: false,
                 success: function(result){
                     //alert(result)
-                    if(result == ""){
-                       // window.location.replace("../View/Login.php");
+                        if(result == ""){
+                           // window.location.replace("../View/Login.php");
+                        }
                     }
-
-                }
-            });
+                });
         }
          if(page3visible){
 
+             let method = "create_account";
+             let verCode = $("#verificationCode").val();
+             let email = $("#email").val();
+             $.ajax({
+                 type: "POST",
+                 url: "../Controller/AccountController.php",
+                 data: '&method='+method+'&verCode='+verCode+'&email='+email,
+                 //cache: false,
+                 success: function(result){
+                     alert(result)
+                     if(result == ""){
+
+                     }
+                 }
+             });
         }
 
     }
@@ -68,4 +82,23 @@ $("#btnBackPage3").click(function () {
     $("#page2CreateAccount").show();
     $("#page3CreateAccount").hide();
     $("#btnNextCreateAccount").text("Next");
+});
+
+$("#btnResendVer").click(function () {
+    let method = "verify_email";
+    let firstName = $("#firstName").val();
+    let lastName =$("#lastName").val();
+    let email =$("#email").val();
+    $.ajax({
+        type: "POST",
+        url: "../Controller/AccountController.php",
+        data: '&method='+method+'&firstName='+firstName+'&lastName='+lastName+'&email='+email,
+        //cache: false,
+        success: function(result){
+            //alert(result)
+            if(result == ""){
+                // window.location.replace("../View/Login.php");
+            }
+        }
+    });
 });
