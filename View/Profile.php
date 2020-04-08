@@ -30,16 +30,32 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             $faculty;
             $degree;
 
-            if(isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null){
+            if(isset($_SESSION["student_user"]) || $_SESSION["student_user"] != null){
                 $firstName = unserialize($_SESSION['student_user'])->getFname();
-                $lastName = unserialize($_SESSION['current_user'])->getLname();
-                $userImage = unserialize($_SESSION['current_user'])->getImage();
-                //$faculty = unserialize($_SESSION['current_user'])->getFac_id();
-                //$degree = unserialize($_SESSION['current_user'])->getDeg_id();
+                $lastName = unserialize($_SESSION['student_user'])->getLname();
+                $userImage = unserialize($_SESSION['student_user'])->getImage();
+                $faculty = unserialize($_SESSION['student_user'])->getFacName();
+                $degree = unserialize($_SESSION['student_user'])->getDegName();
             }
-            echo $firstName ;
+            echo  ("
+            <div>
+            <br>
+                <p>Profile Picture : ".$userImage."</p><br>
+                <p>Name : ".$firstName." ".$lastName."</p><br>
+                <p>Degree Programme : ".$degree."</p><br>
+                <p>Faculty : ".$faculty."</p><br>
+            </div>
+            "
+            );
+            
             ?>
-
+        <div>
+            <button>Inquiry</button>
+            <button>View Events</button>
+            <button>Video Tutorials</button>
+            <button>View CGU Staff</button>
+            <button>View Degree Contents</button>
+        </div>
         </div>
 
     </div>
