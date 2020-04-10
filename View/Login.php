@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../res/css/Login.css">
   <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap.css'>
   <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap-grid.css'>
-<!--  --><?php //$loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
+  <?php //$loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 
 </head>
 
@@ -46,7 +46,7 @@
           </div>
 
         </div>
-        <!---- /////////////////////////about us modal end////////////////////////////////////// ----!>
+        <!---- /////////////////////////about us modal end////////////////////////////////////// --->
 
     </div>
     <div>

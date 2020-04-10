@@ -37,6 +37,8 @@
                     $user_obj->setUser_id($row["user_id"]);
                     $user_obj->setTpnumber($row["tpnumber"]);
                     $user_obj->setImage($row["image"]);
+                    $user_obj->setGender($row["gender"]);
+                    $user_obj->setRole($row["user_role"]);
                 }
                 return $user_obj;
             }

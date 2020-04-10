@@ -30,10 +30,19 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                 echo ("
                     <br>
                     <div>
-                        <p>Welcome ".unserialize($_SESSION['current_user'])->getFname()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getFname()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getLname()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getGender()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getEmail()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getDob()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getTpnumber()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getUser_id()."</p>
+                        <p>".unserialize($_SESSION['current_user'])->getRole()."</p>
                     </div>
                 "
                 );
+
+                echo '<img src=\"data:image/jpg;base64,' .base64_encode(unserialize($_SESSION['current_user'])->getImage()). '\" />';
             }
         ?>
     </div>

@@ -8,6 +8,8 @@
         private $tpnumber;
         private $image;
         private $user_id;
+        private $role;
+        private $gender;
 
 
         public function __construct()
@@ -66,9 +68,25 @@
         public function getUser_id(){
             return $this->user_id;
         }
-    
+
         public function setUser_id($user_id){
             $this->user_id = $user_id;
+        }
+
+        public function getGender(){
+            return $this->gender;
+        }
+
+        public function setGender($gender){
+            $this->gender = $gender;
+        }
+
+        public function getRole(){
+            return $this->role;
+        }
+
+        public function setRole($role){
+            $this->role = $role;
         }
 
     }
