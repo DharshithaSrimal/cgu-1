@@ -2,7 +2,7 @@
     include_once '../Common/DbCon.php';
     include_once '../Model/User.php';
     require_once "Mail.php";
-    date_default_timezone_set('	Asia/Colombo');
+    @date_default_timezone_set('	Asia/Colombo');
 
     session_start();
 
@@ -31,7 +31,11 @@
         //$verCode should be saved in verification_code_store table
         $con = DbCon::connection();
         $sql = "INSERT INTO verification_code_store(email,verification_code,created_time) VALUES ('".$email."',".$verCode.",'".date("Y-m-d H:i:s")."')";
-        $res=$con->query($sql);
+        try{
+            $res=$con->query($sql);
+        }catch (PDOException $e){
+
+        }
         $con = null; //closing connection
 
         $from = '<cgu@noreply.com>';
@@ -66,12 +70,19 @@
         $dob=$_POST['dob'];
         $tpnumber=$_POST['tpnumber'];
         $user_role=$_POST['user_role'];
-        $image=$_POST['image'];
+        $image;
+        if(isset($_FILES['image']) and !$_FILES['image']['error']){
+            $image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
+        }
         $password=$_POST['password'];
 
         $con = DbCon::connection();
         $sql = "SELECT *  FROM verification_code_store v WHERE v.email='".$email."'ORDER BY created_time DESC LIMIT 1 ";
-        $res=$con->query($sql);
+        try{
+            $res=$con->query($sql);
+        }catch (PDOException $e){
+
+        }
 
         if($res){
             $codeValidTime;
@@ -104,7 +115,11 @@
                      '".$password."','".$dob."','".$tpnumber."','".$image."',
                      '".$user_role."','".$gender."');
                      ";
-                     $res=$con->query($sql);
+                    try{
+                        $res=$con->query($sql);
+                    }catch (PDOException $e){
+
+                    }
                     echo "Account created";
                 }
             }

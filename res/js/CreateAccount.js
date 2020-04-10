@@ -5,6 +5,17 @@ window.onload =
         $("#page3CreateAccount").hide();
 };
 
+var user_id;
+var fname;
+var lname;
+var gender;
+var email;
+var dob;
+var tpnumber;
+var password;
+var user_role="student";
+
+
 $("#btnNextCreateAccount").click(async function () {
 
     //if page1CreateAccount is visibale make it visible = false and make page2CreateAccount visible
@@ -12,26 +23,18 @@ $("#btnNextCreateAccount").click(async function () {
     var page2visible = $("#page2CreateAccount").is(":visible")
     var page3visible = $("#page3CreateAccount").is(":visible")
 
-    var user_id;
-    var fname;
-    var lname;
-    var gender;
-    var email;
-    var dob;
-    var tpnumber;
-    var password;
-    var user_role="student";
-
-
         if(page1visible){
 
             let next1= false; let next2= false; let next3= false; let next4= false; let next5 = false;
 
              user_id=$("#indexNo").val();
+             if(user_id != null || user_id != ""){ user_id.toUpperCase();}
              fname =$("#firstName").val();
              lname=$("#lastName").val();
              gender=$("input[name='gender']:checked").val();
              email=$("#email").val();
+             dob=$("#birthDate").val();
+             tpnumber=$("#phoneNumber").val();
 
             let msg  =[];
 
@@ -41,7 +44,7 @@ $("#btnNextCreateAccount").click(async function () {
             if( gender == null|| gender == ""){next4=false; msg.push("Gender");} else next4=true ;
             if(email == null|| email == ""){next5=false; msg.push("Email");} else next5=true ;
 
-            if(next1 && next2 && next3 && next4 && next5){
+           if(next1 && next2 && next3 && next4 && next5){
                 $("#page1CreateAccount").hide();
                 $("#page2CreateAccount").show();
                 $("#page3CreateAccount").hide();
@@ -60,7 +63,7 @@ $("#btnNextCreateAccount").click(async function () {
             password=$("#userPassword").val();
 
             if(password == null|| password == ""){next1=false; msg.push("Password");}else next1=true ;
-            if(next1){
+           if(next1){
                 $("#page1CreateAccount").hide();
                 $("#page2CreateAccount").hide();
                 $("#page3CreateAccount").show();
@@ -98,20 +101,35 @@ $("#btnNextCreateAccount").click(async function () {
 
              var method = "create_account";
              let image=document.querySelector('#userImage').files[0];
-             image =  await getBlob(image);
+             image =  await getBase64(image);
+
+            // console.log(JSON.stringify(image));
 
              if(next1){
-                 let dataString = '&method='+method+'&verCode='+verCode+'&user_id='+user_id+'&fname='+fname+'&lname='+lname+'&gender='+gender+'&email='+email+'&dob='+dob+'&tpnumber='+tpnumber+'&user_role='+user_role+'&image='+image+'&password='+password;
-
+                 //let dataSet = '&method='+method+'&verCode='+verCode+'&user_id='+user_id+'&fname='+fname+'&lname='+lname+'&gender='+gender+'&email='+email+'&dob='+dob+'&tpnumber='+tpnumber+'&user_role='+user_role+'&image='+image+'&password='+password;
+                 let dataSet = new FormData();
+                 dataSet.append('method', method);
+                 dataSet.append('verCode', verCode);
+                 dataSet.append('user_id', user_id);
+                 dataSet.append('fname', fname);
+                 dataSet.append('lname', lname);
+                 dataSet.append('gender', gender);
+                 dataSet.append('email', email);
+                 dataSet.append('dob', dob);
+                 dataSet.append('tpnumber', tpnumber);
+                 dataSet.append('user_role', user_role);
+                 dataSet.append('password', password);
+                 dataSet.append('image', image);
                  $.ajax({
                      type: "POST",
                      url: "../Controller/AccountController.php",
-                     data: dataString,
-                     //cache: false,
+                     data: dataSet,
+                     contentType: false,
+                     processData: false,
                      success: function(result){
-                         alert(result)
-                         if(result == ""){
-
+                         alert(result);
+                         if(result == "Account created"){
+                             window.location.replace("../View/Login.php");
                          }
                      }
                  });
@@ -158,7 +176,7 @@ $("#btnResendVer").click(function () {
     });
 });
 
- async function getBlob(file) {
+ async function getBase64(file) {
 
      var string64;
      var imgReader = new FileReader();
@@ -174,18 +192,29 @@ $("#btnResendVer").click(function () {
 
      let result = await promise;
 
-     //var byteString = atob(result.split(',')[1]);
-     var byteCharacters = atob(result.split(',')[1]);
-     var byteNumbers = new Array(byteCharacters.length);
-     for (let i = 0; i < byteCharacters.length; i++) {
-         byteNumbers[i] = byteCharacters.charCodeAt(i);
-     }
-     var byteArray = new Uint8Array(byteNumbers);
+     return dataURItoBlob(result);
 
-     var blob = new Blob([byteArray], { type: 'image/jpeg' });
 
-     return blob;
  }
+
+function dataURItoBlob(dataURI) {
+    // convert base64 to raw binary data held in a string
+    var byteString = atob(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    // write the ArrayBuffer to a blob, and you're done
+    var bb = new Blob([ab],{ type: 'image/jpeg' });
+    return bb;
+}
 
  function showAlert(msg){
      var msg_string = "" ;

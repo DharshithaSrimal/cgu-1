@@ -42,7 +42,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                 "
                 );
 
-                echo '<img src=\"data:image/jpg;base64,' .base64_encode(unserialize($_SESSION['current_user'])->getImage()). '\" />';
+                echo '<img width="200px" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'" />';
             }
         ?>
     </div>
