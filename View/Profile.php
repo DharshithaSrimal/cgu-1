@@ -50,7 +50,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             
             ?>
         <div>
-            <button>Inquiry</button>
+            <button onclick="window.location.href='../View/Inquiry.php'">Inquiry</button>
             <button>View Events</button>
             <button>Video Tutorials</button>
             <button>View CGU Staff</button>
