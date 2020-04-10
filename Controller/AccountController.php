@@ -45,14 +45,13 @@
             'Subject' => $subject
         );
 
-        $mail = $smtp->send($to, $headers, $body);
+        //$mail = $smtp->send($to, $headers, $body);
 
         if (PEAR::isError($mail)) {
             echo('<p>' . $mail->getMessage() . '</p>');
         } else {
-            echo('<p>Message successfully sent!</p>');
+            echo('<p>Message successfully sent! '.$verCode.'</p>');
         }
-
     }
 
     if($method == 'create_account'){
@@ -60,10 +59,20 @@
         $enteredVerCode =$_POST['verCode'];
         $email =$_POST['email'];
 
+        $user_id= $_POST['user_id'];
+        $fname=$_POST['fname'];
+        $lname=$_POST['lname'];
+        $gender=$_POST['gender'];
+        $dob=$_POST['dob'];
+        $tpnumber=$_POST['tpnumber'];
+        $user_role=$_POST['user_role'];
+        $image=$_POST['image'];
+        $password=$_POST['password'];
+
         $con = DbCon::connection();
         $sql = "SELECT *  FROM verification_code_store v WHERE v.email='".$email."'ORDER BY created_time DESC LIMIT 1 ";
         $res=$con->query($sql);
-        echo "echo result "+$res;
+
         if($res){
             $codeValidTime;
             $codeCreatedTime;
@@ -86,18 +95,22 @@
                 }
                 else{
                     //save account details to the database
+                     $sql = "INSERT INTO user
+                     (user_id,fname,lname,email,
+                     password,dob,tpnumber,image,
+                     user_role,gender)
+                     VALUES
+                     ('".$user_id."','".$fname."','".$lname."','".$email."',
+                     '".$password."','".$dob."','".$tpnumber."','".$image."',
+                     '".$user_role."','".$gender."');
+                     ";
+                     $res=$con->query($sql);
                     echo "Account created";
                 }
             }
             else{
                 echo "Invalid verification code";
             }
-
-
-//            var_dump( $currentTime);
-//            var_dump( $codeCreatedTime);
-//            var_dump( $timeDif->format('%y years %m months %a days %h hours %i minutes %s seconds'));
-
         }
         $con = null; //closing connection
 

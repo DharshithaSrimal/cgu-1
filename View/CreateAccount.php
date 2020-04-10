@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3">Upload Photo:</label><br />
                     <div class="col-sm-9">
-                            <input name="userImage" type="file" class="inputFile" />
+                            <input id="userImage" type="file" class="inputFile" />
                     </div>
                 </div>
 
@@ -143,6 +143,7 @@
 
    <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
    <script src="../res/js/CreateAccount.js"></script>
+
 </body>
 </html>
 
