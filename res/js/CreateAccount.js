@@ -48,33 +48,27 @@ $("#btnNextCreateAccount").click(async function () {
                 $("#btnNextCreateAccount").text("Next");
             }
             else {
-                var msg_string = "" ;
-                try{ msg.forEach(function(item,index){
-                    msg_string += item + (msg.length>1 & index!=(msg.length-1)?", ":"");
-                });
-                }
-                catch (e) {
-                    console.log(e);
-                }
-
-                alert( msg_string + (msg.length>1?" are ":" is ")+"required");
+                showAlert(msg);
             }
 
         }
 
         if(page2visible){
-            let next;
+            let next1;
+            let msg  =[];
 
-             password=$("#userPassword").val();
+            password=$("#userPassword").val();
 
-            password == null|| password == ""? (()=>{next=false;alert("Password is required")}): next=true ;
-
-            if(next){
+            if(password == null|| password == ""){next1=false; msg.push("Password");}else next1=true ;
+            if(next1){
                 $("#page1CreateAccount").hide();
                 $("#page2CreateAccount").hide();
                 $("#page3CreateAccount").show();
 
                 $("#btnNextCreateAccount").text("Create account");
+            }else
+            {
+                showAlert(msg);
             }
 
 
@@ -96,17 +90,17 @@ $("#btnNextCreateAccount").click(async function () {
          if(page3visible){
 
 
-             let next;
-
+             let next1;
+             let msg  =[];
              let verCode = $("#verificationCode").val();
 
-             verCode == null ||  verCode == ""? (()=>{next=false;alert("Please insert the verification code")}): next=true ;
+             if(verCode == null ||  verCode == ""){next1=false; msg.push("Verification code");}else next1=true ;
 
              var method = "create_account";
              let image=document.querySelector('#userImage').files[0];
              image =  await getBlob(image);
 
-             if(next){
+             if(next1){
                  let dataString = '&method='+method+'&verCode='+verCode+'&user_id='+user_id+'&fname='+fname+'&lname='+lname+'&gender='+gender+'&email='+email+'&dob='+dob+'&tpnumber='+tpnumber+'&user_role='+user_role+'&image='+image+'&password='+password;
 
                  $.ajax({
@@ -121,6 +115,10 @@ $("#btnNextCreateAccount").click(async function () {
                          }
                      }
                  });
+             }
+             else
+             {
+                 showAlert(msg);
              }
         }
 
@@ -187,4 +185,12 @@ $("#btnResendVer").click(function () {
      var blob = new Blob([byteArray], { type: 'image/jpeg' });
 
      return blob;
+ }
+
+ function showAlert(msg){
+     var msg_string = "" ;
+     msg.forEach(function(item,index){
+         msg_string += item + (msg.length>1 & index!=(msg.length-1)?", ":"");
+     });
+     alert( msg_string + (msg.length>1?" are ":" is ")+"required");
  }
