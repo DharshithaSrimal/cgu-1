@@ -15,7 +15,6 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <meta name="author" content="CGU-UOK">
     <link rel="stylesheet" href="../res/css/Home.css">
     <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
-    <script src="../res/js/Profile.js"></script>
 </head>
 
 <body>
@@ -24,21 +23,22 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <button>View Inquiry History</button><br><br>
     <div>
         <label for="inquiry">Select Inquiry Type:</label>
-        <select id="inquiry">
-            <option value="selection">Level one Subject Selection</option>
-            <option value="optional">Optional Subjects</option>
-            <option value="lorem">lorem ipsum</option>
-            <option value="ipsum">lorem ipsum</option>
+        <select id="inquiryType">
+            <option value="Level one Subject Selection">Level one Subject Selection</option>
+            <option value="Level two Subject Selection">Level two Subject Selection</option>
+            <option value="Level three Subject Selection">Level three Subject Selection</option>
+            <option value="Level four Subject Selection">Level four Subject Selection</option>
         </select>
         <br><br>
         <label for="composeInquiry">Compose Your Inquiry:</label>
-
         <textarea id="composeInquiry" rows="4" cols="50"></textarea>
+
+        <input id="submitInquiry" type="button" value="Submit">
     </div>
-    <button>Send</button>
 </div>
 
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
+<script src="../res/js/Inquiry.js"></script>
 </body>
 
 </html>
