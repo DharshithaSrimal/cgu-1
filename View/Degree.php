@@ -14,7 +14,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <meta name="author" content="CGU-UOK">
     <link rel="stylesheet" href="../res/css/Home.css">
     <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
-    <script src="../res/js/Profile.js"></script>
+    <script src="../res/js/Degree.js"></script>
     
 </head>
 
@@ -25,23 +25,23 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         <div class="col-md-4">
             <label for="faculty">Select Faculty:</label>
             <select id="faculty">
-                <option value="selection">Level one Subject Selection</option>
+                <option value="1">Level one Subject Selection</option>
             </select>
         </div>
         <div class="col-md-4">
-            <label for="department">Select Department:</label>
-            <select id="department">
-                <option value="selection">Level one Subject Selection</option>
+            <label for="degree">Select Degree:</label>
+            <select id="degree">
+                <option value="1">Level one Subject Selection</option>
             </select>
         </div>
         <div class="col-md-4">
             <br>
-            <button>View Degree Content</button>
+            <input type = "button" id = "viewContent" value="View Degree Content">
         </div>
     </div>
     <div class="degree_content" id="degree_content">
     <?php
-   
+             require '../Model/User.php';
             require '../Model/Degree.php';
             $deg_id;
             $fac_id;
@@ -49,8 +49,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             $degree_duration;
 
             if(isset($_SESSION["student_user"]) || $_SESSION["student_user"] != null){
-                $fac_id = unserialize($_SESSION['student_user'])->getFacultyId();
-                $deg_id = unserialize($_SESSION['student_user'])->getDegreeId();
+                $fac_id = unserialize($_SESSION['student_user'])->getFacultyName();
                 $degree_title = unserialize($_SESSION['student_user'])->getDegreeTitle();
                 $degree_duration = unserialize($_SESSION['student_user'])->getDegreeDuration();
                 
@@ -58,7 +57,6 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             echo  ("
             <div>
             <br>
-                <p>Degree Id : ".$deg_id."</p><br>
                 <p>Faculty : ".$fac_id."</p><br>
                 <p>Degree Programme : ".$degree_title."</p><br>
                 <p>Duration : ".$degree_duration."</p><br>
@@ -72,6 +70,8 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 </div>
 
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
+<script src="../res/js/Degree.js"></script>
+</body>
 </body>
 
 </html>

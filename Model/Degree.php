@@ -3,6 +3,7 @@
 
         private $deg_id;
         private $fac_id;
+        private $fac_name;
         private $degree_title;
         private $degree_duration;
         
@@ -28,23 +29,29 @@
             return $this->deg_id;
         }
 
-        public function getDegreeTitle(){
-            return $this->degree_title;
+        public function setFacultyName($fac_name){
+            $this->fac_name = $fac_name;
+        }
+
+        public function getFacultyName(){
+            return $this->fac_name;
         }
 
         public function setDegreeTitle($degree_title){
             $this->degree_title = $degree_title;
         }
 
-        public function getDegreeDuration(){
+        public function getDegreeTitle(){
             return $this->degree_title;
         }
 
         public function setDegreeDuration($degree_duration){
             $this->degree_duration = $degree_duration;
         }
-        
 
+        public function getDegreeDuration(){
+            return $this->degree_duration;
+        }
 
     }
 
