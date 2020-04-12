@@ -26,23 +26,36 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             <label for="faculty">Select Faculty:</label>
             <select id="faculty">
                 <option value="1">Level one Subject Selection</option>
+                <option value="2">2</option>
             </select>
         </div>
+        
+        <div class="col-md-4">;
+        <?php 
+            $result =  unserialize($_SESSION['student_user']);
+            
+            print_r($result);
+            ?>
+            <label for='degree'>Select Degree:</label>;
+           
+                <select id='degree'>;    
+                <?php
+                    require '../Model/User.php';
+                    require '../Model/Degree.php';
+                                        
+                    foreach($result as $output){   
+                        echo ("<option value='".$output["deg_id"]."'>'".$output["degree_title"]."'</option>");
+                    }                 
+                ?>
+                 </select>
+            </div>
         <div class="col-md-4">
-            <label for="degree">Select Degree:</label>
-            <select id="degree">
-                <option value="1">Level one Subject Selection</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <br>
             <input type = "button" id = "viewContent" value="View Degree Content">
         </div>
     </div>
     <div class="degree_content" id="degree_content">
     <?php
-             require '../Model/User.php';
-            require '../Model/Degree.php';
+            
             $deg_id;
             $fac_id;
             $degree_title;
@@ -71,6 +84,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/Degree.js"></script>
+<script src="../res/js/LoadDegree.js"></script>
 </body>
 </body>
 
