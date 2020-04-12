@@ -18,11 +18,8 @@ $("#submitLogin").click(function(){
           if(result == "login failed"){
            $("#errorMsg").text("Login failed. Check user name and password again");
         }
-  
       }
   });
-
-
 });
 
 
