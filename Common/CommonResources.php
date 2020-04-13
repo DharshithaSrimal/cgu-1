@@ -26,20 +26,14 @@ if($loadingPositon == "header"){
 <link rel='stylesheet' href='../res/fontawesome-free-5.13.0-web/css/all.css'>
 
 <nav class=\"navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark\">
-  <a class=\"navbar-brand\" href=\"#\">Navbar</a>
+  <a class=\"navbar-brand\" href=\"#\">Career Guidance Unit - UOK</a>
   <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
     <span class=\"navbar-toggler-icon\"></span>
   </button>
 
   <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
     <ul class=\"navbar-nav mr-auto\">
-      <li class=\"nav-item active\">
-        <a class=\"nav-link\" href=\"#\">
-          <i class=\"fa fa-home\"></i>
-          Home
-          <span class=\"sr-only\">(current)</span>
-          </a>
-      </li>
+    <!--
       <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"#\">
           <i class=\"fa fa-envelope-o\">
@@ -70,29 +64,44 @@ if($loadingPositon == "header"){
           <a class=\"dropdown-item\" href=\"#\">Something else here</a>
         </div>
       </li>
+      -->
     </ul>
     <ul class=\"navbar-nav \">
+      <li class=\"nav-item active\">
+        <a class=\"nav-link\" href=\"#\">
+          <i class=\"fa fa-home\"></i>
+          Home
+          <span class=\"sr-only\">(current)</span>
+          </a>
+      </li>
       <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"#\">
           <i class=\"fa fa-bell\">
             <span class=\"badge badge-info\">11</span>
           </i>
-          Test
+          Messages
         </a>
       </li>
       <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"#\">
-          <i class=\"fa fa-globe\">
-            <span class=\"badge badge-success\">11</span>
+          <i class=\"fa fa-user\">
+            <!-- <span class=\"badge badge-success\">11</span> -->
           </i>
-          Test
+          Profile
         </a>
       </li>
+    <li class=\"nav-item\">
+      <a class=\"nav-link\" href=\"#\">
+        <i class=\"fa fa-sign-out \" id=\"btnLogout\">
+        </i>
+        Logout
+      </a>
+    </li>
     </ul>
-    <form class=\"form-inline my-2 my-lg-0\">
+    <!-- <form class=\"form-inline my-2 my-lg-0\">
       <input class=\"form-control mr-sm-2\" type=\"text\" placeholder=\"Search\" aria-label=\"Search\">
       <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>
-    </form>
+    </form> -->
   </div>
 </nav>
 <style>
