@@ -24,9 +24,11 @@ if($loadingPositon == "header"){
 <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap.css'>
 <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap-grid.css'>
 <link rel='stylesheet' href='../res/fontawesome-free-5.13.0-web/css/all.css'>
+<link rel='stylesheet' href='../res/css/CommonResources.css'>
 
 <nav class=\"navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark\">
-  <a class=\"navbar-brand\" href=\"#\">Career Guidance Unit - UOK</a>
+  <a class=\"navbar-brand\" href=\"#\"><img width=\"300px\" src=\"../res/img/CGUL.png\"></a>
+  <h4 id=\"navHeading\">Student Relationship Management System</h4>
   <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
     <span class=\"navbar-toggler-icon\"></span>
   </button>
@@ -68,14 +70,14 @@ if($loadingPositon == "header"){
     </ul>
     <ul class=\"navbar-nav \">
       <li class=\"nav-item active\">
-        <a class=\"nav-link\" href=\"#\">
+        <a class=\"nav-link\" href=\"../View/Home.php\">
           <i class=\"fa fa-home\"></i>
           Home
           <span class=\"sr-only\">(current)</span>
           </a>
       </li>
       <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"#\">
+        <a class=\"nav-link\" href=\"../View/Inquiry.php\">
           <i class=\"fa fa-bell\">
             <span class=\"badge badge-info\">11</span>
           </i>
@@ -83,7 +85,7 @@ if($loadingPositon == "header"){
         </a>
       </li>
       <li class=\"nav-item\">
-        <a class=\"nav-link\" href=\"#\">
+        <a class=\"nav-link\" href=\"../View/Profile.php\">
           <i class=\"fa fa-user\">
             <!-- <span class=\"badge badge-success\">11</span> -->
           </i>
@@ -92,7 +94,7 @@ if($loadingPositon == "header"){
       </li>
     <li class=\"nav-item\">
       <a class=\"nav-link\" href=\"#\">
-        <i class=\"fa fa-sign-out \" id=\"btnLogout\">
+        <i class=\"fa fa-sign-out-alt\" id=\"btnLogout\">
         </i>
         Logout
       </a>
@@ -105,7 +107,6 @@ if($loadingPositon == "header"){
   </div>
 </nav>
 <style>
-@import url(\"//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\");
 
 .navbar-icon-top .navbar-nav .nav-link > .fa {
   position: relative;
