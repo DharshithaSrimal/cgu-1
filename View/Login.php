@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../res/css/Login.css">
   <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap.css'>
   <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap-grid.css'>
-  <?php //$loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
+  <?php session_start(); $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 
 </head>
 
@@ -19,7 +19,7 @@
 
 <div>
     <div>
-        <h1>Career Guidance Unit - UOK</h1>
+
         <h2>Login</h2>
 
        <!---- /////////////////////////about us modal start//////////////////////////////////////  ----!>
@@ -86,7 +86,6 @@
 
 <?php
     include_once '..\Model\User.php';
-    session_start();
 
     if(isset($_SESSION["current_user"]) && $_SESSION["current_user"]!= null){
         echo ("
