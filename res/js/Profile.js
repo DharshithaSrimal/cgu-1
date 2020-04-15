@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    alert("Hi");
+
     var method = "load";
     
     $.ajax({

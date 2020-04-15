@@ -37,21 +37,20 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                 $faculty = unserialize($_SESSION['student_user'])->getFacName();
                 $degree = unserialize($_SESSION['student_user'])->getDegName();
             }
+            echo '<img width="200px" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['student_user'])->getImage()).'" />';
             echo  ("
-            <div>
             <br>
-                <p>Profile Picture : ".$userImage."</p><br>
                 <p>Name : ".$firstName." ".$lastName."</p><br>
                 <p>Degree Programme : ".$degree."</p><br>
                 <p>Faculty : ".$faculty."</p><br>
-            </div>
             "
             );
             
             ?>
         <div>
+            <button onclick="window.location.href='../View/EditProfile.php'">Edit Profile</button>
             <button onclick="window.location.href='../View/Inquiry.php'">Inquiry</button>
-            <button>View Events</button>
+            <button onclick="">View Events</button>
             <button>Video Tutorials</button>
             <button>View CGU Staff</button>
             <button>View Degree Contents</button>
