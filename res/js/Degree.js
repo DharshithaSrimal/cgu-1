@@ -22,17 +22,5 @@ $("#viewContent").click(function () {
 
 
 
-/*document.addEventListener('DOMContentLoaded', function() {
 
-    var method = "load";
-
-    $.ajax({
-        type: "POST",
-        url: "../Controller/DegreeController.php",
-        data: '&method='+method,
-        cache: false,
-        success: function(result){
-        }
-    });
-
-}, false);*/
+   

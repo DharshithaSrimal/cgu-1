@@ -25,8 +25,10 @@ $method;
 
             $userName = unserialize($_SESSION['current_user'])->getUser_id();
             $con = DbCon::connection();
-            $sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = '".$facultyId."' and d.deg_id = '".$degreeId."'";
-            //$sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = 1 and d.deg_id = 1";
+
+            
+            //$sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = '".$facultyId."' and d.deg_id = '".$degreeId."'";
+            $sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = 1 and d.deg_id = 1";
             $res = $con->query($sql);
             $conn = null; //closing connection
             if ($res) {
@@ -41,12 +43,43 @@ $method;
                 return $degree_obj;
             }
             else {
-                echo "inq failed";
+                echo "Failed to load data.";
             }
         }
-        $stu_user = loadData();
-        $_SESSION["student_user"] = serialize($stu_user);
+        $stu_user = loadData(); 
+        $_SESSION["student_user"] = serialize($stu_user);    
     }
+
+    if($method == 'loadDegree') {
+        //echo "<script>alert('hi');</script>";
+        function loadDegree()
+        {
+            $facultyId;
+            if(!empty($_POST['faculty'])) {
+                $facultyId =$_POST['faculty'];
+            }
+
+                $userName = unserialize($_SESSION['student_user'])->getUser_id();
+                try{
+                    $con = DbCon::connection();
+                    $query = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = 1";            
+                    $stmt = $con->prepare($query);
+                    $stmt->execute(); 
+                    $result = $stmt->fetchAll();
+                    
+                    $_SESSION["student_user"] = serialize($result);
+                }
+                catch(Exception $ex){                    
+                    echo($ex->getMessage());
+                }
+                
+        }
+       
+         
+    }
+     
+        
+    
 
 
 
