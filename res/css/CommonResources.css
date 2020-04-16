@@ -1,8 +1,11 @@
 :root {
-    --main-bg-color: coral;
+    --main-color1: #fff;
+    --main-color2: #eec92f;
+    --main-color3:#8a1400;
+    --main-text-color1:#fff;
+    --main-text-color2: #353535;
+    --main-text-color3: #8a1400;
 }
-
-
 
 #navHeading{
     color: white;
@@ -11,7 +14,7 @@
 }
 
 .bg-dark{
-    background-color: #8a1400 !important;
+    background-color: var(--main-color3)  !important;
 }
 .navbar-icon-top .navbar-nav .nav-link > .fa {
     position: relative;
@@ -33,6 +36,14 @@
 
 .navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
     top: -10px;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--main-color2);
 }
 
 @media (min-width: 576px) {
@@ -129,12 +140,12 @@
 
 
 .page-footer{
-    background-color: #8a1400 !important;
-    color: white;
+    background-color: var(--main-color3) !important;
+    color: var(--main-text-color1);
 
 }
 .fb-ic{
-    color: white;
+    color:var(--main-color2);
 }
 
 .footer-copyright{
@@ -143,13 +154,12 @@
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: gold;
+    background-color: var(--main-color2);
 }
 
 .page-footer p{
     margin-top:-10px !important;
 }
-
 
 /* The Modal (background) */
 .modal {
@@ -167,7 +177,7 @@
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--main-text-color1);;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
@@ -191,10 +201,10 @@
 
 #btnaboutUs{
     margin-left: 10px;
-    color: gold;
+    color:var(--main-color2);
 }
 
 .fb-ic{
     margin-left: 10px;
-    color: gold;
+    color: var(--main-color2);
 }

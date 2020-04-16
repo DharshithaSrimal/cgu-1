@@ -9,6 +9,8 @@
   <meta name="author" content="CGU-UOK">
 
   <link rel="stylesheet" href="../res/css/CreateAccount.css">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
   <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 
 </head>
@@ -19,17 +21,26 @@
             <div id="page1CreateAccount">
                 <h3><center><b>Create a new account</center></h3></br>
 
-                <div>
-                    <p>Conditions</p>
-                    <p>To create a account,</p>
-                    <p> *You must be a undergraduate of University of Kelaniya</p>
+                <div id="condition">
+                    <p>*** To create a account, You must be a undergraduate or staff member of University of Kelaniya</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="indexNo" class="col-sm-3 control-label">I am a*</label>
+                    <div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                            <span class="absolute-no">Lecturer</span>
+                        </label>
+                    </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="indexNo" class="col-sm-3 control-label">Student No*</label>
+                    <label for="indexNo" class="col-sm-3 control-label">Student No / Employee ID No *</label>
                     <div class="col-sm-9">
-                        <input type="text" id="indexNo" name="indexNo" placeholder="IM/2018/0**" class="form-control" autofocus required>
+                        <input type="text" id="indexNo" name="indexNo" placeholder="XXX/XXXX/XXX" class="form-control" autofocus required>
                     </div>
                 </div>
 
@@ -47,7 +58,7 @@
                     </div>
                 </div>
 
-                <p>You must use your student email address given by university</p>
+                <p>You must use the email address given by the university</p>
 
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email*</label>
@@ -143,6 +154,12 @@
 
    <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
    <script src="../res/js/CreateAccount.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $(function() {
+            $('#toggle-one').bootstrapToggle();
+        })
+    </script>
 
 </body>
 </html>
