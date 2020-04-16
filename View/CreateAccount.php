@@ -9,7 +9,6 @@
   <meta name="author" content="CGU-UOK">
 
   <link rel="stylesheet" href="../res/css/CreateAccount.css">
-  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
   <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 
@@ -26,19 +25,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="indexNo" class="col-sm-3 control-label">I am a*</label>
+                    <label class="col-sm-3 control-label">I am a*</label>
                     <div>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input id="user_role" type="checkbox" checked>
                             <span class="slider round"></span>
                             <span class="absolute-no">Lecturer</span>
                         </label>
                     </div>
                 </div>
 
-
                 <div class="form-group">
-                    <label for="indexNo" class="col-sm-3 control-label">Student No / Employee ID No *</label>
+                    <label for="indexNo" class="col-sm-3 control-label">Student No*</label>
                     <div class="col-sm-9">
                         <input type="text" id="indexNo" name="indexNo" placeholder="XXX/XXXX/XXX" class="form-control" autofocus required>
                     </div>
@@ -67,9 +65,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Gender*</label>
-                    <div class="col-sm-6">
+                <div class="form-group" id="gender_group">
+                    <label for="gender" class="control-label col-sm-3">Gender*</label>
+                    <div class="col-sm-6" >
                         <div class="row">
                             <div class="col-sm-4">
                                 <label class="radio-inline">
@@ -86,10 +84,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Upload Photo:</label><br />
+
+                    <label class="control-label col-sm-3">Upload your photo:</label><br />
                     <div class="col-sm-9">
-                            <input id="userImage" type="file" class="inputFile" />
+                        <div class="custom-file ">
+                            <input id="userImage" type="file" class="custom-file-input">
+                            <label class="custom-file-label" for="userImage" data-browse="Choose image">No file chosen</label>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="form-group">
@@ -114,7 +117,7 @@
                 </div>
             </div>
             <div id="page2CreateAccount">
-                <i id="btnBackPage2" class="fas fa-arrow-circle-left"></i>
+                <i id="btnBackPage2" class="fas fa-arrow-circle-left fa-2x"></i>
                 <p>Set password to your account</p>
                 <form>
                     <div class="form-group">
@@ -135,14 +138,14 @@
             </div>
 
             <div id="page3CreateAccount">
-                <i id="btnBackPage3" class="fas fa-arrow-circle-left"></i>
-                <p>Verification code is sent to your student email address</p>
+                <i id="btnBackPage3" class="fas fa-arrow-circle-left  fa-2x"></i>
+                <p>Verification code is sent to your email address</p>
                 <form>
                     <div class="form-group">
                         <div class="col-sm-9">
                             <input type="text" placeholder="Enter the verification code" id="verificationCode" name="verificationCode" class="form-control" >
                             <p id="verificationError"></p>
-                            <button Id="btnResendVer">Resend</button>
+                            <button Id="btnResendVer" class="btn btn-info">Resend</button>
                         </div>
                     </div>
                 </form>
@@ -154,11 +157,12 @@
 
    <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
    <script src="../res/js/CreateAccount.js"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script>
-        $(function() {
-            $('#toggle-one').bootstrapToggle();
-        })
+
+    <script type="application/javascript">
+        $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
+        });
     </script>
 
 </body>
