@@ -44,12 +44,24 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         );
         ?>
         <div>
-            <button onclick="window.location.href='../View/EditProfile.php'">Edit Profile</button>
-            <button onclick="window.location.href='../View/Inquiry.php'">Inquiry</button>
-            <button onclick="">View Events</button>
-            <button>Video Tutorials</button>
-            <button>View CGU Staff</button>
-            <button>View Degree Contents</button>
+            <p>Personal Details</p>
+            <hr>
+        </div>
+        <div>
+            <p>Educational Qualifications</p>
+            <hr>
+        </div>
+        <div>
+            <p>Academic Qualifications</p>
+            <hr>
+        </div>
+        <div>
+            <p>Proffessional Qualifications</p>
+            <hr>
+        </div>
+        <div>
+            <p>Soft Skills</p>
+            <hr>
         </div>
     </div>
 </div>

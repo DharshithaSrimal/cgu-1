@@ -104,7 +104,7 @@ if($loadingPositon == "header"){
 <link rel='stylesheet' href='../res/1-bootstrap-4.4.1-dist/css/bootstrap-grid.css'>
 <link rel='stylesheet' href='../res/fontawesome-free-5.13.0-web/css/all.css'>
 <link rel='stylesheet' href='../res/css/CommonResources.css'>
-
+<script src='../res/2-jquery/jquery-3.3.1.min.js'></script>
 <nav class=\"navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark\">
   <a class=\"navbar-brand\" href=\"#\"><img width=\"300px\" src=\"../res/img/CGUL.png\"></a>
   <h4 id=\"navHeading\">Student Relationship Management System</h4>
@@ -201,7 +201,7 @@ if($loadingPositon == "footer"){
 
 </footer>
 
-        <script src='../res/2-jquery/jquery-3.3.1.min.js'></script>
+        
         <script src='../res/1-bootstrap-4.4.1-dist/js/bootstrap.min.js'></script>
          <script src='../res/js/CommonResources.js'></script>
     ");

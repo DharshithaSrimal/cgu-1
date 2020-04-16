@@ -22,6 +22,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
     <div>
         <div>
+            <p>Student Summary</p>
             <?php
             include_once '../Model/User.php';
             $userImage;
@@ -59,6 +60,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
     </div>
     <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
+
     </body>
 
     </html>
