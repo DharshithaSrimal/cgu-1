@@ -44,7 +44,7 @@
                 <h3>Login</h3>
                 <form onsubmit="return false">
                     <div class="form-group">
-                        <input id="stuNumber"  type="text" class="form-control" placeholder="Your Email *" value="" />
+                        <input id="stuNumber"  type="text" class="form-control" placeholder="Your Student Number/ Employee Number *" value="" />
                     </div>
                     <div class="form-group">
                         <input  id="password" type="password" class="form-control" placeholder="Your Password *" value="" />
@@ -54,7 +54,7 @@
                         <input id="submitLogin" type="submit" class="btnSubmit" value="Login" />
                     </div>
                     <div class="form-group">
-                        <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                        <a href="#" class="ForgetPwd" value="Login">Forgot Password?</a>
                         <br>
                         <a href="./CreateAccount.php" class="ForgetPwd">Sign up<a/>
                     </div>

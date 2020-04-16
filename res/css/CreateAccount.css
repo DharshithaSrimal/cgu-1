@@ -1,3 +1,121 @@
 .fa-arrow-circle-left {
     color: #a71d2a !important;
 }
+
+#page1CreateAccount{
+    margin-top:20px;
+}
+
+#condition{
+    font-weight: normal !important;
+    font-style: oblique;
+}
+
+.help-block{
+    float: right;
+    margin-bottom: 50px;
+}
+
+#btnNextCreateAccount{
+    margin-bottom: 50px !important;
+    margin-top: 50px !important;
+}
+
+
+.ques {
+    color: darkslateblue;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width:143px;
+    height: 43px;
+    left: 20px;
+}
+
+.switch input {display:none;}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f2f2f2;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    z-index: 2;
+    content: "";
+    height: 40px;
+    width: 40px;
+    left: 2px;
+    bottom: 2px;
+    background-color: darkslategrey;
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    -webkit-transition: .4s;
+    transition: all 0.4s ease-in-out;
+}
+.slider:after {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    content: "Student";
+    font-size: 1rem;
+    text-align: left !important;
+    line-height: 40px;
+    padding-left: 0;
+    width: 100%;
+    color: #fff;
+    height:43px;
+    border-radius: 50px;
+    background-color: var(--main-color2);
+    -webkit-transform: translateX(-100px);
+    -ms-transform: translateX(-100px);
+    transform: translateX(-100px);
+    transition: all 0.4s ease-in-out;
+}
+
+input:checked + .slider:after {
+    -webkit-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    transform: translateX(0px);
+    /*width: 235px;*/
+    padding-left: 25px;
+}
+
+input:checked + .slider:before {
+    background-color: #fff;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(100px);
+    -ms-transform: translateX(100px);
+    transform: translateX(100px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 40px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+.absolute-no {
+    position: absolute;
+    left: 0;
+    color: darkslategrey;
+    text-align: right !important;
+    font-size: 1rem;
+    width: calc(100% - 25px);
+    height: 100px;
+    line-height: 40px;
+    cursor: pointer;
+}
