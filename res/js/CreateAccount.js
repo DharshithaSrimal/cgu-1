@@ -13,7 +13,32 @@ var email;
 var dob;
 var tpnumber;
 var password;
-var user_role="student";
+var user_role;
+
+$("#user_role").change(function () {
+    user_role =$("#user_role").is(":checked") == true?"student":"lecturer";
+    if(user_role=="lecturer"){
+        $("label[for='birthDate']").hide();
+        $("#birthDate").hide();
+
+        $("input[name='gender']").hide();
+        $("#gender_group").hide()
+
+        $("label[for='indexNo']").text("Employee ID No*");
+
+    }
+    else if(user_role=="student"){
+        $("label[for='birthDate']").show();
+        $("#birthDate").show();
+
+        $("input[name='gender']").show();
+        $("#gender_group").show()
+
+        $("label[for='indexNo']").text("Student No*");
+
+    }
+
+});
 
 
 $("#btnNextCreateAccount").click(async function () {
@@ -35,13 +60,14 @@ $("#btnNextCreateAccount").click(async function () {
              email=$("#email").val();
              dob=$("#birthDate").val();
              tpnumber=$("#phoneNumber").val();
+             user_role =$("#user_role").is(":checked") == true?"student":"lecturer";
 
             let msg  =[];
 
-            if(user_id == null || user_id == ""){next1=false; msg.push("Student number");}else next1=true ;
+            if(user_id == null || user_id == ""){next1=false; msg.push(user_role=="student"?"Student number":"Employee ID No");}else next1=true ;
             if(fname == null|| fname == ""){next2=false; msg.push("First name");} else next2=true ;
             if(lname == null|| lname == ""){next3=false; msg.push("Last name");} else next3=true ;
-            if( gender == null|| gender == ""){next4=false; msg.push("Gender");} else next4=true ;
+            if( (gender == null|| gender == "") && user_role=="student"){next4=false; msg.push("Gender");} else next4=true ;
             if(email == null|| email == ""){next5=false; msg.push("Email");} else next5=true ;
 
            if(next1 && next2 && next3 && next4 && next5){
