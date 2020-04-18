@@ -26,7 +26,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <div>
         <?php
             include_once '../Model/User.php';
-            if(isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null){
+            if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="student"){
                 echo ("
                     <br>
                     <div>
@@ -43,6 +43,10 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                 );
 
                 echo '<img width="200px" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'" />';
+            }
+
+            if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="lecturer"){
+              include '../View/staffHome.php';
             }
         ?>
     </div>
