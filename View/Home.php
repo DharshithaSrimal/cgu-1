@@ -14,6 +14,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <meta name="description" content="Career Guidance Unit - System">
     <meta name="author" content="CGU-UOK">
     <link rel="stylesheet" href="../res/css/Home.css">
+
     <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
 </head>
 
@@ -46,13 +47,15 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             }
 
             if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="lecturer"){
-              include '../View/staffHome.php';
+
+              include '../View/StaffHome.php';
             }
         ?>
     </div>
 
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
-</body>
 <script src="../res/js/Home.js"></script>
+</body>
+
 </html>

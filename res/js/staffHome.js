@@ -1,3 +1,4 @@
+
 $(function(){
     $('.check input').on("change", function () {
         if ($(this).is(":checked")) {

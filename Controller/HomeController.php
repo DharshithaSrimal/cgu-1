@@ -3,6 +3,14 @@ include_once '../Common/DbCon.php';
 include_once '../Model/User.php';
 
 
+function create_staff_obj(){
+
+}
+
+function loadUser(){
+
+
+}
 
 function loadStudentList(){
 

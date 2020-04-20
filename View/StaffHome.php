@@ -1,4 +1,4 @@
-
+<?php include_once '../Controller/UserController.php'; loadData();?>
 <link rel="stylesheet" href="../res/css/staffHome.css">
 <div class="container bootstrap snippets">
     <div class="row decor-default">
@@ -13,7 +13,7 @@
 
                 <div id="home_profile_summary">
                     <br>
-                    <h5><?php echo "Senior Lecturer"?></h5>
+                    <h5><?php echo unserialize($_SESSION['current_user'])->getAcademicPosition()?></h5>
 
                     <br>
                     <button class="btn btn-default">Edit profile</button>
@@ -68,6 +68,5 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="http://91.234.35.26/iwiki-admin/v1.0.0/admin/css/vendors/checkboxes.css">
-<script src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/js/checkboxes.js"></script>
+
 <script src="../res/js/staffHome.js"></script>
