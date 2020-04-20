@@ -78,19 +78,22 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         <div>
             <p>Academic Qualifications</p>
             <hr>
+            <div id="outputAcademic"></div>
         </div>
         <div>
             <p>Proffessional Qualifications</p>
             <hr>
+            <div id="outputProfessional"></div>
         </div>
         <div>
             <p>Soft Skills</p>
             <hr>
+            <div id="softSkills"></div>
         </div>
     </div>
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
-<script src="../res/js/Profile.js"></script>
+<script src="../res/js/EditProfile.js"></script>
 </body>
 </html>
 
