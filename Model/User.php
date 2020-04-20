@@ -17,7 +17,7 @@
         }
 
 
-        public function getFname(){
+            public function getFname(){
             return $this->fname;
         }
     
@@ -155,7 +155,10 @@
 
         private $experience;
         private $fac_id;
+        private $facName;
         private $specialized_area;
+        private $academic_position;
+        private $cgu_position;
 
         function __construct(){
         }
@@ -184,5 +187,34 @@
             $this->specialized_area = $specialized_area;
         }
 
+        public function getFacName()
+        {
+            return $this->facName;
+        }
+
+        public function setFacName($facName)
+        {
+            $this->facName = $facName;
+        }
+
+        public function getAcademicPosition()
+        {
+            return $this->academic_position;
+        }
+
+        public function setAcademicPosition($academic_position)
+        {
+            $this->academic_position = $academic_position;
+        }
+
+        public function getCguPosition()
+        {
+            return $this->cgu_position;
+        }
+
+        public function setCguPosition($cgu_position)
+        {
+            $this->cgu_position = $cgu_position;
+        }
     }
 ?>
