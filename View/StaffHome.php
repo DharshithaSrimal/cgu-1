@@ -3,7 +3,7 @@
 <div class="container bootstrap snippets">
     <div class="row decor-default">
         <div class="col-lg-3 col-md-4 col-sm-12">
-            <div class="contacts-labels">
+            <div id="leftCol" class="contacts-labels">
                 <br>
                 <h4>Welcome <?php echo unserialize($_SESSION['current_user'])->getFname() ?> !</h4>
                 <br>
@@ -13,16 +13,35 @@
 
                 <div id="home_profile_summary">
                     <br>
-                    <h5><?php echo unserialize($_SESSION['current_user'])->getAcademicPosition()?></h5>
+                    <h5  style = "text-transform:capitalize;"><?php echo unserialize($_SESSION['current_user'])->getCguPosition()?> <span style = "text-transform:none;">at</span> CGU</h5>
+                    <h6><?php echo unserialize($_SESSION['current_user'])->getAcademicPosition()?></h6>
+                    <p style="margin-top: -10px"><?php echo unserialize($_SESSION['current_user'])->getFacName()?></p>
+                    <br>
+                    <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['current_user'])->getTpnumber()?></p>
 
                     <br>
-                    <button class="btn btn-default">Edit profile</button>
+                   <div>
+                       <button class="btn btn-default editProfileBtn">Edit profile</button>
+                   </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-12">
             <div class="contacts-list">
                 <h5 class="title">Students under your supervision</h5>
+<!--                <div style="float: right">-->
+<!--                    <div class="dropdown show">-->
+<!--                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            All-->
+<!--                        </a>-->
+<!---->
+<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--                            <a class="dropdown-item" href="#">Recent activities</a>-->
+<!--                            <a class="dropdown-item" href="#">Another action</a>-->
+<!--                            <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <form class="ac-custom ac-checkbox ac-checkmark" autocomplete="off">
 
@@ -30,6 +49,7 @@
                         <input type="text" class="contacts-list-search" placeholder="Search......." name="search">
                         <button type="button" class="btn" id="search_button"><i class="fa fa-search"></i></button>
                     </div>
+
                   <?php
 
 
@@ -37,7 +57,7 @@
                   $stu_ar = loadStudentList();
 
                   foreach ($stu_ar as $stu) {
-
+                      $id=str_replace("/","",$stu->getUser_id());
                       echo "  <div class=\"unit\">
                         <div class=\"field name\">
                             <div class=\"check\">
@@ -51,14 +71,25 @@
                                     <img src=\"data:image/jpg;base64,".base64_encode($stu->getImage())."\" alt=\"image\" class=\"avatar\"> 
                                 </div>
                                 ".$stu->getFname()." ".$stu->getLname()."
+                               
+                                    <fieldset id=\"".$id."\" class=\"rating\">
+                                        <input type=\"radio\" id=\"".$id."star5\" name=\"".$id."rating\" value=\"5\" /><label class = \"full\" for=\"star5\" title=\"Very Good\"></label>
+                                        <input type=\"radio\" id=\"".$id."star4half\" name=\"".$id."rating\" value=\"4 and a half\" /><label class=\"half\" for=\"star4half\" title=\"Very Good\"></label>
+                                        <input type=\"radio\" id=\"".$id."star4\" name=\"".$id."rating\" value=\"4\" /><label class = \"full\" for=\"star4\" title=\"Good\"></label>
+                                        <input type=\"radio\" id=\"".$id."star3half\" name=\"".$id."rating\" value=\"3 and a half\" /><label class=\"half\" for=\"star3half\" title=\"Good\"></label>
+                                        <input type=\"radio\" id=\"".$id."star3\" name=\"".$id."rating\" value=\"3\" /><label class = \"full\" for=\"star3\" title=\"Average\"></label>
+                                        <input type=\"radio\" id=\"".$id."star2half\" name=\"".$id."rating\" value=\"2 and a half\" /><label class=\"half\" for=\"star2half\" title=\"Average\"></label>
+                                        <input type=\"radio\" id=\"".$id."star2\" name=\"".$id."rating\" value=\"2\" /><label class = \"full\" for=\"star2\" title=\"Poor\"></label>
+                                        <input type=\"radio\" id=\"".$id."star1half\" name=\"".$id."rating\" value=\"1 and a half\" /><label class=\"half\" for=\"star1half\" title=\"Poor\"></label>
+                                        <input type=\"radio\" id=\"".$id."star1\" name=\"".$id."rating\" value=\"1\" /><label class = \"full\" for=\"star1\" title=\"Very Poor\"></label>
+                                        <input type=\"radio\" id=\"".$id."starhalf\" name=\"".$id."rating\" value=\"half\" /><label class=\"half\" for=\"starhalf\" title=\"Very Poor\"></label>
+                                    </fieldset>
                             </div>
     <!--                            <div class=\"lab lab-warning\">Friends</div>-->
                         </div>
-                        <div class=\"field phone\">
-                            +1-800-600-9898
-                        </div>
-                        <div class=\"field email\">
-                            example@gmail.com
+                        <div class=\"field phone\" style=\"width: 60% !important;height: 100px  !important;\">
+                             <span style='font-weight: bold'>Notes: </span>
+                             Dear sir, I changed my profile description. Please review my profile
                         </div>
                     </div>";
                   }

@@ -30,7 +30,7 @@
     position: relative;
     display: table;
     border-collapse: separate;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 .contacts-search {
     width: 100%;
@@ -70,6 +70,11 @@ button {
 .contacts-labels .list .unit {
     overflow: hidden;
     padding: 0 0 20px;
+}
+
+.unit:hover{
+    background-color: rgba(255, 234, 53, 0.33);
+    cursor: pointer;
 }
 .contacts-labels .list .unit .lab-success {
     background: #46be8a;
@@ -207,9 +212,12 @@ input {
 }
 .contacts-list .unit .field {
     float: left;
-    overflow: hidden;
-    white-space: nowrap;
+    overflow: scroll;
     text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+.contacts-list .unit .field::-webkit-scrollbar {
+    display: none;
 }
 .contacts-list .unit .name {
     width: 40%;
@@ -222,7 +230,7 @@ input {
     top: -8px;
 }
 .contacts-list .unit .phone {
-    width: 30%;
+    width: 60%;
     padding: 0 0 0 20px;
 }
 .contacts-list .unit .email {
@@ -288,13 +296,18 @@ input {
     vertical-align: top;
     overflow: hidden;
 }
-
+.editProfileBtn{
+    font-size: 15px;
+    min-width: 0px !important;
+    margin: auto;
+}
 .pro_pic{
     height :100%;
 }
 
 #home_profile_summary{
 
+    text-align: center;
 }
 
 .pro_pic_frame{
@@ -302,9 +315,14 @@ input {
     height: 200px;
     width: 200px;
     border-radius: 50%;
-    margin: 0 16px 0 0;
+    margin: auto;
     vertical-align: top;
     overflow: hidden;
+
+}
+#leftCol{
+    text-align: center;
+    margin-right: 50px
 }
 
 .contacts-list .lab {
@@ -328,3 +346,53 @@ input {
 .contacts-list .lab-primary {
     background: #7266ba;
 }
+
+
+/*///////////////////////RATING STARS ///////////////////start////////////////////////////*/
+
+@import url('../fontawesome-free-5.13.0-web/css/all.css');
+
+/****** Style Star Rating Widget *****/
+
+
+.rating {
+    border: none;
+    float: left;
+}
+
+.rating > input { display: none; }
+.rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > label {
+    color: #ddd;
+    float: right;
+}
+
+.rating > input:checked ~ label { color: #FFD700;  }
+
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+/*.rating > input:checked ~ label, !* show gold star when clicked *!*/
+/*.rating:not(:checked) > label:hover, !* hover current star *!*/
+/*.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } !* hover previous stars in list *!*/
+
+/*.rating > input:checked + label:hover, !* hover current star when changing rating *!*/
+/*.rating > input:checked ~ label:hover,*/
+/*.rating > label:hover ~ input:checked ~ label, !* lighten current selection *!*/
+/*.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }*/
+
+
+/*///////////////////////RATING STARS ///////////////////end////////////////////////////*/

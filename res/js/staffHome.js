@@ -17,3 +17,10 @@ $(function(){
     });
 
 })
+
+window.onload = function () {
+
+    $('#IM2014030star1half').prop( "checked", true );
+    $('#IM2014014star3half').prop( "checked", true );
+
+}
