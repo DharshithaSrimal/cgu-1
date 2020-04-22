@@ -53,17 +53,17 @@ window.onload = function () {
         var searchVal = event.target.value;
         xx.each(function (index, element) {
 
-            //console.log(element.querySelector('.stuName').innerHTML+"-"+searchVal);
+            console.log(element.querySelector('.stuName').innerHTML.trim()+"-"+searchVal);
             var i = 0;
             i = element.querySelector('.stuName').innerHTML.trim().search(searchVal);
-            if(i!=0){
-                element.style.visibility  = "hidden";
-                element.style.display  = "none";
-            }
-            else {
+            console.log(i);
+            if(i>=0){
                 element.style.visibility  = "visible";
                 element.style.display  = "inline-block";
-
+            }
+            else {
+                element.style.visibility  = "hidden";
+                element.style.display  = "none";
             }
 
             if(searchVal == ""){
