@@ -3,9 +3,11 @@
 include_once '../Common/DbCon.php';
 include_once '../Model/User.php';
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-$method;
+$method = null;
 
 
 if(!empty($_POST['method'])) {
@@ -14,8 +16,14 @@ if(!empty($_POST['method'])) {
 
 
 if($method == 'load') {
-    function loadData()
-    {
+
+    loadData();
+
+}
+
+function loadData()
+{
+    if(unserialize($_SESSION['current_user'])->getRole()=='student'){
         $userName = unserialize($_SESSION['current_user'])->getUser_id();
         $con = DbCon::connection();
         $sql = "select * from user u inner join student s on u.user_id = s.stu_id inner join faculty f on s.fac_id = f.fac_id
@@ -34,12 +42,42 @@ if($method == 'load') {
                 $stu_obj->setImage($row["image"]);
                 $stu_obj->setFac_id($row["fac_id"]);
                 $stu_obj->setFacName($row["fac_name"]);
+                $stu_obj->setRole($row["user_role"]);
                 $stu_obj->setDeg_id($row["deg_id"]);
                 $stu_obj->setDegName($row["degree_title"]);
             }
-            return $stu_obj;
+
+            $_SESSION["student_user"] = serialize($stu_obj);
         }
     }
-    $stu_user = loadData();
-    $_SESSION["student_user"] = serialize($stu_user);
+
+    if(unserialize($_SESSION['current_user'])->getRole()=='lecturer'){
+        $userName = unserialize($_SESSION['current_user'])->getUser_id();
+        $con = DbCon::connection();
+        $sql = "select * from user u inner join staff_member s on u.user_id = s.staff_id inner join faculty f on s.fac_id = f.fac_id
+               where u.user_id = '".$userName."'" ;
+        $res = $con->query($sql);
+        $conn = null; //closing connection
+        if ($res) {
+            $staff_obj = new Staff();
+            while ($row = $res->fetch(PDO::FETCH_BOTH)) {
+                $staff_obj->setFname($row["fname"]);
+                $staff_obj->setLname($row["lname"]);
+                $staff_obj->setEmail($row["email"]);
+                $staff_obj->setDob($row["dob"]);
+                $staff_obj->setUser_id($row["user_id"]);
+                $staff_obj->setTpnumber($row["tpnumber"]);
+                $staff_obj->setImage($row["image"]);
+                $staff_obj->setFac_id($row["fac_id"]);
+                $staff_obj->setFacName($row["fac_name"]);
+                $staff_obj->setRole($row["user_role"]);
+                $staff_obj->setExperience($row["experience"]);
+                $staff_obj->setSpecialized_area($row["specialised_area"]);
+                $staff_obj->setAcademicPosition($row["academic_position"]);
+                $staff_obj->setCguPosition($row["cgu_position"]);
+            }
+            $_SESSION["current_user"] = serialize($staff_obj);
+        }
+
+    }
 }

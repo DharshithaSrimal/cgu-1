@@ -201,9 +201,10 @@ if($loadingPositon == "footer"){
 
 </footer>
 
-        
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script> 
         <script src='../res/1-bootstrap-4.4.1-dist/js/bootstrap.min.js'></script>
-         <script src='../res/js/CommonResources.js'></script>
+        <script src='../res/js/CommonResources.js'></script>
+
     ");
 }
 
