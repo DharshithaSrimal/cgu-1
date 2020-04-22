@@ -54,8 +54,9 @@ window.onload = function () {
         xx.each(function (index, element) {
 
             //console.log(element.querySelector('.stuName').innerHTML+"-"+searchVal);
-
-            if((element.querySelector('.stuName').innerHTML).trim()!= searchVal){
+            var i = 0;
+            i = element.querySelector('.stuName').innerHTML.trim().search(searchVal);
+            if(i!=0){
                 element.style.visibility  = "hidden";
                 element.style.display  = "none";
             }
@@ -70,10 +71,15 @@ window.onload = function () {
                 element.style.display  = "inline-block";
             }
         });
+    });
 
-
-
-
+    //Adding click event listner for all unit divs.. once click a unit user can view its owners profile
+    xx.each(function (index, element) {
+        element.addEventListener('click', (event) => {
+            var unitID = element.querySelector('fieldset').getAttribute("id");
+            alert("Should open profile in new tab >>> "+unitID);
+        });
     });
 
 }
+
