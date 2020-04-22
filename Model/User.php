@@ -1,5 +1,5 @@
 <?php 
-    class User {
+    class User implements JsonSerializable {
 
         private $fname;
         private $lname;
@@ -16,8 +16,7 @@
         {
         }
 
-
-            public function getFname(){
+        public function getFname(){
             return $this->fname;
         }
     
@@ -89,6 +88,17 @@
             $this->role = $role;
         }
 
+        /**
+         * @inheritDoc
+         */
+        public function jsonSerialize()
+        {
+            $json = array();
+            foreach($this as $key => $value) {
+                $json[$key] = $value;
+            }
+            return $json; // or json_encode($json)
+        }
     }
 
     class Student extends User{

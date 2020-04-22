@@ -32,7 +32,7 @@ function loadData()
         $conn = null; //closing connection
         if ($res) {
             $stu_obj = new Student();
-            while ($row = $res->fetch(PDO::FETCH_BOTH)) {
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $stu_obj->setFname($row["fname"]);
                 $stu_obj->setLname($row["lname"]);
                 $stu_obj->setEmail($row["email"]);
@@ -46,8 +46,9 @@ function loadData()
                 $stu_obj->setDeg_id($row["deg_id"]);
                 $stu_obj->setDegName($row["degree_title"]);
             }
-
+//            print_r(json_encode(var_dump((array) $stu_obj)));
             $_SESSION["student_user"] = serialize($stu_obj);
+
         }
     }
 
