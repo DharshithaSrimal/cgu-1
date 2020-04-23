@@ -40,9 +40,6 @@ function drawStarRating(elementID,Rating) {
 }
 
 window.onload = function () {
-
-
-
     var inputField = document.querySelector('.contacts-list-search');
 
     var xx = $('.allUnits').children('.unit');

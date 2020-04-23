@@ -80,7 +80,6 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                 </div>
             </div>
         </div>
-
     </div>
     <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 
