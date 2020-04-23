@@ -36,47 +36,118 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         $degree = unserialize($_SESSION['student_user'])->getDegName();
     }
     ?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card bg-light mb-3 text-center card-user ">
-                    <div class="card-header">
-                        <h2>Welcome <?php echo $firstName ?>....!!!</h2>
+    <div class="container bootstrap snippets">
+        <div class="row decor-default">
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div id="leftCol" class="contacts-labels card bg-light mb-3  card-user">
+                    <br>
+                    <h4>Welcome <?php echo unserialize($_SESSION['current_user'])->getFname() ?> !</h4>
+                    <br>
+                    <div class="pro_pic_frame" >
+                        <?php echo '<img class="pro_pic" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'" />'; ?>
                     </div>
-                    <?php
-                    echo '<img class="card-img-top rounded-circle user-img" src="data:image/jpg;base64,'
-                        .base64_encode(unserialize($_SESSION['student_user'])->getImage()).'" />';?>
-                    <div class="card-body">
-                        <?php
-                        echo  ("
+
+                    <div id="home_profile_summary">
                         <br>
-                            <h4 class=\"card-title\">".$firstName." ".$lastName."</h4>
-                            <p class=\"card-text\">".$degree."</p>
-                            <p class=\"card-text\">".$faculty."</p>
-                        "
-                        );
-                        ?>
+                        <h5  style = "text-transform:capitalize;"><?php echo unserialize($_SESSION['current_user'])->getRole()?> <span style = "text-transform:none;">at</span> CGU</h5>
+<!--                        <h6>--><?php //echo unserialize($_SESSION['current_user'])->getAcademicPosition()?><!--</h6>-->
+                        <p style="margin-top: -10px"><?php echo unserialize($_SESSION['student_user'])->getDegName()?></p>
+                        <br>
+                        <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['student_user'])->getTpnumber()?></p>
+
+                        <div>
+                            <button onclick="window.location.href='../View/EditProfile.php'" class="btn btn-default editProfileBtn">Edit profile</button>
+                            <button class="btn btn-default editProfileBtn" onclick="">View Events</button>
+                            <button class="btn btn-default editProfileBtn">Video Tutorials</button>
+                            <button class="btn btn-default editProfileBtn">View CGU Staff</button>
+                            <button class="btn btn-default editProfileBtn">View Degree Contents</button>
+                        </div>
                     </div>
                 </div>
-        </div>
-            <div class="col-md-4 center">
-                <div class="row">
-                <button class="btn btn-secondary col-md-6" onclick="window.location.href='../View/EditProfile.php'">Edit Profile</button>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-12 card bg-light mb-3 card-details">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home">Personal Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu1">Academic Qualifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu2">Professional Qualifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#menu3">Soft Skills</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                <div class="personalDetails container tab-pane active" id="home" >
+                    <h4 class="card-header h5">Personal Details</h4>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <td>Student Number</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getUser_id(); ?></td>
+                            </tr>
+                            <tr>
+                                <td>First Name</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getFname(); ?></td>
+                                <td>Last Name</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getLname(); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getDob(); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getGender(); ?></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getEmail(); ?></td>
+                                <td>Mobile</td>
+                                <td><?PHP echo unserialize($_SESSION['student_user'])->getTpnumber(); ?></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="row">
-                <button class="btn btn-secondary col-md-6" onclick="window.location.href='../View/Inquiry.php'">Inquiry</button>
+
+                <div id="menu1" class="AcademicDetails container tab-pane fade">
+                    <h4 class="card-header h5">Academic Qualifications</h4>
+                    <div class="card-body">
+                        <table id="AcademicDetails" class="table table-hover">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="row">
-                <button class="btn btn-secondary col-md-6" onclick="">View Events</button>
+
+                <div id="menu2" class="ProfessionalDetails container tab-pane fade">
+                    <h4 class="card-header h5">Professional Qualifications</h4>
+                    <div class="card-body">
+                        <table id="ProfessionalDetails" class="table table-hover">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="row">
-                <button class="btn btn-secondary col-md-6">Video Tutorials</button>
+
+                <div id="menu3" class="SoftSkills container tab-pane fade">
+                    <h4 class="card-header h5">Soft Skills</h4>
+                    <div class="card-body">
+                        <table id="SoftSkills" class="table table-hover">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="row">
-                <button class="btn btn-secondary col-md-6">View CGU Staff</button>
-                </div>
-                <div class="row">
-                <button class="btn btn-secondary col-md-6">View Degree Contents</button>
+
                 </div>
             </div>
         </div>
