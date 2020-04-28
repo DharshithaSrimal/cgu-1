@@ -63,32 +63,36 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             <input type="tel" id="mobile" value="<?PHP echo unserialize($_SESSION['student_user'])->getTpnumber(); ?>"><br>
             <label>Gender</label>
             <input type="text" id="stuNumber" value="<?PHP echo unserialize($_SESSION['student_user'])->getGender(); ?>"><br>
-            <button>Update</button>
+            <button id="btnPersonal">Update</button>
             <br><br>
         </div>
         <div>
             <p>Educational Qualifications</p><hr>
 
             <label>Degree</label>
-            <input type="text" id="degree" value="<?PHP echo unserialize($_SESSION['student_user'])->getDegName(); ?>"><br>
+            <input type="text" id="degree" size="70" value="<?PHP echo unserialize($_SESSION['student_user'])->getDegName(); ?>"><br>
             <label>Faculty</label>
             <input type="text" id="faculty" value="<?PHP echo unserialize($_SESSION['student_user'])->getFacName(); ?>"><br>
+            <button id="btnEducational">Update</button>
             <br><br>
         </div>
         <div>
             <p>Academic Qualifications</p>
             <hr>
             <div id="outputAcademic"></div>
+            <button id="btnAcademic">Update</button>
         </div>
         <div>
             <p>Proffessional Qualifications</p>
             <hr>
             <div id="outputProfessional"></div>
+            <button id="btnProffessional">Update</button>
         </div>
         <div>
             <p>Soft Skills</p>
             <hr>
             <div id="softSkills"></div>
+            <button id="btnSoft">Update</button>
         </div>
     </div>
 </div>
