@@ -1,8 +1,16 @@
 <?php
+include_once '../Model/User.php';
 session_start();
 if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     header("Location: ./Login.php");
     exit();
+}
+
+if (isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null) {
+    if (unserialize($_SESSION['current_user'])->getRole() =="lecturer") {
+        header("Location: ./StaffProfile.php");
+        exit();
+    }
 }
 ?>
 
@@ -21,7 +29,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <body>
 
     <?php
-    include_once '../Model/User.php';
+
     $userImage;
     $firstName;
     $lastName;

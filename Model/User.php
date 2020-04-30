@@ -169,6 +169,8 @@
         private $specialized_area;
         private $academic_position;
         private $cgu_position;
+        private $academic_q_array = array();
+        private $prof_q_array= array();
 
         function __construct(){
         }
@@ -226,5 +228,26 @@
         {
             $this->cgu_position = $cgu_position;
         }
+
+        public function getAcademic_q_array()
+        {
+            return $this->academic_q_array;
+        }
+
+        public function setAcademic_q_array($acq)
+        {
+            array_push($this->academic_q_array,$acq);
+        }
+
+        public function getProf_q_array()
+        {
+            return $this->prof_q_array;
+        }
+
+        public function setProf_q_array($pq)
+        {
+            array_push($this->prof_q_array ,$pq);
+        }
+
     }
 ?>
