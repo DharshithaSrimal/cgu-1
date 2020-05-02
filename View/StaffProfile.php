@@ -34,7 +34,7 @@
                         <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['current_user'])->getTpnumber()?></p>
                         <br>
                         <div>
-                            <button class="btn btn-default editProfileBtn">Edit profile</button>
+                            <button id="editProfileBtn" class="btn btn-default editProfileBtn">Edit profile</button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
         </div>
         </div>
 
-
+        <script src="../res/js/StaffProfile.js"></script>
 </body>
 
 </html>
