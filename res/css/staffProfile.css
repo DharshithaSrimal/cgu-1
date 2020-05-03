@@ -320,6 +320,15 @@ input {
     min-width: 0px !important;
     margin: auto;
 }
+
+.saveProfileBtn{
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    min-width: 0px !important;
+    margin: auto;
+    background-color: var(--main-color2);
+}
 .pro_pic{
     height :100%;
 }

@@ -301,6 +301,11 @@ input {
     min-width: 0px !important;
     margin: auto;
 }
+.saveProfileBtn{
+    font-size: 15px;
+    min-width: 0px !important;
+    margin: auto;
+}
 .pro_pic{
     height :100%;
 }

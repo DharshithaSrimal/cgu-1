@@ -27,15 +27,30 @@
 
                 <div id="home_profile_summary">
                     <br>
-                    <h5  style = "text-transform:capitalize;"><?php echo unserialize($_SESSION['current_user'])->getCguPosition()?> <span style = "text-transform:none;">at</span> CGU</h5>
-                    <h6><?php echo unserialize($_SESSION['current_user'])->getAcademicPosition()?></h6>
-                    <p style="margin-top: -10px"><?php echo unserialize($_SESSION['current_user'])->getFacName()?></p>
-                    <br>
-                    <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['current_user'])->getTpnumber()?></p>
-                    <br>
-                    <div>
-                        <button id="saveProfileBtn" class="btn btn-default saveProfileBtn">Save profile</button>
+                    <div class="row">
+                        <select class="form-control col-md-8">
+                            <option><?php echo unserialize($_SESSION['current_user'])->getCguPosition()?></option>
+                        </select>
+                        <div  class="" style="width:auto">
+                            <h5 style="text-transform:capitalize;text-align: right"><span style = "text-transform:none;">&nbsp;at</span> CGU</h5>
+                        </div>
                     </div>
+                    <br>
+                    <div style="margin-top:10px;"><span style="color:#868686">Faculty position:&nbsp;</span>
+                        <select class="form-control col-md-12">
+                            <option><?php echo unserialize($_SESSION['current_user'])->getAcademicPosition()?></option>
+                        </select>
+                    </div>
+                    <div style="margin-top:10px;"><span style="color:#868686">Faculty:&nbsp;</span>
+                        <select class="form-control col-md-12">
+                            <option><?php echo unserialize($_SESSION['current_user'])->getFacName()?></option>
+                        </select>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <span style="color:#868686">Contact:&nbsp;</span><input type="input" class="form-control" id="exampleFormControlInput1" value="<?php echo unserialize($_SESSION['current_user'])->getTpnumber()?>"/></input>
+                    </div>
+                    <br>
+
                 </div>
             </div>
         </div>
@@ -45,7 +60,7 @@
                     <form class="ac-custom ac-checkbox ac-checkmark" autocomplete="off"></form>
                     <div class="allUnits">
                         <br>
-                        <div><span style="color:#868686">Service period:&nbsp&nbsp</span><input type="input" class="form-control" id="exampleFormControlInput1" value="<?php echo unserialize($_SESSION['current_user'])->getExperience()?> years"/></textarea></div>
+                        <div><span style="color:#868686">Service period:&nbsp&nbsp</span><input type="input" class="form-control" id="exampleFormControlInput1" value="<?php echo unserialize($_SESSION['current_user'])->getExperience()?> years"/></input></div>
                         <hr>
                         <div><span style="color:#868686">Academic Qualifications:&nbsp&nbsp</span><textarea class="form-control" id="exampleFormControlInput1" rows="2"><?php echo unserialize($_SESSION['current_user'])->getAcademic_q_array()[0]["aq_title"]?></textarea> </div>
                         <hr>
@@ -55,20 +70,10 @@
                         <hr>
                     </div>
                     </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3 stu_no">
-                    <img src="../res/img/students_icon.png" width="150px">
-                    <h2>Number of Students</h2>
-                    <h6>Allocated by CGU</h6>
 
-                </div>
-                <div class="col-md-3 stu_no_count">
-                    <h1>20</h1>
-                </div>
-                <div class="col-md-3">
-
+                    <div>
+                        <button id="saveProfileBtn" class="btn btn-default saveProfileBtn">Save profile</button>
+                    </div>
                 </div>
             </div>
         </div>

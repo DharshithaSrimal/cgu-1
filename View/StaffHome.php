@@ -22,7 +22,7 @@
 
                     <br>
                    <div>
-                       <button class="btn btn-default editProfileBtn">Edit profile</button>
+                       <button id="editProfileBtn" class="btn btn-default editProfileBtn">Edit profile</button>
                    </div>
                 </div>
             </div>
