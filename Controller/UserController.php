@@ -55,27 +55,51 @@ function loadData()
     if(unserialize($_SESSION['current_user'])->getRole()=='lecturer'){
         $userName = unserialize($_SESSION['current_user'])->getUser_id();
         $con = DbCon::connection();
-        $sql = "select * from user u inner join staff_member s on u.user_id = s.staff_id inner join faculty f on s.fac_id = f.fac_id
-               where u.user_id = '".$userName."'" ;
+        $sql =  "Select u.*,s.*,f.*,
+                ua.aq_institute,ua.aq_level,
+                aq.aq_description,aq.aq_title,
+                up.pq_institute,up.pq_level,
+                pq.pq_title,pq.pq_description from user u 
+                inner join staff_member s on u.user_id = s.staff_id 
+                inner join faculty f on s.fac_id = f.fac_id
+                Left join user_academic_qualification ua on ua.user_id = u.user_id
+                Left join academic_qualification aq on aq.aq_id = ua.aq_id
+                Left join user_proffesional_qualification up on up.user_id = u.user_id
+                Left join proffesional_qualification pq on pq.pq_id = up.pq_id
+                where u.user_id = '".$userName."'";
+
         $res = $con->query($sql);
         $conn = null; //closing connection
         if ($res) {
             $staff_obj = new Staff();
+            $row_count = 0;
             while ($row = $res->fetch(PDO::FETCH_BOTH)) {
-                $staff_obj->setFname($row["fname"]);
-                $staff_obj->setLname($row["lname"]);
-                $staff_obj->setEmail($row["email"]);
-                $staff_obj->setDob($row["dob"]);
-                $staff_obj->setUser_id($row["user_id"]);
-                $staff_obj->setTpnumber($row["tpnumber"]);
-                $staff_obj->setImage($row["image"]);
-                $staff_obj->setFac_id($row["fac_id"]);
-                $staff_obj->setFacName($row["fac_name"]);
-                $staff_obj->setRole($row["user_role"]);
-                $staff_obj->setExperience($row["experience"]);
-                $staff_obj->setSpecialized_area($row["specialised_area"]);
-                $staff_obj->setAcademicPosition($row["academic_position"]);
-                $staff_obj->setCguPosition($row["cgu_position"]);
+                $row_count = $row_count+1;
+                if($row_count == 1){
+                    $staff_obj->setFname($row["fname"]);
+                    $staff_obj->setLname($row["lname"]);
+                    $staff_obj->setEmail($row["email"]);
+                    $staff_obj->setDob($row["dob"]);
+                    $staff_obj->setUser_id($row["user_id"]);
+                    $staff_obj->setTpnumber($row["tpnumber"]);
+                    $staff_obj->setImage($row["image"]);
+                    $staff_obj->setFac_id($row["fac_id"]);
+                    $staff_obj->setFacName($row["fac_name"]);
+                    $staff_obj->setRole($row["user_role"]);
+                    $staff_obj->setExperience($row["experience"]);
+                    $staff_obj->setSpecialized_area($row["specialised_area"]);
+                    $staff_obj->setAcademicPosition($row["academic_position"]);
+                    $staff_obj->setCguPosition($row["cgu_position"]);
+
+                    $staff_obj->setAcademic_q_array(array("aq_title"=>$row["aq_title"],"aq_institute"=>$row["aq_institute"],
+                        "aq_level"=>$row["aq_level"],"aq_description"=>$row["aq_description"]));
+                    $staff_obj->setProf_q_array(array("pq_title"=>$row["pq_title"],"pq_institute"=>$row["pq_institute"],
+                        "pq_level"=>$row["pq_level"],"pq_description"=>$row["pq_description"]));
+                }
+                $staff_obj->setAcademic_q_array(array("aq_title"=>$row["aq_title"],"aq_institute"=>$row["aq_institute"],
+                    "aq_level"=>$row["aq_level"],"aq_description"=>$row["aq_description"]));
+                $staff_obj->setProf_q_array(array("pq_title"=>$row["pq_title"],"pq_institute"=>$row["pq_institute"],
+                    "pq_level"=>$row["pq_level"],"pq_description"=>$row["pq_description"]));
             }
             $_SESSION["current_user"] = serialize($staff_obj);
         }

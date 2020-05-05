@@ -1,4 +1,23 @@
+.allUnits div{
+    margin-left: 20px;
+}
+.allUnits{
+    margin-top: 20px;
+}
+.stu_no{
+    float:right;
+    text-align: right;
+}
 
+.stu_no h2{
+    margin-top: -40px;
+    color: #565656;
+}
+.stu_no_count h1 {
+    font-size: 12.5rem !important;
+    color: #a8a8a8;
+
+}
 .decor-default {
     background-color: #ffffff;
 }
@@ -301,10 +320,14 @@ input {
     min-width: 0px !important;
     margin: auto;
 }
+
 .saveProfileBtn{
+    float: right;
     font-size: 15px;
+    font-weight: bold;
     min-width: 0px !important;
     margin: auto;
+    background-color: var(--main-color2);
 }
 .pro_pic{
     height :100%;

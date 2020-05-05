@@ -68,6 +68,7 @@ $method;
                     $result = $stmt->fetchAll();
                     
                     $_SESSION["student_user"] = serialize($result);
+                   // echo json_encode($result);
                 }
                 catch(Exception $ex){                    
                     echo($ex->getMessage());

@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
-    header("Location: ./Login.php");
-    exit();
-}
+    session_start();
+    if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
+        header("Location: ./Login.php");
+        exit();
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,9 +32,9 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         
         <div class="col-md-4">;
         <?php 
-            $result =  unserialize($_SESSION['student_user']);
+           // $result =  unserialize($_SESSION['student_user']);
             
-            print_r($result);
+            //print_r($result);
             ?>
             <label for='degree'>Select Degree:</label>;
            
@@ -60,7 +60,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             $fac_id;
             $degree_title;
             $degree_duration;
-
+                       
             if(isset($_SESSION["student_user"]) || $_SESSION["student_user"] != null){
                 $fac_id = unserialize($_SESSION['student_user'])->getFacultyName();
                 $degree_title = unserialize($_SESSION['student_user'])->getDegreeTitle();

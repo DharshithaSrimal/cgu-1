@@ -40,9 +40,6 @@ function drawStarRating(elementID,Rating) {
 }
 
 window.onload = function () {
-
-
-
     var inputField = document.querySelector('.contacts-list-search');
 
     var xx = $('.allUnits').children('.unit');
@@ -81,5 +78,10 @@ window.onload = function () {
         });
     });
 
+    $("#editProfileBtn").click( function () {
+        window.location.replace("../View/EditStaffProfile.php");
+    });
 }
+
+
 
