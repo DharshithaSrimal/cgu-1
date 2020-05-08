@@ -81,3 +81,28 @@ if($method == 'loadSkills') {
         echo "Failed";
     }
 }
+
+if ($method == 'editPersonal'){
+
+    $stuNum = $_POST['stuNum'];
+    $fName = $_POST['fName'];
+    $lName = $_POST['lName'];
+    $email = $_POST['email'];
+    $dob = $_POST['dob'];
+    $mobile = $_POST['mobile'];
+    $gender = $_POST['gender'];
+
+    $sql = "UPDATE user SET fname='".$fName."',lname='".$lName."',email='".$email."',dob='".$dob."',tpnumber='".$mobile."',gender='".$gender."'
+     WHERE user_id='".$stuNum."'";
+    
+    $con = DbCon::connection();
+    $res = $con->query($sql);
+    $conn = null;
+
+    if ($res) {
+        echo "edit success";
+    }
+    else{
+        echo "edit failed";
+    }
+}

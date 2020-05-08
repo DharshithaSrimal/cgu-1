@@ -22,26 +22,6 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     <div>
         <?php
         include_once '../Model/User.php';
-//        $userImage;
-//        $firstName;
-//        $lastName;
-//        $faculty;
-//        $degree;
-//        if(isset($_SESSION["student_user"]) || $_SESSION["student_user"] != null){
-//            $firstName = unserialize($_SESSION['student_user'])->getFname();
-//            $lastName = unserialize($_SESSION['student_user'])->getLname();
-//            $userImage = unserialize($_SESSION['student_user'])->getImage();
-//            $faculty = unserialize($_SESSION['student_user'])->getFacName();
-//            $degree = unserialize($_SESSION['student_user'])->getDegName();
-//        }
-//        echo '<img width="200px" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['student_user'])->getImage()).'" />';
-//        echo  ("
-//           <br>
-//               <p>Name : ".$firstName." ".$lastName."</p><br>
-//               <p>Degree Programme : ".$degree."</p><br>
-//               <p>Faculty : ".$faculty."</p><br>
-//           "
-//        );
         ?>
         <div>
             <p>Personal Details</p><hr>
@@ -62,7 +42,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             <label>Mobile</label>
             <input type="tel" id="mobile" value="<?PHP echo unserialize($_SESSION['student_user'])->getTpnumber(); ?>"><br>
             <label>Gender</label>
-            <input type="text" id="stuNumber" value="<?PHP echo unserialize($_SESSION['student_user'])->getGender(); ?>"><br>
+            <input type="text" id="gender" value="<?PHP echo unserialize($_SESSION['student_user'])->getGender(); ?>"><br>
             <button id="btnPersonal">Update</button>
             <br><br>
         </div>
