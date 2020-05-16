@@ -206,4 +206,10 @@ if($loadingPositon == "footer"){
     ");
 }
 
+
+//following arrays are used in population select boxes and drop downs
+$cgu_postions = Array("Career Counselor","Academic Counselor","Director","Office Staff");
+$faculty_position = Array("Demonstrator","Lecturer","Senior Lecturer","Office Staff");
+
+
 ?>

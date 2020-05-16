@@ -335,6 +335,7 @@ input {
 }
 .pro_pic{
     height :100%;
+    position: relative;
 }
 
 #home_profile_summary{
@@ -350,6 +351,7 @@ input {
     margin: auto;
     vertical-align: top;
     overflow: hidden;
+    position: relative;
 
 }
 #leftCol{

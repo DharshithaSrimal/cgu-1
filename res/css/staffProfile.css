@@ -410,6 +410,19 @@ input {
 
 .rating > input:checked ~ label { color: #FFD700;  }
 
+.image_upload_ic{
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+
+.image-upload > input
+{
+    display: none;
+    position: absolute;
+    right: 50px;
+}
+
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 

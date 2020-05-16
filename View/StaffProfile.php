@@ -31,7 +31,8 @@
                         <h6><?php echo unserialize($_SESSION['current_user'])->getAcademicPosition()?></h6>
                         <p style="margin-top: -10px"><?php echo unserialize($_SESSION['current_user'])->getFacName()?></p>
                         <br>
-                        <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['current_user'])->getTpnumber()?></p>
+                        <p style="margin-top: -10px">Phone: <?php echo unserialize($_SESSION['current_user'])->getTpnumber()?></p>
+                        <p style="margin-top: -10px">E-mail: <?php echo unserialize($_SESSION['current_user'])->getEmail()?></p>
                         <br>
                         <div>
                             <button id="editProfileBtn" class="btn btn-default editProfileBtn">Edit profile</button>
