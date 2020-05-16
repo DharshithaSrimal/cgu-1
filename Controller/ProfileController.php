@@ -81,3 +81,93 @@ if($method == 'loadSkills') {
         echo "Failed";
     }
 }
+
+if ($method == 'editPersonal'){
+
+    $stuNum = $_POST['stuNum'];
+    $fName = $_POST['fName'];
+    $lName = $_POST['lName'];
+    $email = $_POST['email'];
+    $dob = $_POST['dob'];
+    $mobile = $_POST['mobile'];
+    $gender = $_POST['gender'];
+
+    $sql = "UPDATE user SET fname='".$fName."',lname='".$lName."',email='".$email."',dob='".$dob."',tpnumber='".$mobile."',gender='".$gender."'
+     WHERE user_id='".$stuNum."'";
+    
+    $con = DbCon::connection();
+    $res = $con->query($sql);
+    $conn = null;
+
+    if ($res) {
+        echo "edit success";
+    }
+    else{
+        echo "edit failed";
+    }
+}
+
+if ($method == 'editAcademic'){
+
+    $userId = unserialize($_SESSION['current_user'])->getUser_id();
+    $level = $_POST['level'];
+    $institute = $_POST['institute'];
+    $courseId = $_POST['courseId'];
+
+    $sql = "UPDATE user_academic_qualification SET aq_institute='".$institute."',aq_level='".$level."' 
+            WHERE user_id='".$userId."' AND aq_id ='".$courseId."'";
+
+    $con = DbCon::connection();
+    $res = $con->query($sql);
+    $conn = null;
+
+    if ($res) {
+        echo "edit success";
+    }
+    else{
+        echo "edit failed";
+    }
+}
+
+if ($method == 'editProfessional'){
+
+    $userId = unserialize($_SESSION['current_user'])->getUser_id();
+    $level = $_POST['level'];
+    $institute = $_POST['institute'];
+    $courseId = $_POST['courseId'];
+
+    $sql = "UPDATE user_proffesional_qualification SET pq_institute='".$institute."',pq_level='".$level."' 
+            WHERE user_id='".$userId."' AND pq_id ='".$courseId."'";
+
+    $con = DbCon::connection();
+    $res = $con->query($sql);
+    $conn = null;
+
+    if ($res) {
+        echo "edit success";
+    }
+    else{
+        echo "edit failed";
+    }
+}
+
+if ($method == 'editSoft'){
+
+    $userId = unserialize($_SESSION['current_user'])->getUser_id();
+    $description = $_POST['description'];
+    $courseId = $_POST['courseId'];
+
+    $sql = "UPDATE student_soft_skill SET description='".$description."' 
+            WHERE stu_id='".$userId."' AND ss_id ='".$courseId."'";
+
+    $con = DbCon::connection();
+    $res = $con->query($sql);
+    $conn = null;
+
+    if ($res) {
+        echo "edit success";
+    }
+    else{
+        echo "edit failed";
+    }
+}

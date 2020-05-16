@@ -38,6 +38,7 @@ function loadData()
                 $stu_obj->setEmail($row["email"]);
                 $stu_obj->setDob($row["dob"]);
                 $stu_obj->setUser_id($row["user_id"]);
+                $stu_obj->setGender($row["gender"]);
                 $stu_obj->setTpnumber($row["tpnumber"]);
                 $stu_obj->setImage($row["image"]);
                 $stu_obj->setFac_id($row["fac_id"]);
