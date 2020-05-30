@@ -1,3 +1,4 @@
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -9,6 +10,7 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
 
 
 
@@ -43,7 +45,7 @@ $("#addPQ").click(function (){
 });
 
 function delQ(id){
-    alert("#" + id);
+   // alert("#" + id);
     $("#" + id).remove();
 }
 
@@ -52,23 +54,44 @@ $("#saveProfileBtn").click(async function(){
 
 
     var method = "update_profile";
-    let image=document.querySelector('#file-input').files[0];
-    image =  await getBase64(image);
+
+    var image=$('#pro_pic_ele').attr('src');
     var fname= $("#editFname").val();
     var lname=$("#editLname").val();
     var email=$("#editEmail").val();
     var tpnumber =$("#editPhone").val();
 
     var faculty_pos = $("#editFacPos").text();
-    var fac=$("#editFac").text();
+    var fac=$("#editFac").children(":selected").attr("id");
     var cgu_pos=$("#editCguPos").text();
 
     var service_period =$("#editServicePeriod").val()+" "+$("#editServicePeriod1").val();
-    var academic_qualifications =$("#editAQ").val();
-    var professional_qualifications =$("#editPQ").val();
     var specialized_areas =$("#editSA").val();
 
+    var academic_qualifications = new Array();
+    var professional_qualifications = new Array();
 
+    $("#AQLoadingSection").children().each(function(){
+        var content = $(this).text().split("-");
+        var aQTitile = content[0].trim();;
+        var x = content[1].replace(")", "").split("(");
+        var aQIns= x[0].trim();
+        var aQDesc= x[1].trim();
+
+        academic_qualifications.push(new Array(aQTitile,aQIns,aQDesc));
+
+    });
+
+    $("#PQLoadingSection").children().each(function(){
+        var content = $(this).text().split("-");
+        var pQTitile = content[0].trim();;
+        var x = content[1].replace(")", "").split("(");
+        var pQIns= x[0].trim();
+        var pQDesc= x[1].trim();
+
+        professional_qualifications.push(new Array(pQTitile,pQIns,pQDesc));
+
+    });
     let dataSet = new FormData();
     dataSet.append('method', method);
     dataSet.append('fname', fname);
@@ -76,13 +99,13 @@ $("#saveProfileBtn").click(async function(){
     dataSet.append('email', email);
     dataSet.append('tpnumber', tpnumber);
     dataSet.append('academic_position', faculty_pos);
-    dataSet.append('password', fac);
+    dataSet.append('fac_id', fac);
     dataSet.append('image', image);
     dataSet.append('cgu_position', cgu_pos);
     dataSet.append('experience', service_period);
-    dataSet.append('image', academic_qualifications);
-    dataSet.append('image', professional_qualifications);
-    dataSet.append('image', specialized_areas);
+    dataSet.append('academic_qualifications', academic_qualifications);
+    dataSet.append('professional_qualifications', professional_qualifications);
+    dataSet.append('specialized_areas', specialized_areas);
 
     $.ajax({
         type: "POST",

@@ -24,15 +24,15 @@
                 <input style="width: 100%" type="input" class="form-control" id="editLname" value="<?php echo unserialize($_SESSION['current_user']    )->getLname() ?>" placeholder="Last Name">
                 <br>
                 <div class="image-upload">
-                    <label for="file-input">
+                    <label for="fileinput">
                         <a class="image_upload_ic" style = "color:var(--main-color2)">
                             <i class="fas fa-plus-circle fa-2x"></i>
                         </a>
                     </label>
-                    <input type='file' onchange="readURL(this);" id="file-input"/>
+                    <input type='file' onchange="readURL(this);" id="fileinput"/>
                 </div>
                 <div class="pro_pic_frame" >
-                    <img class="pro_pic" id ="pro_pic_ele"<?php echo 'src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'"'; ?> />
+                    <img class="pro_pic" id ="pro_pic_ele"<?php echo 'src="data:image/jpeg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'"'; ?> />
                 </div>
                 <div id="home_profile_summary">
                     <br>
