@@ -1,12 +1,12 @@
 <?php
 
 class Inquiry{
-    private $stu_id;
-    private $staff_id;
+    private $sender;
+    private $receiver;
     private $inq_id;
     private $inq_type;
-    private $feedback;
-    private $description;
+    private $msg_body;
+    private $time;
 
     /**
      * Inquiry constructor.
@@ -14,38 +14,36 @@ class Inquiry{
     public function __construct()
     {
     }
+    /**
+     * @return mixed
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
 
+    /**
+     * @param mixed $sender
+     */
+    public function setSender($sender)
+    {
+        $this->sender = $sender;
+    }
 
     /**
      * @return mixed
      */
-    public function getStuId()
+    public function getReceiver()
     {
-        return $this->stu_id;
+        return $this->receiver;
     }
 
     /**
-     * @param mixed $stu_id
+     * @param mixed $receiver
      */
-    public function setStuId($stu_id)
+    public function setReceiver($receiver)
     {
-        $this->stu_id = $stu_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStaffId()
-    {
-        return $this->staff_id;
-    }
-
-    /**
-     * @param mixed $staff_id
-     */
-    public function setStaffId($staff_id)
-    {
-        $this->staff_id = $staff_id;
+        $this->receiver = $receiver;
     }
 
     /**
@@ -83,34 +81,33 @@ class Inquiry{
     /**
      * @return mixed
      */
-    public function getFeedback()
+    public function getMsgBody()
     {
-        return $this->feedback;
+        return $this->msg_body;
     }
 
     /**
-     * @param mixed $feedback
+     * @param mixed $msg_body
      */
-    public function setFeedback($feedback)
+    public function setMsgBody($msg_body)
     {
-        $this->feedback = $feedback;
+        $this->msg_body = $msg_body;
     }
 
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getTime()
     {
-        return $this->description;
+        return $this->time;
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $time
      */
-    public function setDescription($description)
+    public function setTime($time)
     {
-        $this->description = $description;
+        $this->time = $time;
     }
-
 
 }
