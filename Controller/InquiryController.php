@@ -64,6 +64,8 @@
                 $inq_obj->setSender($row["sender"]);
                 $inq_obj->setReceiver($row["receiver"]);
                 $inq_obj->setTime($row["time"]);
+                $inq_obj->setSenderId($row["sender_id"]);
+                $inq_obj->setReceiverId($row["receiver_id"]);
 
                 array_push($msg_array, $inq_obj);
             }

@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     header("Location: ./Login.php");
     exit();
+
 }
 
 include_once '../Controller/InquiryController.php';
@@ -25,11 +26,50 @@ include_once '../Controller/InquiryController.php';
         <ul class="list-group">
         <?php
             $msges = loadAllInqueries(unserialize($_SESSION['current_user'])->getUser_id());
-           // $senders = array();
-//            var_dump($msges) ;
+            $msg_names = array();
             foreach ( $msges as $msg){
-                //array_push($senders,$msg->getSender());
-                echo "<li>".$msg->getSender()."<span class=\"badge\">2</span>  </li>";
+                   $allreadyIn = 0 ;
+                   foreach ($msg_names as $a){
+                       if($msg->getSender() == $a){
+                           $allreadyIn =1;
+                       }
+                       if($msg->getReceiver() == $a){
+                           $allreadyIn =1;
+                       }
+                   }
+
+                    $otherUserID = "";
+
+                    if($msg->getSenderId() == unserialize($_SESSION['current_user'])->getUser_id() ){
+                        $otherUserID = $msg->getReceiverId();
+
+                    }
+                    if($msg->getReceiverId() == unserialize($_SESSION['current_user'])->getUser_id() ){
+                        $otherUserID = $msg->getSenderId();
+
+                    }
+
+                   if($allreadyIn == 0){
+                       $msgData = array(); // all messages with certain user
+                       foreach ( $msges as $msg2){
+                           //filtering out communication with certain user
+                           if(  ($msg2->getSenderId() == $otherUserID || $msg2->getReceiverId() == $otherUserID)  ){
+
+                                   array_push($msgData,$msg2);
+                           }
+                       }
+
+                       $tobeSent = $msgData;
+
+                       if($msg->getSenderId() != unserialize($_SESSION['current_user'])->getUser_id()){
+                           array_push($msg_names,$msg->getSender());
+                           echo "<li onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().")'>".$msg->getSender()."<span class=\"badge\">2</span>  </li>";
+                       }
+                       if($msg->getReceiverId() != unserialize($_SESSION['current_user'])->getUser_id()){
+                           array_push($msg_names,$msg->getReceiver());
+                           echo "<li onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().")'>".$msg->getReceiver()."<span class=\"badge\">2</span>  </li>";
+                       }
+                   }
             }
         ?>
         </ul>
@@ -56,33 +96,7 @@ include_once '../Controller/InquiryController.php';
         </div>
         <div>
             <div id="msg_div">
-                <div class="my">
-                    <div class="d_time">2020 May 27 8:55 PM</div>
-                    <div class="msg_text">
-                        Hi i'm test 1
-                    </div>
-                    <div class="pro_pic_frame" >
-                        <img class="pro_pic" src="../res/img/testImage.jpg" />
-                    </div>
-                </div>
-                <div class="other">
-                    <div class="d_time">2020 May 27 8:55 PM</div>
-                    <div class="pro_pic_frame" >
-                        <img class="pro_pic" src="../res/img/testImage.jpg" />
-                    </div>
-                    <div class="msg_text">
-                        Hi i'm test 2
-                    </div>
-                </div>
-                <div class="my">
-                    <div class="d_time">2020 May 27 8:55 PM</div>
-                    <div class="msg_text">
-                        Hi i'm test 1
-                    </div>
-                    <div class="pro_pic_frame" >
-                        <img class="pro_pic" src="../res/img/testImage.jpg" />
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
