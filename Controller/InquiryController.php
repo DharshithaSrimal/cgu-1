@@ -3,11 +3,14 @@
     include_once '../Model/User.php';
     include_once '../Model/Inquiry.php';
 
+    session_start();
+
     $inqType = null;
-    $inqBody = null;
+    $msg_body = null;
     $method = null;
     $receiver = null;
     $sender = unserialize($_SESSION['current_user'])->getUser_id();
+    $time  = null;
 
     if(!empty($_POST['method'])) {
         $method =$_POST['method'];
@@ -15,16 +18,16 @@
     if(!empty($_POST['inqType'])) {
         $inqType=$_POST['inqType'];
     }
-    if(!empty($_POST['inqBody'])) {
-        $inqBody=$_POST['inqBody'];
+    if(!empty($_POST['msg_body'])) {
+        $msg_body=$_POST['msg_body'];
     }
     if(!empty($_POST['receiver'])) {
         $receiver=$_POST['receiver'];
     }
 
-    if($method == 'inqSubmit' && isset($inqType) && isset($inqBody)){
+    if($method == 'inqSubmit' && isset($inqType) && isset($msg_body)){
         $con = DbCon::connection();
-        $sql="INSERT INTO inquiry (sender,receiver,inq_type,msg_body,time) VALUES ('".$sender."','".$receiver."','".$inqType."','".$inqBody.", '".date("Y-m-d h:m:s",time())."'');";
+        $sql="INSERT INTO inquiry (sender,receiver,inq_type,msg_body,time) VALUES ('".$sender."','".$receiver."','".$inqType."','".$msg_body."','".date("Y-m-d h:m:s",time())."');";
         $res=$con->query($sql);
         $conn = null; //closing connection
         if($res) {
@@ -76,4 +79,5 @@
             echo "No msg";
         }
     }
+
 ?>

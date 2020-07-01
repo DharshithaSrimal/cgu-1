@@ -1,12 +1,12 @@
 <?php
-session_start();
+include_once '../Controller/InquiryController.php';
+include_once '../Controller/HomeController.php';
+
 if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     header("Location: ./Login.php");
     exit();
 
 }
-
-include_once '../Controller/InquiryController.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -77,21 +77,31 @@ include_once '../Controller/InquiryController.php';
 
     <div id="msg_main_div" class="col-md-5">
         <div>
-            <button class="btn btn-light" >View Inquiry History</button><br><br>
+            <!-- <button class="btn btn-light" >View Inquiry History</button><br><br> -->
             <div>
-                <label for="inquiry">Select Inquiry Type:</label>
+                 <!--<label for="inquiry">Select Inquiry Type:</label>
                 <select id="inquiryType" class="custom-select">
-                    <option value="Level one Subject Selection">Level one Subject Selection</option>
-                    <option value="Level two Subject Selection">Level two Subject Selection</option>
-                    <option value="Level three Subject Selection">Level three Subject Selection</option>
-                    <option value="Level four Subject Selection">Level four Subject Selection</option>
+                    <option value="Level one Subject Selection">Stu 1</option>
+                    <option value="Level two Subject Selection">Stu 2</option>
+                </select>-->
+
+                <h3>New Message:</h3>
+                <label for="to">To:</label>
+                <select id="receiverList" class="custom-select">
+                    <?php
+                    $stu_list = loadStudentList();
+                    foreach ( $stu_list as $stu){
+                        echo("<option value='".$stu->getUser_id()."'>".$stu->getFname()." ".$stu->getLname()."-".$stu->getUser_id()."</option>");
+                    }
+
+                    ?>
                 </select>
                 <br><br>
-                <label for="composeInquiry">Compose Your Inquiry:</label>
+                <label for="composeInquiry">Compose Your Message:</label>
                 <br>
                 <textarea id="composeInquiry" rows="4" cols="50"></textarea>
 
-                <input class="btn btn-info" id="submitInquiry" type="button" value="Submit">
+                <input class="btn btn-info" id="submitInquiry" type="button" value="Send">
             </div>
         </div>
         <div>

@@ -1,26 +1,29 @@
 $("#submitInquiry").click(function () {
-    var inqType = $("#inquiryType").val();
-    var inqBody = $("#composeInquiry").val();
+    var inqType = "ANY";
+    var msg_body = $("#composeInquiry").val();
+    var receiver = $("#receiverList").val();
     var method = "inqSubmit";
 
     $.ajax({
         type: "POST",
         url: "../Controller/InquiryController.php",
-        data: 'inqType='+inqType+'&inqBody='+inqBody+'&method='+method,
+        data: 'inqType='+inqType+'&msg_body='+msg_body+'&method='+method+'&receiver='+receiver,
         cache: false,
         success: function(result){
 
             if(result == "inq success"){
-                alert("Successfully Submitted");
+                //alert("Successfully Send");
+
             }
             if(result == "inq failed"){
-                alert("Error... Please try again...!!");
+                //alert("Error... Please try again...!!");
             }
         }
     });
 });
 
 function showMsg(msgs,thisUser){
+    clearSection();
     //alert(msgs[0]["sender"]);
     msgs.forEach(function(item, index){
         var d_time = document.createElement("div");
@@ -57,4 +60,8 @@ function showMsg(msgs,thisUser){
         var main_ele = document.getElementById("msg_div");
         main_ele.appendChild(myMsg);
     });
+}
+
+function clearSection(){
+    document.getElementById("msg_div").innerHTML = '';
 }
