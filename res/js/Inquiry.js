@@ -1,3 +1,8 @@
+window.onload = function() {
+   // $('#ele_IM-2014-030').click();
+}
+
+
 $("#submitInquiry").click(function () {
     var inqType = "ANY";
     var msg_body = $("#composeInquiry").val();
@@ -20,9 +25,16 @@ $("#submitInquiry").click(function () {
             }
         }
     });
+
+    // location.reload();
+
+    setTimeout(window.location.href = "http://localhost:8080/cgu/View/Inquiry.php?newMsg="+receiver.split("/").join('-'),2000)
 });
 
-function showMsg(msgs,thisUser){
+function showMsg(msgs,thisUser,x){
+    $("#NewMessageHeading").hide();
+    $("#receiverList").children().removeAttr("selected");
+    $("#receiverList").find("#"+x).attr("selected","selected");
     clearSection();
     //alert(msgs[0]["sender"]);
     msgs.forEach(function(item, index){
@@ -64,4 +76,9 @@ function showMsg(msgs,thisUser){
 
 function clearSection(){
     document.getElementById("msg_div").innerHTML = '';
+}
+
+function newMessage(){
+    clearSection();
+    $("#NewMessageHeading").show();
 }

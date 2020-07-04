@@ -7,6 +7,9 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     exit();
 
 }
+if (isset($_GET['newMsg'])) {
+   $res =$_GET['newMsg'];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,6 +25,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 <body>
 <h5 class="title">Inbox</h5>
 <div id="main" class="row">
+
     <div id="contact_list" class="col-md-3">
         <ul class="list-group">
         <?php
@@ -63,11 +67,11 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
                        if($msg->getSenderId() != unserialize($_SESSION['current_user'])->getUser_id()){
                            array_push($msg_names,$msg->getSender());
-                           echo "<li onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().")'>".$msg->getSender()."<span class=\"badge\">2</span>  </li>";
+                           echo "<li id='ele_".str_replace("/","-",$msg->getSenderId())."' onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().",\"".str_replace("/","-",$msg->getSenderId())."\")'>".$msg->getSender()."<span class=\"badge\">2</span>  </li>";
                        }
                        if($msg->getReceiverId() != unserialize($_SESSION['current_user'])->getUser_id()){
                            array_push($msg_names,$msg->getReceiver());
-                           echo "<li onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().")'>".$msg->getReceiver()."<span class=\"badge\">2</span>  </li>";
+                           echo "<li id='ele_".str_replace("/","-",$msg->getReceiverId())."' onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().",\"".str_replace("/","-",$msg->getReceiverId())."\")'>".$msg->getReceiver()."<span class=\"badge\">2</span>  </li>";
                        }
                    }
             }
@@ -76,6 +80,9 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     </div>
 
     <div id="msg_main_div" class="col-md-5">
+        <div style="position:absolute; top:-40px; right:0px;">
+            <button class="btn btn-warning" onclick = "newMessage()">New Message</button>
+        </div>
         <div>
             <!-- <button class="btn btn-light" >View Inquiry History</button><br><br> -->
             <div>
@@ -85,16 +92,17 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                     <option value="Level two Subject Selection">Stu 2</option>
                 </select>-->
 
-                <h3>New Message:</h3>
+                <h3 id="NewMessageHeading">New Message:</h3>
                 <label for="to">To:</label>
                 <select id="receiverList" class="custom-select">
                     <?php
                     $stu_list = loadStudentList();
-                    foreach ( $stu_list as $stu){
-                        echo("<option value='".$stu->getUser_id()."'>".$stu->getFname()." ".$stu->getLname()."-".$stu->getUser_id()."</option>");
-                    }
 
+                    foreach ( $stu_list as $stu){
+                        echo("<option id='".str_replace("/","-",$stu->getUser_id())."' value='".$stu->getUser_id()."'>".$stu->getFname()." ".$stu->getLname()."-".$stu->getUser_id()."</option>");
+                    }
                     ?>
+
                 </select>
                 <br><br>
                 <label for="composeInquiry">Compose Your Message:</label>
@@ -116,6 +124,17 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 </style>
 
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
+<?php
+
+if(isset($res)){
+ echo "
+ <script>
+       setTimeout(function(){\$('#ele_".$res."').click()},2000);
+ </script>
+ ";
+}
+
+?>
 <script src="../res/js/Inquiry.js"></script>
 </body>
 

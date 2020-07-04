@@ -48,7 +48,7 @@
         $con = DbCon::connection();
          $sql="SELECT i.inq_id,inq_type,i.msg_body,i.time, CONCAT(u.fname ,' ',u.lname) as receiver ,i.receiver as receiver_id , CONCAT(u1.fname ,' ', u1.lname) as sender,i.sender as sender_id
          FROM inquiry i JOIN  user u ON i.receiver = u.user_id JOIN user u1 ON i.sender = u1.user_id
-         WHERE receiver ='".$currentUser."' OR sender = '".$currentUser."'";
+         WHERE receiver ='".$currentUser."' OR sender = '".$currentUser."' ORDER BY i.time DESC";
 
         $res=$con->query($sql);
         $conn = null; //closing connection
