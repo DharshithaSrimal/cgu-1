@@ -9,6 +9,7 @@ class Inquiry implements JsonSerializable {
     private $time;
     private $sender_id;
     private $receiver_id;
+    private $read;
 
 
     /**
@@ -144,6 +145,19 @@ class Inquiry implements JsonSerializable {
     public function setTime($time)
     {
         $this->time = $time;
+    }
+
+    public function getRead()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param mixed $time
+     */
+    public function setRead($read)
+    {
+        $this->$read = $read;
     }
 
     /**

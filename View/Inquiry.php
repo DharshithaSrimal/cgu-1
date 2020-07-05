@@ -20,6 +20,17 @@ if (isset($_GET['newMsg'])) {
     <meta name="author" content="CGU-UOK">
     <link rel="stylesheet" href="../res/css/Inquiry.css">
     <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
+
+    <!-- include libraries(jQuery, bootstrap) -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -67,11 +78,11 @@ if (isset($_GET['newMsg'])) {
 
                        if($msg->getSenderId() != unserialize($_SESSION['current_user'])->getUser_id()){
                            array_push($msg_names,$msg->getSender());
-                           echo "<li id='ele_".str_replace("/","-",$msg->getSenderId())."' onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().",\"".str_replace("/","-",$msg->getSenderId())."\")'>".$msg->getSender()."<span class=\"badge\">2</span>  </li>";
+                           echo "<li id='ele_".str_replace("/","-",$msg->getSenderId())."' onclick='showMsg(".json_encode($tobeSent).",\"".str_replace(" "," ",unserialize($_SESSION['current_user'])->getUser_id())."\",\"".str_replace("/","-",$msg->getSenderId())."\")'>".$msg->getSender()."<span class=\"badge\">2</span>  </li>";
                        }
                        if($msg->getReceiverId() != unserialize($_SESSION['current_user'])->getUser_id()){
                            array_push($msg_names,$msg->getReceiver());
-                           echo "<li id='ele_".str_replace("/","-",$msg->getReceiverId())."' onclick='showMsg(".json_encode($tobeSent).",".unserialize($_SESSION['current_user'])->getUser_id().",\"".str_replace("/","-",$msg->getReceiverId())."\")'>".$msg->getReceiver()."<span class=\"badge\">2</span>  </li>";
+                           echo "<li id='ele_".str_replace("/","-",$msg->getReceiverId())."' onclick='showMsg(".json_encode($tobeSent).",\"".str_replace(" "," ",unserialize($_SESSION['current_user'])->getUser_id())."\",\"".str_replace("/","-",$msg->getReceiverId())."\")'>".$msg->getReceiver()."<span class=\"badge\">2</span>  </li>";
                        }
                    }
             }
@@ -94,12 +105,21 @@ if (isset($_GET['newMsg'])) {
 
                 <h3 id="NewMessageHeading">New Message:</h3>
                 <label for="to">To:</label>
-                <select id="receiverList" class="custom-select">
+                <select id="receiverList" class="custom-select" style="font-size: inherit !important;">
                     <?php
-                    $stu_list = loadStudentList();
+                        if( unserialize($_SESSION['current_user'])->getRole() == "lecturer"){
+                            $stu_list = loadStudentList();
 
-                    foreach ( $stu_list as $stu){
-                        echo("<option id='".str_replace("/","-",$stu->getUser_id())."' value='".$stu->getUser_id()."'>".$stu->getFname()." ".$stu->getLname()."-".$stu->getUser_id()."</option>");
+                            foreach ( $stu_list as $stu){
+                                echo("<option id='".str_replace("/","-",$stu->getUser_id())."' value='".$stu->getUser_id()."'>".$stu->getFname()." ".$stu->getLname()."-".$stu->getUser_id()."</option>");
+                            }
+                        }
+                    if( unserialize($_SESSION['current_user'])->getRole() == "student"){
+                        $staff_list = loadStaffList();
+
+                        foreach ( $staff_list as $staff){
+                            echo("<option id='".str_replace("/","-",$staff->getUser_id())."' value='".$staff->getUser_id()."'>".$staff->getFname()." ".$staff->getLname()."-".$staff->getUser_id()."</option>");
+                        }
                     }
                     ?>
 
@@ -107,8 +127,14 @@ if (isset($_GET['newMsg'])) {
                 <br><br>
                 <label for="composeInquiry">Compose Your Message:</label>
                 <br>
-                <textarea id="composeInquiry" rows="4" cols="50"></textarea>
-
+                <div id="composeInquiry"></div>
+                <script>
+                    $('#composeInquiry').summernote({
+                        placeholder: 'Type your message',
+                        tabsize: 2,
+                        height: 100
+                    });
+                </script>
                 <input class="btn btn-info" id="submitInquiry" type="button" value="Send">
             </div>
         </div>
@@ -133,9 +159,12 @@ if(isset($res)){
  </script>
  ";
 }
-
 ?>
 <script src="../res/js/Inquiry.js"></script>
+<?php
+$id = unserialize($_SESSION['current_user'])->getUser_id();
+echo "  <script> getMessageNotifications('".$id."');  </script>";
+?>
 </body>
 
 </html>
