@@ -50,6 +50,11 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
               include '../View/StaffHome.php';
             }
+
+            if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="admin"){
+
+                include '../View/AdminHome.php';
+              }
         ?>
     </div>
 
