@@ -76,6 +76,19 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/EditProfile.js"></script>
+
+<?php
+    $id = unserialize($_SESSION['current_user'])->getUser_id();
+    echo "
+     <script src='../res/js/CommonResources.js'></script>
+    <script>
+                $( document ).ready(function(){
+                 showUnreadCount('".$id."');
+                });
+            </script>";
+
+?>
+
 </body>
 </html>
 

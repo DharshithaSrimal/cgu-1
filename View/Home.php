@@ -61,6 +61,15 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/Home.js"></script>
+
+<?php
+    $id = unserialize($_SESSION['current_user'])->getUser_id();
+    echo "  <script>
+                          showUnreadCount('".$id."');
+
+            </script>";
+
+?>
 </body>
 
 </html>

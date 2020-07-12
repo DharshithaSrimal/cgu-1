@@ -164,6 +164,14 @@ if(isset($res)){
 <?php
 $id = unserialize($_SESSION['current_user'])->getUser_id();
 echo "  <script> getMessageNotifications('".$id."');  </script>";
+
+$id = unserialize($_SESSION['current_user'])->getUser_id();
+echo "  <script>
+                $( document ).ready(function(){
+                      showUnreadCount('".$id."');
+                 });
+        </script>";
+
 ?>
 </body>
 

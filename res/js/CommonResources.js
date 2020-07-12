@@ -32,3 +32,36 @@ $("#btnLogout").click(function(){
     });
 
 });
+
+
+function showUnreadCount(receiverID){
+
+    var method = "unreadCount";
+    userList = $(".list-group").children().find(".badge").hide();
+    $.ajax({
+        type: "POST",
+        url: "../Controller/InquiryController.php",
+        data: 'receiverID='+receiverID.toString().split("-").join("/")+'&method='+method,
+        cache: false,
+        success: function(result){
+            var counts= JSON.parse(result);
+
+            if (true){
+                var userList = $(".list-group").children();
+                var total = null;
+
+                for (var c in counts) {
+                    total = total + parseInt(counts[c]);
+                }
+
+                $('#unreadCount').text(total);
+            }
+
+
+
+        }
+    });
+
+
+}
+

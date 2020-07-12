@@ -15,19 +15,26 @@ function readURL(input) {
 
 
 var AQprog = "";
+var AQprogID = "";
 var AQins = "";
 $("input[name=editAQMain]").focusout(function(){
     AQprog = $(this).val();
+    try{
+        AQprogID = document.querySelector('#editAQMain option[value="'+$(this).val()+'"]').getAttribute('id');
+    }
+    catch (e) {
+        AQprogID = "";
+    }
 });
+
 $("input[name=editAQInstitiute]").focusout(function(){
     AQins = $(this).val();
 });
+
 $("#addAQ").click(function (){
     var desc = $("#editAQDescription").val();
-    document.querySelector("#AQLoadingSection").innerHTML += "<div class=\"row\" id='"+AQprog.replace(/[,\s]/g, '')+AQins.replace(/[,\s]/g, '')+"'><p><a style=\"color:red;cursor: pointer;\"><i  onclick=\"delQ('"+AQprog.replace(/[,\s]/g, '')+AQins.replace(/[,\s]/g, '')+"')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;"+AQprog+"-&nbsp;"+AQins+"&nbsp;(\""+desc+"\")</p></div>"
+    document.querySelector("#AQLoadingSection").innerHTML += "<div class=\"row\" id='"+AQprogID+"'><p><a style=\"color:red;cursor: pointer;\"><i  onclick=\"delQ('"+AQprogID+"')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;"+AQprog+"-&nbsp;"+AQins+"&nbsp;("+desc+")</p></div>"
 });
-
-
 
 var PQprog = "";
 var PQins = "";
@@ -38,30 +45,27 @@ $("input[name=editPQInstitiute]").focusout(function(){
     PQins = $(this).val();
 });
 
-
 $("#addPQ").click(function (){
     var desc = $("#editPQDescription").val();
-    document.querySelector("#PQLoadingSection").innerHTML += "<div id='"+PQprog.replace(/[,\s]/g, '')+PQins.replace(/[,\s]/g, '')+"' class=\"row\"><p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('"+PQprog.replace(/[,\s]/g, '')+PQins.replace(/[,\s]/g, '')+"')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;"+PQprog+"-&nbsp;"+PQins+"&nbsp;(\""+desc+"\")</p></div>"
+    document.querySelector("#PQLoadingSection").innerHTML += "<div id='"+PQprog.replace(/[,\s]/g, '')+PQins.replace(/[,\s]/g, '')+"' class=\"row\"><p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('"+PQprog.replace(/[,\s]/g, '')+PQins.replace(/[,\s]/g, '')+"')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;"+PQprog+"-&nbsp;"+PQins+"&nbsp;("+desc+")</p></div>"
 });
 
 function delQ(id){
-   // alert("#" + id);
-    $("#" + id).remove();
+    try{
+        $("#PQLoadingSection #"+id).remove();
+        $("#AQLoadingSection #"+id).remove();
+    }catch (e) {
+    }
 }
 
-
 $("#saveProfileBtn").click(async function(){
-
-
     var method = "update_profile";
-
     var image=$('#pro_pic_ele').attr('src');
     var fname= $("#editFname").val();
     var lname=$("#editLname").val();
     var email=$("#editEmail").val();
     var tpnumber =$("#editPhone").val();
-
-    var faculty_pos = $("#editFacPos").text();
+    var faculty_pos = $("#editFacPos").val();
     var fac=$("#editFac").children(":selected").attr("id");
     var cgu_pos=$("#editCguPos").text();
 
@@ -77,8 +81,9 @@ $("#saveProfileBtn").click(async function(){
         var x = content[1].replace(")", "").split("(");
         var aQIns= x[0].trim();
         var aQDesc= x[1].trim();
+        var aQID = $(this).attr("id");
 
-        academic_qualifications.push(new Array(aQTitile,aQIns,aQDesc));
+        academic_qualifications.push(new Array(aQID,aQTitile,aQIns,aQDesc));
 
     });
 
@@ -103,10 +108,10 @@ $("#saveProfileBtn").click(async function(){
     dataSet.append('image', image);
     dataSet.append('cgu_position', cgu_pos);
     dataSet.append('experience', service_period);
-    dataSet.append('academic_qualifications', academic_qualifications);
-    dataSet.append('professional_qualifications', professional_qualifications);
+    dataSet.append('academic_qualifications', JSON.stringify(academic_qualifications));
+    dataSet.append('professional_qualifications',  JSON.stringify(professional_qualifications));
     dataSet.append('specialized_areas', specialized_areas);
-
+    console.log(academic_qualifications);
     $.ajax({
         type: "POST",
         url: "../Controller/EditProfileController.php",

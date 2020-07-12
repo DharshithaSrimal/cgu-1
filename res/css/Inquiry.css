@@ -106,3 +106,8 @@
     position: relative;
     bottom: 5px;
 }
+
+.navbar-icon-top .navbar-nav .nav-link > .fa > .badge {
+    font-size: 1.25rem !important;
+
+}
