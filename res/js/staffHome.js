@@ -19,6 +19,7 @@ $(function(){
 })
 
 
+
 function drawStarRating(elementID,Rating) {
 //#IM2014030star1half
     starRating = Rating;
@@ -80,6 +81,20 @@ window.onload = function () {
 
     $("#editProfileBtn").click( function () {
         window.location.replace("../View/EditStaffProfile.php");
+    });
+
+    $('#iframeNewsView').hide();
+    $("#viewNews").click(function(){
+        if($("#iframeNewsAdd").is(":visible")){
+            $("#viewNews").html("Publish New Item");
+            $('#iframeNewsView').show();
+            $('#iframeNewsAdd').hide();
+        }
+        else{
+            $("#viewNews").html("View Published Items");
+            $('#iframeNewsView').hide();
+            $('#iframeNewsAdd').show();
+        }
     });
 }
 

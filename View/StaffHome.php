@@ -33,18 +33,18 @@
                     <br>
                     <h5 style="color: var(--main-color3);" class="title">Publish News for your students</h5>
                     <br>
-                    <iframe src="http://localhost:8080/cgu/View/NewsPublish.php" title="News publish" frameBorder="0"
+                    <iframe id="iframeNewsAdd" src="http://localhost:8080/cgu/View/NewsPublish.php" title="News publish" frameBorder="0"
                             style="width:800px;height:500px;">
 
                     </iframe>
-                    <iframe src="http://localhost:8080/cgu/View/NewsView.php" title="News view" frameBorder="0"
+                    <iframe id="iframeNewsView" src="http://localhost:8080/cgu/View/NewsView.php" title="News view" frameBorder="0"
                             style="width:800px;height:500px; overflow-x: hidden !important; overflow-y: scroll !important" >
 
                     </iframe>
                     <br>
                 </div>
                 <div class ='col-md-4' style="height: 200px">
-                    <button style="margin-left: 60px;margin-top:30px;" class="btn-default">View Published Items</button>
+                    <button id="viewNews" style="margin-left: 60px;margin-top:30px;" class="btn-default">View Published Items</button>
                 </div>
             </div>
             <div class="contacts-list">
