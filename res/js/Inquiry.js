@@ -11,6 +11,7 @@ $(document).ready(function() {
 $("#submitInquiry").click(function () {
     var inqType = "ANY";
     var msg_body = $('#composeInquiry').summernote('code');
+    msg_body =  msg_body.replace(/\+/g,'%2B');
     var receiver = $("#receiverList").val();
     var method = "inqSubmit";
 

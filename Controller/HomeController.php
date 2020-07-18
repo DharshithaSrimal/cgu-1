@@ -9,8 +9,9 @@ function create_staff_obj(){
 
 function loadUser(){
 
-
 }
+
+
 function loadStaffList(){
     $con = DbCon::connection();
     $sql = "SELECT distinct user.*,staff_member.*,faculty.fac_name

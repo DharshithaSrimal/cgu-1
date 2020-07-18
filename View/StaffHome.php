@@ -28,6 +28,25 @@
             </div>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-12">
+            <div id="newsPublishWindow" class="row">
+                <div class ='col-md-8'>
+                    <br>
+                    <h5 style="color: var(--main-color3);" class="title">Publish News for your students</h5>
+                    <br>
+                    <iframe src="http://localhost:8080/cgu/View/NewsPublish.php" title="News publish" frameBorder="0"
+                            style="width:800px;height:500px;">
+
+                    </iframe>
+                    <iframe src="http://localhost:8080/cgu/View/NewsView.php" title="News view" frameBorder="0"
+                            style="width:800px;height:500px; overflow-x: hidden !important; overflow-y: scroll !important" >
+
+                    </iframe>
+                    <br>
+                </div>
+                <div class ='col-md-4' style="height: 200px">
+                    <button style="margin-left: 60px;margin-top:30px;" class="btn-default">View Published Items</button>
+                </div>
+            </div>
             <div class="contacts-list">
                 <h5 class="title">Students under your supervision</h5>
 <!--                <div style="float: right">-->
@@ -90,8 +109,6 @@
                               </script>"
                             ;
                         }
-
-
                         ?>
                     </div>
                 </form>
