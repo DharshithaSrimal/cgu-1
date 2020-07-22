@@ -16,7 +16,7 @@
         <div class="col-lg-9 col-md-8 col-sm-12">
             <div class="contacts-list">
                 <a href= ""><h5 class="title">Manage Staff</h5></a>
-                <a href= ""><h5 class="title">Manage Students</h5></a>
+                <a href= ""><h5 class="title">Manage Students</h5></a> 
             </div>
         </div>
     </div>
