@@ -58,6 +58,15 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
         ?>
     </div>
 
+<?php
+
+if(unserialize($_SESSION['current_user'])->getRole()=='student'){
+echo "    <iframe id=\"iframeNewsView\" src=\"http://localhost:8080/cgu/View/NewsView.php\" title=\"News view\" frameBorder=\"0\"
+                  style=\"width:1000px;height:1500px; overflow-x: hidden !important; overflow-y: scroll !important\" >
+          </iframe>";
+}
+?>
+
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/Home.js"></script>
@@ -70,6 +79,9 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
             </script>";
 
 ?>
+
+
+
 </body>
 
 </html>

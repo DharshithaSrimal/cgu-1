@@ -43,7 +43,7 @@
                     </iframe>
                     <br>
                 </div>
-                <div class ='col-md-4' style="height: 200px">
+                <div class ='col-md-4' style="height: 100px">
                     <button id="viewNews" style="margin-left: 60px;margin-top:30px;" class="btn-default">View Published Items</button>
                 </div>
             </div>

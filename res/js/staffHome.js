@@ -87,6 +87,7 @@ window.onload = function () {
     $("#viewNews").click(function(){
         if($("#iframeNewsAdd").is(":visible")){
             $("#viewNews").html("Publish New Item");
+            document.getElementById('iframeNewsView').contentWindow.location.reload();
             $('#iframeNewsView').show();
             $('#iframeNewsAdd').hide();
         }
@@ -97,6 +98,8 @@ window.onload = function () {
         }
     });
 }
+
+
 
 
 

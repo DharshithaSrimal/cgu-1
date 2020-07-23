@@ -8,9 +8,15 @@ session_start();
 function LoadNews(){
 
     $news_array = array();
-
     $con = DbCon::connection();
-    $sql="SELECT * FROM news WHERE publishedBy =".unserialize($_SESSION['current_user'])->getUser_id()." AND isDeleted =0";
+    $sql="";
+    if(unserialize($_SESSION['current_user'])->getRole()=='lecturer' || unserialize($_SESSION['current_user'])->getRole()=='admin'){
+        $sql="SELECT * FROM news WHERE publishedBy =\"".unserialize($_SESSION['current_user'])->getUser_id()."\" AND isDeleted =0";
+    }
+
+    if(unserialize($_SESSION['current_user'])->getRole()=='student'){
+        $sql="SELECT * FROM news WHERE (publishedBy = (select staff_id FROM student_counselor WHERE stu_id = '".unserialize($_SESSION['current_user'])->getUser_id()."') AND isDeleted =0) OR (publishedForAll = 1  AND isDeleted =0)";
+    }
 
     $res=$con->query($sql);
     $conn = null; //closing connection
@@ -32,14 +38,27 @@ function LoadNews(){
         return $news_array;
     }
 }
+?>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet">
 
-$newslIST = LoadNews();
+<?php
+$newslIST =  array_reverse(LoadNews()); ;
+$deleteButtonContent = "";
+
+if(unserialize($_SESSION['current_user'])->getRole()=='lecturer' || unserialize($_SESSION['current_user'])->getRole()=='admin'){
+    $deleteButtonContent = "<input style=\"display:inline-flex;Float:right\"  class=\"btn btn-info\" id=\"publishNews\" type=\"button\" value=\"Delete\" onclick=\'deleteNews()\'>";
+}
 
 foreach ($newslIST as $news) {
 
-    echo "<div>
-            <div style='height: auto; margin-top: 10px; background-color: #6c757d'> 
+    echo "<div style='background-color: #dfdfdf;padding:10px;margin-top: 10px;'>
+            
+            <div style='display:inline-flex;Float:left'> Published on ".$news->getDateTime()." by ".$news->getPublishedBy()." </div>
+            ".$deleteButtonContent."
+            <div style='display:inline-flex;height: auto;'>
                 ".$news->getContent()."
             </div>
         </div>
@@ -47,6 +66,18 @@ foreach ($newslIST as $news) {
 }
 
 ?>
+
+<script>
+
+    function deleteNews(){
+        var r = confirm("Are you sure want to delete this ?");
+        if (r == true) {
+
+        } else {
+
+        }
+    }
+</script>
 
 
 
