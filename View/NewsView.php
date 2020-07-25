@@ -48,11 +48,12 @@ function LoadNews(){
 $newslIST =  array_reverse(LoadNews()); ;
 $deleteButtonContent = "";
 
-if(unserialize($_SESSION['current_user'])->getRole()=='lecturer' || unserialize($_SESSION['current_user'])->getRole()=='admin'){
-    $deleteButtonContent = "<input style=\"display:inline-flex;Float:right\"  class=\"btn btn-info\" id=\"publishNews\" type=\"button\" value=\"Delete\" onclick=\'deleteNews()\'>";
-}
 
 foreach ($newslIST as $news) {
+
+    if(unserialize($_SESSION['current_user'])->getRole()=='lecturer' || unserialize($_SESSION['current_user'])->getRole()=='admin'){
+        $deleteButtonContent = "<input style=\"display:inline-flex;Float:right\"  class=\"btn btn-info\" type=\"button\" value=\"Delete\" onclick=\"deleteNews(".$news->getIdnews().")\">";
+    }
 
     echo "<div style='background-color: #dfdfdf;padding:10px;margin-top: 10px;'>
             
@@ -69,14 +70,30 @@ foreach ($newslIST as $news) {
 
 <script>
 
-    function deleteNews(){
+    function deleteNews(newsId){
+
+        var method = 'deleteNews';
         var r = confirm("Are you sure want to delete this ?");
+
         if (r == true) {
+            $.ajax({
+                type: "POST",
+                url: "../Controller/NewsPublishController.php",
+                data: '&method='+method+'&newsId='+newsId,
+                async:true,
+                success: function(result){
+                    console.log(result);
+                    if(result=='Deleted'){
+                        location.reload();
+                    }
+                }
+            });
 
         } else {
 
         }
     }
+
 </script>
 
 

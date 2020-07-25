@@ -29,5 +29,22 @@ if($method == 'publishNews') {
 
 }
 
+if($method == 'deleteNews') {
+
+    $newsId =$_POST['newsId'];
+
+    $con = DbCon::connection();
+    $sql="UPDATE news SET isDeleted= 1 WHERE idnews=".$newsId;
+    $res=$con->query($sql);
+    $conn = null; //closing connection
+    if($res) {
+        echo "Deleted";
+    }
+    else {
+        echo "Delete failed";
+    }
+
+}
+
 
 ?>
