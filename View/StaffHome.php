@@ -33,11 +33,11 @@
                     <br>
                     <h5 style="color: var(--main-color3);" class="title">Publish News for your students</h5>
                     <br>
-                    <iframe id="iframeNewsAdd" src="http://localhost:8080/cgu/View/NewsPublish.php" title="News publish" frameBorder="0"
+                    <iframe id="iframeNewsAdd" src="/cgu/View/NewsPublish.php" title="News publish" frameBorder="0"
                             style="width:800px;height:500px;">
 
                     </iframe>
-                    <iframe id="iframeNewsView" src="http://localhost:8080/cgu/View/NewsView.php" title="News view" frameBorder="0"
+                    <iframe id="iframeNewsView" src="/cgu/View/NewsView.php" title="News view" frameBorder="0"
                             style="width:800px;height:500px; overflow-x: hidden !important; overflow-y: scroll !important" >
 
                     </iframe>
