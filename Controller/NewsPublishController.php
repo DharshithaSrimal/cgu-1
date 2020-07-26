@@ -11,9 +11,8 @@ if(!empty($_POST['method'])) {
 }
 
 if($method == 'publishNews') {
-
     $content =$_POST['content'];
-    $publishedForAll = 1;
+    $publishedForAll = $_POST['publishScope'];
     $publishedBy =  unserialize($_SESSION['current_user'])->getUser_id();
     $con = DbCon::connection();
     $sql="INSERT INTO news (content,publishedForAll,publishedBy,dateTime) VALUES 

@@ -46,7 +46,7 @@
                         <form class="ac-custom ac-checkbox ac-checkmark" autocomplete="off"></form>
                             <div class="allUnits">
                                 <br>
-                                   <div><span style="color:#868686">Service period:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getExperience()?> years</div>
+                                   <div><span style="color:#868686">Service period:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getExperience()?> </div>
                                 <hr>
                                     <div><span style="color:#868686">Academic Qualifications:&nbsp&nbsp</span><?php
                                         foreach (unserialize($_SESSION['current_user'])->getAcademic_q_array() as $i){

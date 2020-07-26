@@ -21,7 +21,13 @@
     });
 </script>
 
-<input class="btn btn-info" id="publishNews" type="button" value="Publish">
+<div style="display: inline-flex" >
+    <input class="btn btn-info" id="publishNews" type="button" value="Publish">
+    <select class="form-control col-md-8" id="publishScope" style="margin-left: 20px">
+        <option id="1" value="1">for all</option>
+        <option id="0" value="0">for my students</option>
+    </select>
+</div>
 
 <script>
     $("#publishNews").click(function () {
@@ -34,10 +40,12 @@
         content =  content.replace(/\+/g,'%2B');
         var method = "publishNews";
 
+        var publishScope = $('#publishScope').val();
+
         $.ajax({
             type: "POST",
             url: "../Controller/NewsPublishController.php",
-            data: 'content='+content+'&method='+method,
+            data: 'content='+content+'&method='+method+'&publishScope='+publishScope,
             cache: false,
             success: function(result){
                 console.log("aa "+result);
