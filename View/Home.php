@@ -19,32 +19,10 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 </head>
 
 <body>
-
 <div>
-    <div>
-
-    </div>
-    <div>
         <?php
             include_once '../Model/User.php';
-            if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="student"){
-                echo ("
-                    <br>
-                    <div>
-                        <p>".unserialize($_SESSION['current_user'])->getFname()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getLname()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getGender()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getEmail()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getDob()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getTpnumber()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getUser_id()."</p>
-                        <p>".unserialize($_SESSION['current_user'])->getRole()."</p>
-                    </div>
-                "
-                );
-
-                echo '<img width="200px" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'" />';
-            }
+           
 
             if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="lecturer"){
 
@@ -57,17 +35,62 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
               }
         ?>
     </div>
+<div>
+    <div>
+        <div class="container bootstrap snippets">
+            <div class="row decor-default">
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                <?php
 
-<?php
+                if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="student"){
+                    echo ("
+                    <div id=\"leftCol\" class=\"contacts-labels card bg-light mb-3  card-user\">
+                        <br>
+                        <h4>Welcome ".unserialize($_SESSION['current_user'])->getFname()."</h4>
+                        <br>
+                        <div class=\"pro_pic_frame\" >
+                            <img class=\"pro_pic\" src=\"data:image/jpg;base64,'".base64_encode(unserialize($_SESSION['current_user'])->getImage())."'\" />;
+                        </div>
 
-if(unserialize($_SESSION['current_user'])->getRole()=='student'){
-echo "    <iframe id=\"iframeNewsView\" src=\"./NewsView.php\" title=\"News view\" frameBorder=\"0\"
-                  style=\"width:1000px;height:1500px; overflow-x: hidden !important; overflow-y: scroll !important\" >
-          </iframe>";
-}
-?>
+                        <div id=\"home_profile_summary\">
+                            <br>
+                            <h5  style = \"text-transform:capitalize;\">".unserialize($_SESSION['current_user'])->getRole()."<span style = \"text-transform:none;\"> at</span> CGU</h5>
+                           
+                            <br>
+                            <p style=\"margin-top: -10px\">".unserialize($_SESSION['current_user'])->getUser_id()."</p>
+                            <p style=\"margin-top: -10px\"> ".unserialize($_SESSION['current_user'])->getEmail()."</p>
+                            <p style=\"margin-top: -10px\">".unserialize($_SESSION['current_user'])->getTpnumber()."</p>
 
-</div>
+                            <div>
+                                <button onclick=\"window.location.href='../View/EditProfile.php'\" class=\"btn btn-default editProfileBtn\">Edit profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                "
+            );
+        }
+                ?>
+            <div class="col-lg-9 col-md-8 col-sm-12 card bg-light mb-3 card-details">
+                <div class="tab-content">
+                    <div class="personalDetails container tab-pane active" id="home" >
+                    <?php
+                    if(unserialize($_SESSION['current_user'])->getRole()=='student'){
+                                echo "
+                        <h4 class=\"card-header h5\">Important Notices</h4>
+                        <div class=\"card-body\">
+                            
+                                 <iframe id=\"iframeNewsView\" src=\"./NewsView.php\" title=\"News view\" frameBorder=\"0\"
+                                        style=\"height:435px; overflow-x: hidden !important; overflow-y: scroll !important\" >
+                                        </iframe>";
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/Home.js"></script>
 
