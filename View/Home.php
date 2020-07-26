@@ -61,7 +61,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 <?php
 
 if(unserialize($_SESSION['current_user'])->getRole()=='student'){
-echo "    <iframe id=\"iframeNewsView\" src=\"/cgu/View/NewsView.php\" title=\"News view\" frameBorder=\"0\"
+echo "    <iframe id=\"iframeNewsView\" src=\"./cgu/View/NewsView.php\" title=\"News view\" frameBorder=\"0\"
                   style=\"width:1000px;height:1500px; overflow-x: hidden !important; overflow-y: scroll !important\" >
           </iframe>";
 }
