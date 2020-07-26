@@ -1,12 +1,16 @@
 <?php
 
-class Inquiry{
-    private $stu_id;
-    private $staff_id;
+class Inquiry implements JsonSerializable {
+    private $sender;
+    private $receiver;
     private $inq_id;
     private $inq_type;
-    private $feedback;
-    private $description;
+    private $msg_body;
+    private $time;
+    private $sender_id;
+    private $receiver_id;
+    private $read;
+
 
     /**
      * Inquiry constructor.
@@ -15,37 +19,68 @@ class Inquiry{
     {
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSenderId()
+    {
+        return $this->sender_id;
+    }
+
+    /**
+     * @param mixed $sender_id
+     */
+    public function setSenderId($sender_id)
+    {
+        $this->sender_id = $sender_id;
+    }
 
     /**
      * @return mixed
      */
-    public function getStuId()
+    public function getReceiverId()
     {
-        return $this->stu_id;
+        return $this->receiver_id;
     }
 
     /**
-     * @param mixed $stu_id
+     * @param mixed $receiver_id
      */
-    public function setStuId($stu_id)
+    public function setReceiverId($receiver_id)
     {
-        $this->stu_id = $stu_id;
+        $this->receiver_id = $receiver_id;
     }
 
     /**
      * @return mixed
      */
-    public function getStaffId()
+    public function getSender()
     {
-        return $this->staff_id;
+        return $this->sender;
     }
 
     /**
-     * @param mixed $staff_id
+     * @param mixed $sender
      */
-    public function setStaffId($staff_id)
+    public function setSender($sender)
     {
-        $this->staff_id = $staff_id;
+        $this->sender = $sender;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReceiver()
+    {
+        return $this->receiver;
+    }
+
+    /**
+     * @param mixed $receiver
+     */
+    public function setReceiver($receiver)
+    {
+        $this->receiver = $receiver;
     }
 
     /**
@@ -83,34 +118,62 @@ class Inquiry{
     /**
      * @return mixed
      */
-    public function getFeedback()
+    public function getMsgBody()
     {
-        return $this->feedback;
+        return $this->msg_body;
     }
 
     /**
-     * @param mixed $feedback
+     * @param mixed $msg_body
      */
-    public function setFeedback($feedback)
+    public function setMsgBody($msg_body)
     {
-        $this->feedback = $feedback;
+        $this->msg_body = $msg_body;
     }
 
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getTime()
     {
-        return $this->description;
+        return $this->time;
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $time
      */
-    public function setDescription($description)
+    public function setTime($time)
     {
-        $this->description = $description;
+        $this->time = $time;
     }
 
+    public function getRead()
+    {
+        return $this->time;
+    }
+
+    /**
+     * @param mixed $time
+     */
+    public function setRead($read)
+    {
+        $this->$read = $read;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        $json = array();
+        foreach($this as $key => $value) {
+            $json[$key] = $value;
+        }
+        return $json; // or json_encode($json)
+    }
 
 }

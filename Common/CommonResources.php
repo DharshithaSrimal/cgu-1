@@ -48,7 +48,7 @@ if((isset($_SESSION["current_user"]) && $_SESSION["current_user"]!= null)){
       <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"../View/Inquiry.php\">
           <i class=\"fa fa-bell\">
-            <span class=\"badge badge-info\">11</span>
+            <span id=\"unreadCount\" class=\"badge badge-info\"></span>
           </i>
           Messages
         </a>
@@ -213,3 +213,4 @@ $faculty_position = Array("Demonstrator","Lecturer","Senior Lecturer","Office St
 
 
 ?>
+

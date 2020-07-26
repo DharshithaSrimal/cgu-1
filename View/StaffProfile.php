@@ -19,7 +19,7 @@
             <div class="col-lg-3 col-md-4 col-sm-12">
                 <div id="leftCol" class="contacts-labels">
                     <br>
-                    <h4><?php echo unserialize($_SESSION['current_user']    )->getFname()." ".unserialize($_SESSION['current_user']    )->getLname() ?></h4>
+                    <h4><?php echo unserialize($_SESSION['current_user'])->getFname()." ".unserialize($_SESSION['current_user']    )->getLname() ?></h4>
                     <br>
                     <div class="pro_pic_frame" >
                         <?php echo '<img class="pro_pic" src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'" />'; ?>
@@ -46,11 +46,25 @@
                         <form class="ac-custom ac-checkbox ac-checkmark" autocomplete="off"></form>
                             <div class="allUnits">
                                 <br>
-                                   <div><span style="color:#868686">Service period:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getExperience()?> years</div>
+                                   <div><span style="color:#868686">Service period:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getExperience()?> </div>
                                 <hr>
-                                    <div><span style="color:#868686">Academic Qualifications:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getAcademic_q_array()[0]["aq_title"]?> </div>
+                                    <div><span style="color:#868686">Academic Qualifications:&nbsp&nbsp</span><?php
+                                        foreach (unserialize($_SESSION['current_user'])->getAcademic_q_array() as $i){
+                                            echo "<p>".$i["aq_title"]." - ".$i["aq_institute"]."</p>";
+                                        }
+                                        ?>
+                                    </div>
                                 <hr>
-                                    <div><span style="color:#868686">Professional Qualifications:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getProf_q_array()[0]["pq_title"]?> </div>
+                                    <div><span style="color:#868686">Professional Qualifications:&nbsp&nbsp</span>
+
+                                     <?php
+                                     foreach (unserialize($_SESSION['current_user'])->getProf_q_array() as $i){
+                                         echo "<p>".$i["pq_title"]." - ".$i["pq_institute"]."</p>";
+                                     }
+
+                                     ?>
+
+                                     </div>
                                 <hr>
                                     <div><span style="color:#868686">Specialized Areas:&nbsp&nbsp</span><?php echo unserialize($_SESSION['current_user'])->getSpecialized_area()?> </div>
                                 <hr>
@@ -66,7 +80,7 @@
 
                     </div>
                     <div class="col-md-3 stu_no_count">
-                        <h1>20</h1>
+                        <h1><?php echo studentCount()?></h1>
                     </div>
                     <div class="col-md-3">
 
@@ -77,6 +91,33 @@
         </div>
 
         <script src="../res/js/StaffProfile.js"></script>
+<?php
+    $id = unserialize($_SESSION['current_user'])->getUser_id();
+    echo "
+     <script src='../res/js/CommonResources.js'></script>
+    <script>
+                $( document ).ready(function(){
+                 showUnreadCount('".$id."');
+                });
+            </script>";
+
+    function studentCount(){
+        $con = DbCon::connection();
+        $sql = "SELECT COUNT(stu_id) as c FROM student_counselor WHERE staff_id = '".unserialize($_SESSION['current_user'])->getUser_id()."'";
+
+        $res = $con->query($sql);
+
+        $conn = null; //closing connection
+
+        $aQArray = array();
+
+        if ($res) {
+            while($row = $res->fetch(PDO::FETCH_ASSOC)){
+                    return $row["c"];
+            }
+        }
+    }
+?>
 </body>
 
 </html>

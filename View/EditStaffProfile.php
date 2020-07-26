@@ -24,15 +24,15 @@
                 <input style="width: 100%" type="input" class="form-control" id="editLname" value="<?php echo unserialize($_SESSION['current_user']    )->getLname() ?>" placeholder="Last Name">
                 <br>
                 <div class="image-upload">
-                    <label for="file-input">
+                    <label for="fileinput">
                         <a class="image_upload_ic" style = "color:var(--main-color2)">
                             <i class="fas fa-plus-circle fa-2x"></i>
                         </a>
                     </label>
-                    <input type='file' onchange="readURL(this);" id="file-input"/>
+                    <input type='file' onchange="readURL(this);" id="fileinput"/>
                 </div>
                 <div class="pro_pic_frame" >
-                    <img class="pro_pic" id ="pro_pic_ele"<?php echo 'src="data:image/jpg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'"'; ?> />
+                    <img class="pro_pic" id ="pro_pic_ele"<?php echo 'src="data:image/jpeg;base64,'.base64_encode(unserialize($_SESSION['current_user'])->getImage()).'"'; ?> />
                 </div>
                 <div id="home_profile_summary">
                     <br>
@@ -134,8 +134,8 @@
                             <div id="AQLoadingSection">
                                 <?php  foreach ( unserialize($_SESSION['current_user'])->getAcademic_q_array() as $i){
                                 if(isset($i["aq_title"])){
-                                    echo(" <div class=\"row\" id='".str_replace(array(',', ' '), '', $i["aq_title"]).str_replace(array(',', ' '), '', $i["aq_institute"])."'>
- <p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('".str_replace(array(',', ' '), '', $i["aq_title"]).str_replace(array(',', ' '), '', $i["aq_institute"])."')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;" .$i["aq_title"] . "-" . $i["aq_institute"]
+                                    echo(" <div class=\"row\" id='".$i["aq_id"]."'>
+ <p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('".$i["aq_id"]."')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;" .$i["aq_title"] . "-" . $i["aq_institute"]
                                         . "&nbsp;(" .$i["aq_description"] . ")" . "</p></div>");
                                     }
                                 }
@@ -173,8 +173,8 @@
                                 <?php
                                 foreach ( unserialize($_SESSION['current_user'])->getProf_q_array() as $i){
                                         if(isset($i["pq_title"])){
-                                            echo (" <div class=\"row\" id='".str_replace(array(',', ' '), '', $i["pq_title"]).str_replace(array(',', ' '), '', $i["pq_institute"])."'>
- <p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('".str_replace(array(',', ' '), '', $i["pq_title"]).str_replace(array(',', ' '), '', $i["pq_institute"])."')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;".$i["pq_title"]."-".$i["pq_institute"]
+                                            echo (" <div class=\"row\" id='".$i["pq_id"]."'>
+ <p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('".$i["pq_id"]."')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;".$i["pq_title"]."-".$i["pq_institute"]
                                                 ."&nbsp;(".$i["pq_description"].")"."</p></div>");
                                         }
                                 }
@@ -199,6 +199,17 @@
 </div>
 <script src="../res/js/EditStaffProfile.js"></script>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
+
+<?php
+    $id = unserialize($_SESSION['current_user'])->getUser_id();
+    echo "
+    <script>
+                $( document ).ready(function(){
+                 showUnreadCount('".$id."');
+                });
+            </script>";
+
+?>
 </body>
 
 </html>

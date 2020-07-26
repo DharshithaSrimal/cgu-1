@@ -50,12 +50,38 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 
               include '../View/StaffHome.php';
             }
+
+            if((isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null)&& unserialize($_SESSION['current_user'])->getRole()=="admin"){
+
+                include '../View/AdminHome.php';
+              }
         ?>
     </div>
+
+<?php
+
+if(unserialize($_SESSION['current_user'])->getRole()=='student'){
+echo "    <iframe id=\"iframeNewsView\" src=\"/cgu/View/NewsView.php\" title=\"News view\" frameBorder=\"0\"
+                  style=\"width:1000px;height:1500px; overflow-x: hidden !important; overflow-y: scroll !important\" >
+          </iframe>";
+}
+?>
 
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/Home.js"></script>
+
+<?php
+    $id = unserialize($_SESSION['current_user'])->getUser_id();
+    echo "  <script>
+                          showUnreadCount('".$id."');
+
+            </script>";
+
+?>
+
+
+
 </body>
 
 </html>
