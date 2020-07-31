@@ -55,8 +55,8 @@ $(document).ready(function(){
             var $output = $('#softSkills');
             for(var i = 0; i < x.length; i++) {
                 $output.append('<div id="'+x[i].ss_id+'"></div>');
-                $('#'+x[i].ss_id+'').append('<label>Skill :</label>' + '<input type="text" readonly="readonly" id="textbox' + i + '" value="'+x[i].soft_skill+'" ><br>');
-                $('#'+x[i].ss_id+'').append('<label>Description :</label>' + '<input type="text" id="textboxDes" value="'+x[i].description+'" ><br><br>');
+                $('#'+x[i].ss_id+'').append('<label>Skill :</label>' + '<input type="text" class="form-control" readonly="readonly" id="textbox' + i + '" value="'+x[i].soft_skill+'" ><br>');
+                $('#'+x[i].ss_id+'').append('<label>Description :</label>' + '<input type="text" class="form-control" id="textboxDes" value="'+x[i].description+'" ><br><br>');
             }
         }
     });

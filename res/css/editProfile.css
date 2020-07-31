@@ -1,0 +1,40 @@
+.pro_pic{
+    height :100%;
+    position: relative;
+}
+
+
+.pro_pic_frame{
+    display: inline-block;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: auto;
+    vertical-align: top;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.avatartFrame{
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 16px 0 0;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.image_upload_ic{
+    position: absolute;
+    left: 210px;
+    cursor: pointer;
+}
+
+.image-upload > input
+{
+    display: none;
+    position: absolute;
+    left: 50px;
+}

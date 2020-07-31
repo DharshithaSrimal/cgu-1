@@ -5,7 +5,7 @@ include_once '../Model/User.php';
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
-$method;
+$method ="";
 if(!empty($_POST['method'])) {
     $method = $_POST['method'];
 }
@@ -171,9 +171,6 @@ function getAQInstitutes(){
     }
     return $aQArray;
 }
-
-
-
 
 function getPQPrograms(){
     $con = DbCon::connection();

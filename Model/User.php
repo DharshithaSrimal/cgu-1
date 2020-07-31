@@ -107,6 +107,8 @@
         private $fac_id;
         private $facName;
         private $degName;
+        private $academic_q_array = array();
+        private $prof_q_array= array();
 
 
         public function getDegName()
@@ -157,6 +159,26 @@
     
         public function setDeg_id($deg_id){
             $this->deg_id = $deg_id;
+        }
+
+        public function getAcademic_q_array()
+        {
+            return $this->academic_q_array;
+        }
+
+        public function setAcademic_q_array($acq)
+        {
+            array_push($this->academic_q_array,$acq);
+        }
+
+        public function getProf_q_array()
+        {
+            return $this->prof_q_array;
+        }
+
+        public function setProf_q_array($pq)
+        {
+            array_push($this->prof_q_array ,$pq);
         }
 
     }
