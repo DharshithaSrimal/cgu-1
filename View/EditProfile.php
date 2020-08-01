@@ -180,12 +180,29 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     </div>
     <div class="row decor-default contacts-labels card bg-light mb-3  card-user">
         <h4 class="card-header h5">Soft Skills</h4>
+        <div>
+            <div class="row" style="margin:0 auto;padding-right: 10px; padding-left: 10px;">
+                <span class="col-md-12" style="padding-right: 0px; padding-left: 0px;">
+                    <input class="form-control" list="editSSMain" name="editSSMain" placeholder="Skill type.." >
+                    <datalist id="editSSMain">
+                   <?php foreach (getSkills() as $i)
+                   {
+                       echo "<option id =".$i[1]." value='".$i[0]."'>"  ;
+                   }
+                   ?>
+                    </datalist>
+                </span>
+                <textarea placeholder="Description.." style="resize: none;" class="form-control" id="editSSDescription" rows="2" maxlength="100"></textarea>
+                <button  id="addSS" style="margin-top: 10px;">Add</button>
+            </div>
+        </div>
         <div id="softSkills" class="card-body"></div>
     </div>
 
     <button id="btnSoft" class="btn btn-info" >Update Skills & Qualifications</button>
     !!!!!!!!!!!!!!!!!! Button not working!!!!This part is under development  !!!!!!!!!!!!!!!!
 </div>
+<br>
 <br>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/EditProfile.js"></script>

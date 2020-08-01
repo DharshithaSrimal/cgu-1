@@ -208,4 +208,24 @@ function getPQInstitutes(){
     return $aQArray;
 }
 
+function getSkills(){
+    $con = DbCon::connection();
+    $sql = "SELECT distinct * FROM soft_skill;";
+
+    $res = $con->query($sql);
+
+    $conn = null; //closing connection
+
+    $sSArray = array();
+
+    if ($res) {
+        while($row = $res->fetch(PDO::FETCH_ASSOC)){
+            $a = array();
+            array_push($a,$row["soft_skill"],$row["ss_id"]);
+            array_push($sSArray,$a);
+        }
+    }
+    return $sSArray;
+}
+
 
