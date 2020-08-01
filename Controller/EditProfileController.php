@@ -115,6 +115,136 @@ if($method == 'update_profile'){
  echo "Profile Updated";
 }
 
+if($method=='update_stu_skills_Qual'){
+
+    $professional_qualifications =json_decode($_POST['professional_qualifications']);
+    $academic_qualifications =json_decode($_POST['academic_qualifications']);
+    $skills =json_decode($_POST['skills']);
+    $user_id = unserialize($_SESSION['current_user'])->getUser_id();
+
+    $con = DbCon::connection();
+
+
+    $sql10 = "DELETE FROM user_proffesional_qualification WHERE user_id ='".$user_id."'";
+    $sql11 = "DELETE FROM user_academic_qualification WHERE user_id ='".$user_id."'";
+    $sql12 = "DELETE FROM student_soft_skill WHERE stu_id ='".$user_id."'";
+
+        try{
+            $res=$con->query($sql10);
+            $res=$con->query($sql11);
+            $res=$con->query($sql12);
+          }
+        catch(PDOException $e){
+            echo $e;
+        }
+    foreach ($professional_qualifications as &$value) {
+        $pq_id = $value[3];
+        $pq_title =  $value[0];
+        $pq_institute =  $value[1];
+        $description =  $value[2];
+
+        $sql5 = "SELECT * FROM proffesional_qualification WHERE pq_title ='".$pq_title."'";
+        $res = "";
+        try{
+            $res=$con->query($sql5);
+          }
+        catch(PDOException $e){
+            echo $e;
+        }
+
+        if($res){
+          // this proffesional_qualification type already exists
+            $sql4="INSERT INTO user_proffesional_qualification values('".$user_id."','".$pq_id."','".$pq_institute."','Completed','".$description."')";
+            try{
+                $res=$con->query($sql4);
+            }catch (PDOException $e){
+                 echo $e;
+            }
+        }
+        else{
+            // Add new proffesional_qualification type
+            $pq_id = time();
+            $sql3="INSERT INTO proffesional_qualification values('".$pq_id."','".$pq_title."','')";
+            $sql4="INSERT INTO user_proffesional_qualification values('".$user_id."','".$pq_id."','".$pq_institute."','Completed','".$description."')";
+            try{
+                $res=$con->query($sql3);
+                $res=$con->query($sql4);
+            }catch (PDOException $e){
+                 echo $e;
+            }
+        }
+
+
+    }
+
+    foreach ($academic_qualifications as &$value) {
+        $aq_id =  $value[0];
+        $aq_title =  $value[1];
+        $aq_institute =  $value[2];
+        $description =  $value[3];
+
+        if($aq_id == ""){
+            //new AQ
+            $aq_id = time();
+            $sql3="INSERT INTO academic_qualification values('".$aq_id."','".$aq_title."','')";
+            $sql4="INSERT INTO user_academic_qualification values('".$user_id."','".$aq_id."','".$aq_institute."','Completed','".$description."')";
+            try{
+                $res=$con->query($sql3);
+                $res=$con->query($sql4);
+            }catch (PDOException $e){
+                 echo $e;
+            }
+        }
+        else{
+            //existing AQ
+            $sql5="INSERT INTO user_academic_qualification values('".$user_id."','".$aq_id."','".$aq_institute."','Completed','".$description."')";
+            try{
+                $res=$con->query($sql5);
+            }catch (PDOException $e){
+                 echo $e;
+            }
+        }
+
+    }
+
+    foreach ($skills as &$value) {
+
+        $ss_id =  $value[0];
+        $ss_type =  $value[1];
+        $ss_description =  $value[2];
+
+        if($ss_id ==""){
+            $ss_id =  time();
+            $sql3="INSERT INTO soft_skill values('".$ss_id."','".$ss_type."')";
+            $sql4="INSERT INTO student_soft_skill values('".$user_id."','".$ss_id."','".$ss_description."')";
+            try{
+                $res=$con->query($sql3);
+                $res=$con->query($sql4);
+            }catch (PDOException $e){
+                 echo $e;
+            }
+        }
+        else{
+            $sql4="INSERT INTO student_soft_skill values('".$user_id."','".$ss_id."','".$ss_description."')";
+            try{
+                $res=$con->query($sql4);
+            }catch (PDOException $e){
+                 echo $e;
+            }
+        }
+    }
+
+    echo "Profile Updated";
+}
+
+//-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
+
+
 function getFacultis(){
     $con = DbCon::connection();
     $sql = "SELECT fac_name,fac_id FROM faculty";

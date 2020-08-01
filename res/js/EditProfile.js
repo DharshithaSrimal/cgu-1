@@ -54,10 +54,11 @@ $(document).ready(function(){
             var x = JSON.parse(result);
             var $output = $('#softSkills');
             for(var i = 0; i < x.length; i++) {
-                $output.append('<div id="'+x[i].ss_id+'SS"></div>');
-                $('#'+x[i].ss_id+'SS').append('<label>Skill :</label>' + '<input type="text" class="form-control" readonly="readonly" id="textbox' + i + '" value="'+x[i].soft_skill+'" ><br>');
-                $('#'+x[i].ss_id+'SS').append('<label>Description :</label>' + '<input type="text" class="form-control" id="textboxDes'+ i +'" value="'+x[i].description+'" >');
-                $('#'+x[i].ss_id+'SS').append('<div class="row" id=""> <a style="color:red;cursor: pointer;margin-left: 30px;margin-top: 10px"><i onclick="" class="fas fa-trash-alt"></i></a></div><br><br>');
+                $output.append('<div id="ss'+x[i].ss_id+'"></div>');
+                $('#ss'+x[i].ss_id+'').append('<label>Skill :</label>' + '<input type="text" class="form-control" readonly="readonly" id="ss_' + +x[i].ss_id + '" value="'+x[i].soft_skill+'" ><br>');
+                $('#ss'+x[i].ss_id+'').append('<label>Description :</label>' + '<textarea type="text" class="form-control" id="textboxDes'+ i +'" >');
+                $('#ss'+x[i].ss_id+'').append('<div class="row" id=""> <a style="color:red;cursor: pointer;margin-left: 30px;margin-top: 10px"><i onclick="delQ(\'ss'+x[i].ss_id+'\')" class="fas fa-trash-alt"></i></a></div><br><br>');
+                $("#textboxDes"+ i ).val(x[i].description);
 
             }
         }
@@ -84,12 +85,12 @@ $("#btnPersonal").click(function () {
         data: dataString,
         cache: false,
         success: function(result){
-            // alert(result);
+            alert(result);
             if(result == "edit success"){
-                alert("Successfully updated.....!!!")
+                alert("Successfully updated...!!!")
             }
             if(result == "edit failed"){
-                alert("Update failed....!!!")
+                alert("Update failed...!!!")
             }
         }
     });
@@ -166,36 +167,36 @@ $("#btnProffessional").click(function () {
 });
 
 $("#btnSoft").click(function () {
-
-    $('#softSkills').find('div').each(function(){
-        var courseId = $(this).attr('id');
-
-        var parentHtmlTag = $('#'+courseId);
-
-        var description = parentHtmlTag.find('#textboxDes').val();
-
-        var dataString = {};
-
-        dataString.description = description;
-        dataString.courseId = courseId;
-        dataString.method = "editSoft";
-
-        $.ajax({
-            type: "POST",
-            url: "../Controller/ProfileController.php",
-            data: dataString,
-            cache: false,
-            success: function(result){
-                alert(result);
-                if(result == "edit success"){
-                    alert("Successfully updated.....!!!")
-                }
-                if(result == "edit failed"){
-                    alert("Update failed....!!!")
-                }
-            }
-        });
-    });
+    saveSkillsAndQualifications();
+    // $('#softSkills').find('div').each(function(){
+    //     var courseId = $(this).attr('id');
+    //
+    //     var parentHtmlTag = $('#'+courseId);
+    //
+    //     var description = parentHtmlTag.find('#textboxDes').val();
+    //
+    //     var dataString = {};
+    //
+    //     dataString.description = description;
+    //     dataString.courseId = courseId;
+    //     dataString.method = "editSoft";
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "../Controller/ProfileController.php",
+    //         data: dataString,
+    //         cache: false,
+    //         success: function(result){
+    //             alert(result);
+    //             if(result == "edit success"){
+    //                 alert("Successfully updated.....!!!")
+    //             }
+    //             if(result == "edit failed"){
+    //                 alert("Update failed....!!!")
+    //             }
+    //         }
+    //     });
+    // });
 });
 
 
@@ -211,6 +212,56 @@ $("input[name=editSSMain]").focusout(function(){
     }
 
 });
+
+
+var AQprog = "";
+var AQprogID = "";
+var AQins = "";
+$("input[name=editAQMain]").focusout(function(){
+    AQprog = $(this).val();
+    try{
+        AQprogID = document.querySelector('#editAQMain option[value="'+$(this).val()+'"]').getAttribute('id');
+    }
+    catch (e) {
+        AQprogID = "";
+    }
+});
+
+$("input[name=editAQInstitiute]").focusout(function(){
+    AQins = $(this).val();
+});
+
+$("#addAQ").click(function (){
+    var desc = $("#editAQDescription").val();
+    document.querySelector("#AQLoadingSection").innerHTML += "<div class=\"row\" id='"+AQprogID+"'><p><a style=\"color:red;cursor: pointer;\"><i  onclick=\"delQ('"+AQprogID+"')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;"+AQprog+"-&nbsp;"+AQins+"&nbsp;("+desc+")</p></div>"
+});
+
+var PQprog = "";
+var PQprogID = "";
+var PQins = "";
+
+$("input[name=editPQMain]").focusout(function(){
+    PQprog = $(this).val();
+    try{
+        PQprogID = document.querySelector('#editPQMain option[value="'+$(this).val()+'"]').getAttribute('id');
+    }
+    catch (e) {
+        PQprogID = "";
+    }
+});
+
+$("input[name=editPQMain]").focusout(function(){
+    PQprog = $(this).val();
+});
+$("input[name=editPQInstitiute]").focusout(function(){
+    PQins = $(this).val();
+});
+
+$("#addPQ").click(function (){
+    var desc = $("#editPQDescription").val();
+    document.querySelector("#PQLoadingSection").innerHTML += "<div id='"+PQprogID+"' class=\"row\"><p><a style=\"color:red;cursor: pointer;\"><i onclick=\"delQ('"+PQprog.replace(/[,\s]/g, '')+PQins.replace(/[,\s]/g, '')+"')\" class=\"fas fa-trash-alt\"></i></a>&nbsp;&nbsp;"+PQprog+"-&nbsp;"+PQins+"&nbsp;("+desc+")</p></div>"
+});
+
 
 $("#addSS").click(function () {
 
@@ -232,9 +283,96 @@ $("#addSS").click(function () {
     }
     else {
         var output = $('#softSkills');
-        var mainDiv =$("<div></div>");
-        mainDiv.append('<label>Skill :</label>' + '<input type="text" class="form-control" readonly="readonly" id="textbox' + skillTypeID + '" value="'+skillType+'" ><br>');
-        mainDiv.append('<label>Description :</label>' + '<input type="text" class="form-control" id="textboxDes'+ i +'" value="'+skillDesc+'" ><br><br>');
+        var mainDiv =$("<div id='ss"+skillTypeID+"'></div>");
+        mainDiv.append('<label>Skill :</label>' + '<input type="text" class="form-control" readonly="readonly" id="ss_' + skillTypeID + '" value="'+skillType+'" ><br>');
+        mainDiv.append('<label>Description :</label>' + '<textarea type="text" class="form-control" id="textboxDes'+ i +'" >');
+        mainDiv.append('<div class="row" id=""> <a style="color:red;cursor: pointer;margin-left: 30px;margin-top: 10px"><i onclick="delQ(\'ss'+skillTypeID+'\')" class="fas fa-trash-alt"></i></a></div><br><br>');
         output.append(mainDiv);
+        $("#textboxDes"+ i ).val(skillDesc);
     }
 });
+
+function delQ(id){
+    try{
+        $("#PQLoadingSection #"+id).remove();
+        $("#AQLoadingSection #"+id).remove();
+        $("#softSkills #"+id).remove();
+    }catch (e) {
+    }
+}
+
+function saveSkillsAndQualifications(){
+    var method = "update_stu_skills_Qual";
+
+    var academic_qualifications = new Array();
+    var professional_qualifications = new Array();
+    var skills = new Array();
+
+    $("#AQLoadingSection").children().each(function(){
+        var content = $(this).text().split("-");
+        var aQTitile = content[0].trim();;
+        var x = content[1].replace(")", "").split("(");
+        var aQIns= x[0].trim();
+        var aQDesc= x[1].trim();
+        var aQID = $(this).attr("id");
+
+        academic_qualifications.push(new Array(aQID,aQTitile,aQIns,aQDesc));
+
+    });
+
+    $("#PQLoadingSection").children().each(function(){
+        var content = $(this).text().split("-");
+        var pQTitile = content[0].trim();;
+        var x = content[1].replace(")", "").split("(");
+        var pQIns= x[0].trim();
+        var pQDesc= x[1].trim();
+        var pQId= $(this).attr("id");
+
+        professional_qualifications.push(new Array(pQTitile,pQIns,pQDesc,pQId));
+
+    });
+
+
+    $("#softSkills").children().each(function(){
+        var skillID =  this.children[1].getAttribute("id").substring(3);
+        var skillType = this.children[1].getAttribute("value");
+        var desc= this.children[4].value;
+        skills.push(new Array(skillID,skillType,desc));
+
+    });
+
+    let dataSet = new FormData();
+    dataSet.append('method', method);
+    dataSet.append('academic_qualifications', JSON.stringify(academic_qualifications));
+    dataSet.append('professional_qualifications',  JSON.stringify(professional_qualifications));
+    dataSet.append('skills', JSON.stringify(skills));
+
+    $.ajax({
+        type: "POST",
+        url: "../Controller/EditProfileController.php",
+        data: dataSet,
+        contentType: false,
+        processData: false,
+        success: function(result){
+            // alert(result);
+            if(result == "Profile Updated"){
+                alert("Profile Updated");
+                window.location.replace("../View/Profile.php");
+            }
+        }
+    });
+
+
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#pro_pic_ele')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}

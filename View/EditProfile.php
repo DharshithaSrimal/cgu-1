@@ -192,7 +192,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                    ?>
                     </datalist>
                 </span>
-                <textarea placeholder="Description.." style="resize: none;" class="form-control" id="editSSDescription" rows="2" maxlength="100"></textarea>
+                <textarea placeholder="Description.." style="" class="form-control" id="editSSDescription" rows="2" maxlength="100"></textarea>
                 <button  id="addSS" style="margin-top: 10px;">Add</button>
             </div>
         </div>
@@ -200,7 +200,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     </div>
 
     <button id="btnSoft" class="btn btn-info" >Update Skills & Qualifications</button>
-    !!!!!!!!!!!!!!!!!! Button not working!!!!This part is under development  !!!!!!!!!!!!!!!!
+
 </div>
 <br>
 <br>
@@ -212,11 +212,10 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     echo "
      <script src='../res/js/CommonResources.js'></script>
     <script>
-                $( document ).ready(function(){
-                 showUnreadCount('".$id."');
-                });
-            </script>";
-
+        $( document ).ready(function(){
+         showUnreadCount('".$id."');
+        });
+    </script>";
 ?>
 
 </body>
