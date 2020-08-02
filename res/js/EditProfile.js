@@ -69,13 +69,14 @@ $("#btnPersonal").click(function () {
 
     var dataString = {}
 
-    dataString.stuNum = $("#stuNumber").val();
+    // dataString.stuNum = $("#stuNumber").val();
     dataString.fName = $("#fName").val();
     dataString.lName = $("#lName").val();
     dataString.email = $("#email").val();
     dataString.dob = $("#dob").val();
     dataString.mobile = $("#mobile").val();
-    dataString.gender = $("#gender").val();
+    dataString.image =$('#pro_pic_ele').attr('src');
+    // dataString.gender = $("#gender").val();
 
     dataString.method = "editPersonal";
 
@@ -85,12 +86,13 @@ $("#btnPersonal").click(function () {
         data: dataString,
         cache: false,
         success: function(result){
-            alert(result);
+
             if(result == "edit success"){
-                alert("Successfully updated...!!!")
+                alert("Successfully updated !")
+                window.location.replace("../View/EditProfile.php");
             }
             if(result == "edit failed"){
-                alert("Update failed...!!!")
+                alert("Update failed !")
             }
         }
     });

@@ -71,8 +71,17 @@ function loadData()
                         "pq_level"=>$row["pq_level"],"pq_description"=>$row["pq_description"]));
                 }
                 else{
-                    $stu_obj->setAcademic_q_array(array("aq_id"=>$row["aq_id"],"aq_title"=>$row["aq_title"],"aq_institute"=>$row["aq_institute"],
-                        "aq_level"=>$row["aq_level"],"aq_description"=>$row["description"]));
+                      $exist1 = 0;
+                      foreach ( $stu_obj->getAcademic_q_array() as $i){
+                          if($i["aq_id"] == $row["aq_id"] &&  $i["aq_id"] != ""){
+                              $exist1 = 1;
+                          }
+                      }
+                      if($exist1 == 0){
+                            $stu_obj->setAcademic_q_array(array("aq_id"=>$row["aq_id"],"aq_title"=>$row["aq_title"],"aq_institute"=>$row["aq_institute"],
+                                                    "aq_level"=>$row["aq_level"],"aq_description"=>$row["description"]));
+                      }
+
                     $exist = 0;
                     foreach ( $stu_obj->getProf_q_array() as $i){
                         if($i["pq_id"] == $row["pq_id"] &&  $i["pq_id"] != ""){

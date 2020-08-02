@@ -2,6 +2,8 @@
 
 include_once '../Common/DbCon.php';
 include_once '../Model/User.php';
+include_once 'ProfileController.php';
+
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
@@ -111,7 +113,7 @@ if($method == 'update_profile'){
         }
     }
 
-
+ session_update();
  echo "Profile Updated";
 }
 
@@ -233,6 +235,8 @@ if($method=='update_stu_skills_Qual'){
             }
         }
     }
+
+    session_update();
 
     echo "Profile Updated";
 }
