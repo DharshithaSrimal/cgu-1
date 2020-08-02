@@ -81,8 +81,9 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                         <div class=\"card-body\">
                             
                                  <iframe id=\"iframeNewsView\" src=\"./NewsView.php\" title=\"News view\" frameBorder=\"0\"
-                                        style=\"height:435px; overflow-x: hidden !important; overflow-y: scroll !important\" >
-                                        </iframe>";
+                                   style=\"height: 500px; overflow-x: hidden !important; overflow-y: scroll !important\"
+                                   onload=\"resizeIframe(this)\">
+                                 </iframe>";
                                 }
                             ?>
                         </div>
@@ -98,6 +99,11 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     $id = unserialize($_SESSION['current_user'])->getUser_id();
     echo "  <script>
                           showUnreadCount('".$id."');
+
+                        function resizeIframe(obj) {
+                          obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+                        }
+
 
             </script>";
 

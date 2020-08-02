@@ -59,7 +59,7 @@ foreach ($newslIST as $news) {
             
             <div style='display:inline-flex;Float:left'> Published on ".$news->getDateTime()." by ".$news->getPublishedBy()." </div>
             ".$deleteButtonContent."
-            <div style='display:inline-flex;height: auto;'>
+            <div style='display:inline-flex;height: auto;margin-top:20px'>
                 ".$news->getContent()."
             </div>
         </div>
