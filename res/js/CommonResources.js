@@ -63,5 +63,26 @@ function showUnreadCount(receiverID){
     });
 
 
+
+
 }
+
+
+// .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+//     color: white;
+// }
+//
+// .navbar-dark .navbar-nav .nav-link {
+//     color: var(--main-color2);
+// }
+
+
+//
+// $('.nav-item').click(function(){
+//    //this.attr('color','white');
+//     $(".navbar-nav").children().each(function(){
+//        console.log("");
+//     });
+// });
+
 

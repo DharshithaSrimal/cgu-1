@@ -15,7 +15,7 @@ if (isset($_GET['newMsg'])) {
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>CGU - Home</title>
+    <title>CGU - Messages</title>
     <meta name="description" content="Career Guidance Unit - System">
     <meta name="author" content="CGU-UOK">
     <link rel="stylesheet" href="../res/css/Inquiry.css">
@@ -170,6 +170,7 @@ echo "  <script>
                 $( document ).ready(function(){
                       showUnreadCount('".$id."');
                  });
+
         </script>";
 
 ?>

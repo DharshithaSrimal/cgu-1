@@ -38,7 +38,7 @@ if((isset($_SESSION["current_user"]) && $_SESSION["current_user"]!= null)){
       -->
     </ul>
     <ul class=\"navbar-nav \">
-      <li class=\"nav-item active\">
+      <li class=\"nav-item\">
         <a class=\"nav-link\" href=\"../View/Home.php\">
           <i class=\"fa fa-home\"></i>
           Home
@@ -205,7 +205,22 @@ if($loadingPositon == "footer"){
         <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script> 
     ");
 }
+     echo "
+     <script>
+             $( document ).ready(function(){
 
+                   if(document.title == 'CGU - Home'){
+                      $('.fa-home').parent().css('color','white');
+                   }
+                  if(document.title == 'CGU - Messages'){
+                     $('.fa-bell').parent().css('color','white');
+                   }
+                  if(document.title == 'CGU - Profile'){
+                     $('.fa-user').parent().css('color','white');
+                   }
+              });
+
+     </script>";
 
 //following arrays are used in population select boxes and drop downs
 $cgu_postions = Array("Career Counselor","Academic Counselor","Director","Office Staff");

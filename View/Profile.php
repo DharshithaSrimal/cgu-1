@@ -61,14 +61,14 @@ if (isset($_SESSION["current_user"]) || $_SESSION["current_user"] != null) {
 <!--                        <h6>--><?php //echo unserialize($_SESSION['current_user'])->getAcademicPosition()?><!--</h6>-->
                         <p style="margin-top: -10px"><?php echo unserialize($_SESSION['student_user'])->getDegName()?></p>
                         <br>
-                        <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['student_user'])->getTpnumber()?></p>
+      <!--                  <p style="margin-top: -10px">Contact: <?php echo unserialize($_SESSION['student_user'])->getTpnumber()?></p>-->
 
                         <div>
                             <button onclick="window.location.href='../View/EditProfile.php'" class="btn btn-default editProfileBtn">Edit profile</button>
-                            <button class="btn btn-default editProfileBtn" onclick="">View Events</button>
+                            <!--<button class="btn btn-default editProfileBtn" onclick="">View Events</button>
                             <button class="btn btn-default editProfileBtn">Video Tutorials</button>
                             <button class="btn btn-default editProfileBtn">View CGU Staff</button>
-                            <button class="btn btn-default editProfileBtn">View Degree Contents</button>
+                            <button class="btn btn-default editProfileBtn">View Degree Contents</button>-->
                         </div>
                     </div>
                 </div>
