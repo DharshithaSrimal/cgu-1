@@ -75,7 +75,10 @@ window.onload = function () {
     xx.each(function (index, element) {
         element.addEventListener('click', (event) => {
             var unitID = element.querySelector('fieldset').getAttribute("id");
-            alert("Should open profile in new tab >>> "+unitID);
+            //alert("Should open profile in new tab >>> "+unitID);
+            //http://localhost:8080/cgu/View/ProfileView.php?profUid=IM/2014/030
+            unitID = unitID.slice(0,2)+"/"+unitID.slice(2,6)+"/"+unitID.slice(6,unitID.length)
+            window.open('../View/ProfileView.php?profUid='+unitID, '_blank');
         });
     });
 
