@@ -49,7 +49,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
                         <h4>Welcome ".unserialize($_SESSION['current_user'])->getFname()."</h4>
                         <br>
                         <div class=\"pro_pic_frame\" >
-                            <img class=\"pro_pic\" src=\"data:image/jpg;base64,'".base64_encode(unserialize($_SESSION['current_user'])->getImage())."'\" />;
+                              <img class=\"pro_pic\" src=\"data:image/jpg;base64,".base64_encode(unserialize($_SESSION['current_user'])->getImage())."\" />
                         </div>
 
                         <div id=\"home_profile_summary\">
