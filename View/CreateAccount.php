@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <p>You must use the email address given by the university</p>
+                <!--<p>You must use the email address given by the university</p>-->
 
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email*</label>

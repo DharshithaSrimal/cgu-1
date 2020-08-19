@@ -109,7 +109,7 @@ $("#btnNextCreateAccount").click(async function () {
                 data: '&method='+method+'&firstName='+fname+'&lastName='+lname+'&email='+email,
                 //cache: false,
                 success: function(result){
-                    //alert(result)
+                    console.log(result)
                         if(result == ""){
                            // window.location.replace("../View/Login.php");
                         }
@@ -194,12 +194,13 @@ $("#btnResendVer").click(function () {
         data: '&method='+method+'&firstName='+firstName+'&lastName='+lastName+'&email='+email,
         //cache: false,
         success: function(result){
-            //alert(result)
+             console.log(result)
             if(result == ""){
                 // window.location.replace("../View/Login.php");
             }
         }
     });
+    return false;
 });
 
  async function getBase64(file) {
