@@ -19,7 +19,7 @@
             'port' => '465',
             'auth' => true,
             'username' => 'developmentproject2020@gmail.com',
-            'password' => 'developmentproject_20'
+            'password' => 'developmentproject'
         ));
 
         $firstName =$_POST['firstName'];
