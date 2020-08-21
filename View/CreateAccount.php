@@ -88,9 +88,14 @@
                     <label class="control-label col-sm-3">Upload your photo:</label><br />
                     <div class="col-sm-9">
                         <div class="custom-file ">
-                            <input id="userImage" type="file" class="custom-file-input">
+                            <input id="userImage" type="file" class="custom-file-input" onchange="readURL(this);">
                             <label class="custom-file-label" for="userImage" data-browse="Choose image">No file chosen</label>
                         </div>
+
+                        <div class="pro_pic_frame" >
+                            <img class="pro_pic" id ="pro_pic_ele" src="..\res\img\avatar.png" />
+                        </div>
+
                     </div>
 
                 </div>
