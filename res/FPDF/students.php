@@ -53,7 +53,8 @@ function viewTable($conn)
     $this->SetY(60);
 	$this->SetFont('Arial','B',12);
 	$i = 1;
-	$fetch_student=$conn->query("SELECT * FROM user WHERE user_role = 'student'");
+    $fetch_student=$conn->query("SELECT * FROM user WHERE user_role = 'student'");
+    
 	While($data = $fetch_student->fetch(PDO::FETCH_OBJ))
 	{
         $this->Cell(50,8,$i++,2,0,'C');
