@@ -265,3 +265,20 @@ function readURL(input) {
     }
 }
 
+function stuNoValidation(txt){
+
+}
+
+function emailValidation(txt)
+{
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(txt.match(mailformat))
+    {
+        return true;
+    }
+    else
+    {
+        alert("You have entered an invalid email address!");
+        return false;
+    }
+}

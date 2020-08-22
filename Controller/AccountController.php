@@ -1,7 +1,7 @@
 <?php
     include_once '../Common/DbCon.php';
     include_once '../Model/User.php';
-//    require_once "Mail.php";
+    require_once "Mail.php";
     @date_default_timezone_set('	Asia/Colombo');
 
     session_start();
@@ -14,13 +14,13 @@
 
     if($method == 'verify_email'){
 
-//        $smtp = Mail::factory('smtp', array(
-//            'host' => 'ssl://smtp.gmail.com',
-//            'port' => '465',
-//            'auth' => true,
-//            'username' => 'developmentproject2020@gmail.com',
-//            'password' => 'developmentproject'
-//        ));
+        $smtp = Mail::factory('smtp', array(
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => '465',
+            'auth' => true,
+            'username' => 'developmentproject2020@gmail.com',
+            'password' => 'developmentproject'
+        ));
 
         $firstName =$_POST['firstName'];
         $lastName =$_POST['lastName'];
@@ -38,25 +38,25 @@
         }
         $con = null; //closing connection
 
-//        $from = '<cgu@noreply.com>';
-//        $to = '<'.$email.'>';
-//        $subject = 'Verification Code - Career Guidance Unit - UOK';
-//        $body = "Hi ".$firstName."!,\n\nYour verification code is ".$verCode;
-//
-//        $headers = array(
-//            'From' => $from,
-//            'To' => $to,
-//            'Subject' => $subject
-//        );
-//
-//        $mail = $smtp->send($to, $headers, $body);
+        $from = '<cgu@noreply.com>';
+        $to = '<'.$email.'>';
+        $subject = 'Verification Code - Career Guidance Unit - UOK';
+        $body = "Hi ".$firstName."!,\n\nYour verification code is ".$verCode;
 
-//        if (PEAR::isError($mail)) {
-//            echo('<p> ver. code:' .$verCode.' error:'. $mail->getMessage() . '</p>');
+        $headers = array(
+            'From' => $from,
+            'To' => $to,
+            'Subject' => $subject
+        );
+
+        $mail = $smtp->send($to, $headers, $body);
+
+        if (PEAR::isError($mail)) {
+            echo('<p> ver. code:' .$verCode.' error:'. $mail->getMessage() . '</p>');
                echo('<p> ver. code:' .$verCode.'</p>');
-//        } else {
-//            echo('<p>Message successfully sent! '.$verCode.'</p>');
-//        }
+        } else {
+            echo('<p>Message successfully sent! '.$verCode.'</p>');
+        }
     }
 
     if($method == 'create_account'){
@@ -106,6 +106,9 @@
                     echo "Verification code is expired";
                 }
                 else{
+                    
+                    
+                    
                     //save account details to the database
                      $sql = "INSERT INTO user
                      (user_id,fname,lname,email,
