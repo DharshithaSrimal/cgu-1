@@ -16,8 +16,8 @@
         <div class="col-lg-9 col-md-8 col-sm-12">
             <h4>Manage Users</h4>
                 <div class="contacts-list">
-                    <button href= "">Manage Staff</button>
-                    <button href= "">Manage Students</button> 
+                    <a href="ManageStudents.php"><button>Manage Staff</button></a>
+                    <a href=""><button>Manage Students</button></a>
                 </div>
                 <h4>View Reports</h4>
                 <div class="contacts-list">
