@@ -109,6 +109,17 @@ if($method == 'loadSkills_proView') {
     }
 }
 
+if($method =='updateRatiing'){
+    $userId = $_POST['profUid'];
+    $rating = $_POST['rating'];
+    $con = DbCon::connection();
+    $sql = "UPDATE student_counselor SET given_rating = '".$rating."' WHERE stu_id='".$userId."'";
+    $res = $con->query($sql);
+    if ($res) {
+        echo "ok";
+    }
+}
+
 if ($method == 'editPersonal'){
 
     $stuNum = unserialize($_SESSION['current_user'])->getUser_id();
