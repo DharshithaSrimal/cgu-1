@@ -78,7 +78,7 @@ function viewTable($conn)
         $this->Ln(10);
         While($data2 = $fetch_skills->fetch(PDO::FETCH_OBJ))
         {
-            $this->Cell(94,0,$data2->soft_skill,2,0,'L');
+            $this->Cell(90,0,'             '.$data2->soft_skill,2,0,'L');
             $this->Ln(10);
         }
     }

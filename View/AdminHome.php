@@ -17,7 +17,7 @@
             <h4>Manage Users</h4>
                 <div class="contacts-list">
                     <a href="ManageStudents.php"><button>Manage Students</button></a>
-                    <a href=""><button>Manage Staff</button></a>
+                    <a href="ManageStaff.php"><button>Manage Staff</button></a>
                 </div>
                 <h4>View Reports</h4>
                 <div class="contacts-list">

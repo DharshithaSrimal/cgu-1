@@ -21,13 +21,12 @@
                         <?php
 
                         include_once '../Controller/HomeController.php';
-                        $stu_ar = studentList();
+                        $stu_ar = loadStaff();
                         echo "<table class='table'><tr>
-                                <th>Student ID</th>
+                                <th>Staff ID</th>
                                 <th>Name</th>
                                 <th>Faculty</th>
                                 <th>Report</th>
-                                <th colspan=\"2\"><center>Assign</center></th>
                                 <th>Delete</th>
                             </tr>";
                         foreach ($stu_ar as $stu) {
@@ -37,16 +36,7 @@
                                         <td><div class=\"stuName\">".$stu->getFname()." ".$stu->getLname()."</div></td>
                                         <td><div class=\"stuName\">".$stu->getFacName()."</div></td>
                                         <td><a href=\"../res/FPDF/personal.php?id=".$stu->getUser_id()."\"><button>View Information</button></a></td>
-                                        <td>
-                                            <select class=\"form-control\" id=\"staff_id\">";
-                                            $lecturer = loadStaff();
-                                            foreach ($lecturer as $lec){
-                                                echo "<option value=".$lec->getUser_id().">".$lec->getFname()." ".$lec->getLname()."</option>";
-                                            }                                            
-                                            echo "</select>
-                                        </td>
-                                        <td><button id=\"btnSoft\">Assign</button></td>
-                                        <td><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></td>
+                                        <td><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></td>
                                     </tr>";
                         }
                         echo "</table>";
