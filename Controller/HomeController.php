@@ -19,7 +19,8 @@ function loadStaffList(){
             WHERE user.user_id = staff_member.staff_id AND 
             staff_member.staff_id = student_counselor.staff_id AND 
             student_counselor.stu_id = '".unserialize($_SESSION['current_user'])->getUser_id()."' AND 
-            faculty.fac_id = staff_member.fac_id 
+            user.status = 1 AND
+            faculty.fac_id = staff_member.fac_id AND
             UNION
             SELECT u.*,s.*,f.fac_name
             FROM user u
@@ -70,6 +71,7 @@ function loadStaff(){
     $sql = "SELECT distinct user.*,staff_member.*,faculty.fac_name
             FROM user,faculty ,degree,staff_member
             WHERE user.user_id = staff_member.staff_id AND 
+            user.status = 1 AND
             faculty.fac_id = staff_member.fac_id 
             UNION
             SELECT u.*,s.*,f.fac_name

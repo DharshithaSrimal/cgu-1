@@ -35,8 +35,7 @@
                                         <td><input id=\"stu_id\" value=".$stu->getUser_id()."></td>
                                         <td><div class=\"stuName\">".$stu->getFname()." ".$stu->getLname()."</div></td>
                                         <td><div class=\"stuName\">".$stu->getFacName()."</div></td>
-                                        <td><a href=\"../res/FPDF/personal.php?id=".$stu->getUser_id()."\"><button>View Information</button></a></td>
-                                        <td><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></td>
+                                        <td><button id=\"delete\"><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></button></td>
                                     </tr>";
                         }
                         echo "</table>";
@@ -47,5 +46,5 @@
     </div>
 </div>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
-<script src="../res/js/AssignLec.js"></script>
+<script src="../res/js/DeleteStaff.js"></script>
 
