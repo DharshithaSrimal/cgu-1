@@ -150,8 +150,8 @@ $("#Searchmatching").click(function(){
             console.log(x);
             var $output = $('#matchingStudents');
             for(var i = 0; i < x.length; i++) {
-                $output.append('<div id="'+x[i].user_id+'"></div>');
-                $('#'+x[i].user_id+'').append('<label>Student ID :</label>' + '<input type="text" readonly="readonly" id="textboxId" value="'+x[i].user_id+'" ><br>');
+                $output.append('<div id="output"></div><br>');
+                $('#output').append('<label>Student ID :</label>' + '<input type="text" readonly="readonly" id="receiverList" value="'+x[i].user_id+'" ><br>');
             }
         }
     });
