@@ -71,7 +71,7 @@
         $dob=$_POST['dob'];
         $tpnumber=$_POST['tpnumber'];
         $user_role=$_POST['user_role'];
-        $image;
+        $image = "";
         if(isset($_FILES['image']) and !$_FILES['image']['error']){
             $image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
         }
@@ -106,9 +106,6 @@
                     echo "Verification code is expired";
                 }
                 else{
-                    
-                    
-                    
                     //save account details to the database
                      $sql = "INSERT INTO user
                      (user_id,fname,lname,email,
@@ -122,8 +119,36 @@
                     try{
                         $res=$con->query($sql);
                     }catch (PDOException $e){
+                         if(preg_match("/Duplicate/i", $e)){
+                             echo "User already exist";
+                         }
+                        else
+                         {
+                             echo $e;
+                         }
+                     return null;
+                    }
+                    $sql1 = "";
+                    if($user_role=="student"){
+
+
+
+//                  faculty
+//                degree
+//                user_academic_qualification
+//               academic_qualification
+//                user_proffesional_qualification
+//               proffesional_qualification
+                    }
+                    if($user_role=="lecturer"){
+                        $sql1 = "INSERT INTO staff_member(staff_id, experience, fac_id, specialised_area, academic_position, cgu_position) VALUES ('".$user_id."','','','','','')";
+                    }
+                    try{
+                        $res=$con->query($sql);
+                    }catch (PDOException $e) {
 
                     }
+
                     echo "Account created";
                 }
             }

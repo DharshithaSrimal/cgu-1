@@ -38,22 +38,25 @@
                 <div class="form-group">
                     <label for="indexNo" class="col-sm-3 control-label">Student No*</label>
                     <div class="col-sm-9">
-                        <input type="text" id="indexNo" name="indexNo" placeholder="XXX/XXXX/XXX" class="form-control" autofocus required>
+                        <input type="text" id="indexNo" name="indexNo" placeholder="eg: HS/2013/866" maxlength="13" class="form-control" autofocus required>
                     </div>
+                    <p class="errorInputDisplay" id="indexNoError"></p>
                 </div>
 
                 <div class="form-group">
                     <label for="firstName" class="col-sm-3 control-label">First Name*</label>
                     <div class="col-sm-9">
-                        <input type="text" id="firstName"  name="firstName"  placeholder="Last Name" class="form-control" autofocus required>
+                        <input type="text" id="firstName"  name="firstName"  placeholder="First Name" class="form-control"  maxlength="50" autofocus required>
                     </div>
+                    <p class="errorInputDisplay" id="firstNameError"></p>
                 </div>
 
                <div class="form-group">
                     <label for="lastName" class="col-sm-3 control-label">Last Name*</label>
                     <div class="col-sm-9">
-                        <input type="text" id="lastName"  name="lastName"  placeholder="Last Name" class="form-control" autofocus required>
+                        <input type="text" id="lastName"  name="lastName"  placeholder="Last Name" class="form-control"  maxlength="50"  autofocus required>
                     </div>
+                   <p class="errorInputDisplay" id="lastNameError"></p>
                 </div>
 
                 <!--<p>You must use the email address given by the university</p>-->
@@ -61,8 +64,9 @@
                 <div class="form-group">
                     <label for="email" class="col-sm-3 control-label">Email*</label>
                     <div class="col-sm-9">
-                        <input type="email" id="email" name="email" placeholder="Email" class="form-control" name= "email">
+                        <input type="email" id="email" name="email" placeholder="Email" class="form-control" name= "email"  maxlength="50" >
                     </div>
+                    <p class="errorInputDisplay" id="emailError"></p>
                 </div>
 
                 <div class="form-group" id="gender_group">
@@ -88,7 +92,7 @@
                     <label class="control-label col-sm-3">Upload your photo:</label><br />
                     <div class="col-sm-9">
                         <div class="custom-file ">
-                            <input id="userImage" type="file" class="custom-file-input" onchange="readURL(this);">
+                            <input id="userImage" type="file"  accept=".png,.jpeg" class="custom-file-input" onchange="readURL(this);">
                             <label class="custom-file-label" for="userImage" data-browse="Choose image">No file chosen</label>
                         </div>
 
@@ -110,9 +114,10 @@
                 <div class="form-group">
                     <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
                     <div class="col-sm-9">
-                        <input type="phoneNumber" id="phoneNumber" name="phoneNumber"  placeholder="Phone number" class="form-control">
+                        <input type="text" id="phoneNumber" name="phoneNumber"  placeholder="Phone number" class="form-control"  minlength="10" maxlength="10" size="10">
                         <!-- <span class="help-block">Your phone number won't be disclosed anywhere </span> -->
                     </div>
+                    <p class="errorInputDisplay" id="phoneNumberError"></p>
                 </div>
 
                 <div class="form-group">
@@ -130,6 +135,7 @@
                         <div class="col-sm-9">
                             <input type="password" id="userPassword" name="userPassword" class="form-control" >
                         </div>
+                        <p class="errorInputDisplay" id="userPasswordError"></p>
                     </div>
 
                     <div class="form-group">
@@ -138,6 +144,7 @@
                             <input type="password" id="reEnterPassword" name="reEnterPassword"  class="form-control">
                             <!-- <span class="help-block">Your phone number won't be disclosed anywhere </span> -->
                         </div>
+                        <p class="errorInputDisplay" id="reEnterPasswordError"></p>
                     </div>
                 </form>
             </div>

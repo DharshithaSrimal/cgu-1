@@ -138,3 +138,9 @@ input:checked + .slider:before {
     position: relative;
 
 }
+
+.errorInputDisplay{
+    font-size: 12px;
+    color: #a71d2a;
+    margin-left: 20px;
+}
