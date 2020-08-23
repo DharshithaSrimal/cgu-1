@@ -207,6 +207,26 @@ if ($method == 'editSoft'){
     }
 }
 
+if ($method == 'insertTags'){
+
+    $userId = unserialize($_SESSION['current_user'])->getUser_id();
+    $tags = $_POST['tags'];
+    $output = rtrim($tags, ',');
+
+    $sql = "UPDATE user SET tags='".$output."' WHERE user_id='".$userId."'";
+
+    $con = DbCon::connection();
+    $res = $con->query($sql);
+    $conn = null;
+
+    if ($res) {
+        echo "edit success";
+    }
+    else{
+        echo "edit failed";
+    }
+}
+
 function loadOtherUser($profileUserId){
 
         $con = DbCon::connection();
