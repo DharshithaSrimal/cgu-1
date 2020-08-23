@@ -35,7 +35,7 @@
                                         <td><input id=\"stu_id\" value=".$stu->getUser_id()."></td>
                                         <td><div class=\"stuName\">".$stu->getFname()." ".$stu->getLname()."</div></td>
                                         <td><div class=\"stuName\">".$stu->getFacName()."</div></td>
-                                        <td><a href=\"../res/FPDF/students.php\"><button>View Information</button></a></td>
+                                        <td><a href=\"../res/FPDF/personal.php?id=".$stu->getUser_id()."\"><button>View Information</button></a></td>
                                         <td>
                                             <select class=\"form-control\" id=\"staff_id\">";
                                             $lecturer = loadStaff();
