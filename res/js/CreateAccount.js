@@ -22,9 +22,11 @@ $("#user_role").change(function () {
         $("#birthDate").hide();
 
         $("input[name='gender']").hide();
-        $("#gender_group").hide()
+        $("#gender_group").hide();
 
         $("label[for='indexNo']").text("Employee ID No*");
+        $("#indexNo").attr("placeholder","eg: 42153");//
+        $("#indexNo").attr("maxlength","5")
 
     }
     else if(user_role=="student"){
@@ -35,9 +37,9 @@ $("#user_role").change(function () {
         $("#gender_group").show()
 
         $("label[for='indexNo']").text("Student No*");
+        $("#indexNo").attr("placeholder","eg: HS/2013/866");//
 
     }
-
 });
 
 
@@ -350,24 +352,50 @@ $('#reEnterPassword').change(function(){
 });
 
 function stuNoValidation(txt){
-    var stuNoformat = /(.*\/){2}/; // there should be 3 forward slashes in stu number
-    if(txt.val().match(stuNoformat) || txt.val()=="")
-    {
-        $("#indexNoError").hide();
-        errorCount.forEach(function(item,index){
-            if(item == "stu"){
-                errorCount.splice(index, 1);
-            }
-        });
-        return true;
+
+    user_role =$("#user_role").is(":checked") == true?"student":"lecturer";
+
+    if(user_role=="student"){
+        var stuNoformat = /(.*\/){2}/; // there should be 3 forward slashes in stu number
+        if(txt.val().match(stuNoformat) || txt.val()=="")
+        {
+            $("#indexNoError").hide();
+            errorCount.forEach(function(item,index){
+                if(item == "stu"){
+                    errorCount.splice(index, 1);
+                }
+            });
+            return true;
+        }
+        else
+        {
+            $("#indexNoError").show();
+            $("#indexNoError").text("Invalid index number");
+            txt.focus();
+            errorCount.push("stu");
+            return false;
+        }
     }
-    else
-    {
-        $("#indexNoError").show();
-        $("#indexNoError").text("Invalid index number");
-        txt.focus();
-        errorCount.push("stu");
-        return false;
+    else {
+        var staffNoformat = /(^[0-9])/;
+        if(txt.val().match(staffNoformat) || txt.val()=="")
+        {
+            $("#indexNoError").hide();
+            errorCount.forEach(function(item,index){
+                if(item == "stu"){
+                    errorCount.splice(index, 1);
+                }
+            });
+            return true;
+        }
+        else
+        {
+            $("#indexNoError").show();
+            $("#indexNoError").text("Invalid index number");
+            txt.focus();
+            errorCount.push("stu");
+            return false;
+        }
     }
 }
 

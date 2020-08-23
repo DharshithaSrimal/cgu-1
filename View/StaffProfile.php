@@ -118,6 +118,8 @@
         }
     }
 ?>
+
+<?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 </body>
 
 </html>
