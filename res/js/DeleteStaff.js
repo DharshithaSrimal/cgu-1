@@ -14,10 +14,10 @@ $("#delete").click(function () {
         processData: false,
         success: function(result){
             // alert(result);
-            if(result == "User Deleted"){
+            //if(result == "User Deleted"){
                 alert("User Deleted");
                 window.location.replace("../View/ManageStaff.php");
-            }
+            //}
         }
     });
 });

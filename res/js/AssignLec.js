@@ -17,10 +17,10 @@ $("#btnSoft").click(function () {
         processData: false,
         success: function(result){
             // alert(result);
-            if(result == "Profile Updated"){
+            //if(result == "Profile Updated"){
                 alert("Assigning updated");
                 window.location.replace("../View/ManageStudents.php");
-            }
+            //}
         }
     });
 });

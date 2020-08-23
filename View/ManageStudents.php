@@ -45,8 +45,8 @@
                                             }                                            
                                             echo "</select>
                                         </td>
-                                        <td><button id=\"btnSoft\">Assign</button></td>
-                                        <td><button id=\"delete\"><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></button></td>
+                                        <td><button id=\"btnSoft\" onclick='confirm(\"Please confirm this counselor assignment!\")'>Assign</button></td>
+                                        <td><button id=\"delete\" onclick='confirm(\"Are you sure you want to delete this user?\")><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></button></td>
                                     </tr>";
                         }
                         echo "</table>";

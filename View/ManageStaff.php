@@ -16,7 +16,7 @@
         
         <div class="col-lg-9 col-md-8 col-sm-12">
             <div class="contacts-list">
-            <h4>Manage Students</h4>
+            <h4>Manage Staff</h4>
                     <div class="allUnits">
                         <?php
 
@@ -26,7 +26,6 @@
                                 <th>Staff ID</th>
                                 <th>Name</th>
                                 <th>Faculty</th>
-                                <th>Report</th>
                                 <th>Delete</th>
                             </tr>";
                         foreach ($stu_ar as $stu) {
@@ -35,7 +34,7 @@
                                         <td><input id=\"stu_id\" value=".$stu->getUser_id()."></td>
                                         <td><div class=\"stuName\">".$stu->getFname()." ".$stu->getLname()."</div></td>
                                         <td><div class=\"stuName\">".$stu->getFacName()."</div></td>
-                                        <td><button id=\"delete\"><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></button></td>
+                                        <td><button id=\"delete\" onclick='confirm(\"Are you sure you want to delete this user?\")'><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></button></td>
                                     </tr>";
                         }
                         echo "</table>";
