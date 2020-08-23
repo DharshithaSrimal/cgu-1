@@ -22,14 +22,29 @@
 
                         include_once '../Controller/HomeController.php';
                         $stu_ar = studentList();
-                        echo "<table>";
+                        echo "<table class='table'><tr>
+                                <th>Name</th>
+                                <th>Faculty</th>
+                                <th>Report</th>
+                                <th colspan=\"2\">Assign</th>
+                                <th></th>
+                            </tr>";
                         foreach ($stu_ar as $stu) {
                             $id=str_replace("/","",$stu->getUser_id());
                             echo "  <tr>
+                                        <td><input id=\"stu_id\" value=".$stu->getUser_id()."></td>
                                         <td><div class=\"stuName\">".$stu->getFname()." ".$stu->getLname()."</div></td>
                                         <td><div class=\"stuName\">".$stu->getFacName()."</div></td>
                                         <td><a href=\"../res/FPDF/students.php\"><button>View Information</button></a></td>
-                                        <td><button>Delete</button></td>
+                                        <td>
+                                            <select class=\"form-control\" id=\"staff_id\">";
+                                            $lecturer = loadStaff();
+                                            foreach ($lecturer as $lec){
+                                                echo "<option value=".$lec->getUser_id().">".$lec->getFname()." ".$lec->getLname()."</option>";
+                                            }                                            
+                                            echo "</select>
+                                        </td>
+                                        <td><button id=\"btnSoft\">Assign</button></td>
                                     </tr>";
                         }
                         echo "</table>";
@@ -39,5 +54,6 @@
         </div>
     </div>
 </div>
-
+<?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
+<script src="../res/js/AssignLec.js"></script>
 

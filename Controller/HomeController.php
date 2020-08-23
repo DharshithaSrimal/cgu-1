@@ -64,6 +64,58 @@ function loadStaffList(){
     }
     $con = null; //closing connection
 } 
+
+function loadStaff(){
+    $con = DbCon::connection();
+    $sql = "SELECT distinct user.*,staff_member.*,faculty.fac_name
+            FROM user,faculty ,degree,staff_member
+            WHERE user.user_id = staff_member.staff_id AND 
+            faculty.fac_id = staff_member.fac_id 
+            UNION
+            SELECT u.*,s.*,f.fac_name
+            FROM user u
+            JOIN staff_member s ON s.staff_id =  u.user_id
+            LEFT JOIN  faculty f on f.fac_id = s.fac_id 
+            WHERE u.user_role = 'admin' OR s.cgu_position = 'director' 
+            OR s.cgu_position = 'coordinator'
+            OR s.cgu_position = 'FAA'";
+    try{
+        $staff_array = array();
+
+        $res=$con->query($sql);
+
+        while($row = $res->fetch(PDO::FETCH_BOTH)){
+
+            $staff_obj = new Staff();
+
+            $staff_obj->setFname($row["fname"]);
+            $staff_obj->setLname($row["lname"]);
+            $staff_obj->setEmail($row["email"]);
+            $staff_obj->setDob($row["dob"]);
+            $staff_obj->setUser_id($row["user_id"]);
+            $staff_obj->setTpnumber($row["tpnumber"]);
+            $staff_obj->setImage($row["image"]);
+            $staff_obj->setGender($row["gender"]);
+            $staff_obj->setRole($row["user_role"]);
+            $staff_obj->setSpecialized_area($row["specialised_area"]);//
+            $staff_obj->setAcademicPosition($row["academic_position"]);//
+            $staff_obj->setFac_id($row["fac_id"]);
+            $staff_obj->setFacName($row["fac_name"]);
+            $staff_obj->setCguPosition($row["cgu_position"]);//
+
+            array_push($staff_array, $staff_obj);
+
+        }
+
+        // echo  $student_array[0]->getFname();
+        return $staff_array;
+
+    }catch (PDOException $e){
+        echo $e;
+    }
+    $con = null; //closing connection
+} 
+
 function loadStudentList(){
 
     $con = DbCon::connection();
