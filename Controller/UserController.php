@@ -21,6 +21,20 @@ if($method == 'load') {
 
 }
 
+if($method == 'delete_user') {
+
+    $stu_id = $_POST['stu_id'];
+    $con = DbCon::connection();
+    $sql = "UPDATE user SET status = 0 WHERE user_id = '".$stu_id."'";
+    try{
+        $res=$con->query($sql);
+
+    }catch (PDOException $e){
+         echo $e;
+    }
+
+}
+
 function loadData()
 {
     if(unserialize($_SESSION['current_user'])->getRole()=='student'){
@@ -170,3 +184,4 @@ function loadData()
 
     }
 }
+

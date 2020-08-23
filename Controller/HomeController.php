@@ -126,6 +126,7 @@ function loadStudentList(){
              student_counselor.staff_id = '".unserialize($_SESSION['current_user'])->getUser_id()."' AND 
              faculty.fac_id = student.fac_id AND 
              student.deg_id = degree.deg_id AND 
+             user.status = 1 AND  
              student_counselor.relationship = 'counselor'";
     try{
         $student_array = array();
@@ -173,6 +174,7 @@ function studentList(){
             WHERE user.user_id = student.stu_id AND 
              student.stu_id = student_counselor.stu_id AND 
              faculty.fac_id = student.fac_id AND 
+             user.status = 1 AND 
              student.deg_id = degree.deg_id";
     try{
         $student_array = array();

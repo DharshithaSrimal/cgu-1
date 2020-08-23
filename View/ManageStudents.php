@@ -46,7 +46,7 @@
                                             echo "</select>
                                         </td>
                                         <td><button id=\"btnSoft\">Assign</button></td>
-                                        <td><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></td>
+                                        <td><button id=\"delete\"><center><i class=\"fa fa-trash\" style=\"font-size:24px\"></i></center></button></td>
                                     </tr>";
                         }
                         echo "</table>";
@@ -56,6 +56,8 @@
         </div>
     </div>
 </div>
+<br><br><br><br><br><br>
 <?php $loadingPositon = 'footer'; include '../Common/CommonResources.php'; ?>
 <script src="../res/js/AssignLec.js"></script>
+<script src="../res/js/DeleteUser.js"></script>
 
