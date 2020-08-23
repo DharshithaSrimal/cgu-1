@@ -70,14 +70,22 @@ $("#btnNextCreateAccount").click(async function () {
             if( (gender == null|| gender == "") && user_role=="student"){next4=false; msg.push("Gender");} else next4=true ;
             if(email == null|| email == ""){next5=false; msg.push("Email");} else next5=true ;
 
-           if(next1 && next2 && next3 && next4 && next5){
+           if(next1 && next2 && next3 && next4 && next5 && allowNext()){//next1 && next2 && next3 && next4 && next5 && allowNext()
                 $("#page1CreateAccount").hide();
                 $("#page2CreateAccount").show();
                 $("#page3CreateAccount").hide();
                 $("#btnNextCreateAccount").text("Next");
             }
             else {
-                showAlert(msg);
+
+               if(!next1 && !next2 && !next3 && !next4 && !next5){
+                   showAlert(msg);
+               }
+               if(!allowNext()){
+                   alert("Please correct invalid inputs");
+               }
+
+
             }
 
         }
@@ -89,7 +97,7 @@ $("#btnNextCreateAccount").click(async function () {
             password=$("#userPassword").val();
 
             if(password == null|| password == ""){next1=false; msg.push("Password");}else next1=true ;
-           if(next1){
+           if(next1 && allowNext()){//next1 && allowNext()
                 $("#page1CreateAccount").hide();
                 $("#page2CreateAccount").hide();
                 $("#page3CreateAccount").show();
@@ -97,27 +105,33 @@ $("#btnNextCreateAccount").click(async function () {
                 $("#btnNextCreateAccount").text("Create account");
             }else
             {
-                showAlert(msg);
+                if(!next1){
+                    showAlert(msg);
+                }
+                if(!allowNext()){
+                    alert("Please correct invalid inputs");
+                }
             }
 
 
            // send verification code to student email
-            let method = "verify_email";
+            if(email!=""){
+                let method = "verify_email";
                 $.ajax({
-                type: "POST",
-                url: "../Controller/AccountController.php",
-                data: '&method='+method+'&firstName='+fname+'&lastName='+lname+'&email='+email,
-                //cache: false,
-                success: function(result){
-                    console.log(result)
+                    type: "POST",
+                    url: "../Controller/AccountController.php",
+                    data: '&method='+method+'&firstName='+fname+'&lastName='+lname+'&email='+email,
+                    //cache: false,
+                    success: function(result){
+                        console.log(result)
                         if(result == ""){
-                           // window.location.replace("../View/Login.php");
+                            // window.location.replace("../View/Login.php");
                         }
                     }
                 });
+            }
         }
          if(page3visible){
-
 
              let next1;
              let msg  =[];
@@ -127,7 +141,12 @@ $("#btnNextCreateAccount").click(async function () {
 
              var method = "create_account";
              let image=document.querySelector('#userImage').files[0];
-             image =  await getBase64(image);
+             if(typeof image === "undefined"){
+                 image = "";
+             }
+             else {
+                 image =  await getBase64(image);
+             }
 
             // console.log(JSON.stringify(image));
 
@@ -265,20 +284,201 @@ function readURL(input) {
     }
 }
 
+$('#indexNo').change(function(){
+    stuNoValidation($(this));
+});
+
+
+$('#email').change(function(){
+    emailValidation($(this));
+});
+
+$('#lastName').change(function(){
+    nameValidation($(this));
+});
+
+$('#firstName').change(function(){
+    nameValidation($(this));
+});
+
+$('#phoneNumber').change(function(){
+    phoneValidation($(this));
+});
+
+var errorCount =  [];
+
+$('#userPassword').change(function(){
+    var isValid = passwordValidation($(this));
+    if(!isValid){
+        $("#userPasswordError").show();
+        $("#userPasswordError").text("Password must contains Minimum 8 characters and at least 1 uppercase character, at least 1 lowercase character, at least 1 number and at least 1 special character");
+        //     At least 1 uppercase character.
+        //     At least 1 lowercase character.
+        //     At least 1 digit.
+        //     At least 1 special character.
+        //     Minimum 8 characters.
+
+        errorCount.push("pass1");
+        return false;
+    }
+    else {
+        $("#userPasswordError").hide();
+        errorCount.forEach(function(item,index){
+            if(item == "pass1"){
+                errorCount.splice(index, 1);
+            }
+        });
+    }
+});//matchPasswords
+
+$('#reEnterPassword').change(function(){
+    var isValid = matchPasswords( $("#userPassword"),$(this));
+    if(!isValid){
+        $("#reEnterPasswordError").show();
+        $("#reEnterPasswordError").text("The passwords you enter don't match");
+        errorCount.push("pass2");
+        return false;
+    }
+    else {
+        $("#reEnterPasswordError").hide();
+        errorCount.forEach(function(item,index){
+            if(item == "pass2"){
+                errorCount.splice(index, 1);
+            }
+        });
+    }
+});
+
 function stuNoValidation(txt){
-
-}
-
-function emailValidation(txt)
-{
-    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(txt.match(mailformat))
+    var stuNoformat = /(.*\/){2}/; // there should be 3 forward slashes in stu number
+    if(txt.val().match(stuNoformat) || txt.val()=="")
     {
+        $("#indexNoError").hide();
+        errorCount.forEach(function(item,index){
+            if(item == "stu"){
+                errorCount.splice(index, 1);
+            }
+        });
         return true;
     }
     else
     {
-        alert("You have entered an invalid email address!");
+        $("#indexNoError").show();
+        $("#indexNoError").text("Invalid index number");
+        txt.focus();
+        errorCount.push("stu");
         return false;
     }
 }
+
+
+function emailValidation(txt)
+{
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(txt.val().match(mailformat))
+    {
+        $("#emailError").hide();
+        errorCount.forEach(function(item,index){
+            if(item == "email"){
+                errorCount.splice(index, 1);
+            }
+        });
+        return true;
+    }
+    else
+    {
+        $("#emailError").show();
+        $("#emailError").text("Invalid email address!");
+        txt.focus();
+        errorCount.push("email");
+        return false;
+    }
+}
+
+function nameValidation(txt){
+
+    var nameformat =  /[^a-zA-Z]/;
+
+    var id = txt.attr("id")+"Error";
+
+    if(!txt.val().match(nameformat))
+    {
+        $("#"+id+"").hide();
+        errorCount.forEach(function(item,index){
+            if(item == "name"){
+                errorCount.splice(index, 1);
+            }
+        });
+        return true;
+    }
+    else
+    {
+        $("#"+id+"").show();
+        $("#"+id+"").text("Name cannot contain special characters");
+        txt.focus();
+        errorCount.push("name");
+        return false;
+    }
+}
+
+function phoneValidation(txt){
+
+    var numberformat =  /(^[0-9])/;
+
+    var id = txt.attr("id")+"Error";
+
+    if(txt.val().match(numberformat) || txt.val()=="")
+    {
+        $("#"+id+"").hide();
+        errorCount.forEach(function(item,index){
+            if(item == "phone"){
+                errorCount.splice(index, 1);
+            }
+        });
+        return true;
+    }
+    else
+    {
+        $("#"+id+"").show();
+        $("#"+id+"").text("Invalid phone number");
+        txt.focus();
+        errorCount.push("phone");
+        return false;
+    }
+}
+
+function allowNext() {
+    if(errorCount.length==0){
+        return true
+    }
+    else {
+        return false;
+    }
+}
+
+function passwordValidation(text){
+    var res;
+    var str =  text.val();
+    if (str.match(/[a-z]/g) && str.match(
+        /[A-Z]/g) && str.match(
+        /[0-9]/g) && str.match(
+        /[^a-zA-Z\d]/g) && str.length >= 8)
+        res = true;
+    else
+        res = false;
+
+    return res;
+}
+
+//     At least 1 uppercase character.
+//     At least 1 lowercase character.
+//     At least 1 digit.
+//     At least 1 special character.
+//     Minimum 8 characters.
+
+
+function matchPasswords(pass1,pass2){
+    return (pass1.val()===pass2.val())?true:false;
+}
+
+

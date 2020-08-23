@@ -71,7 +71,7 @@
         $dob=$_POST['dob'];
         $tpnumber=$_POST['tpnumber'];
         $user_role=$_POST['user_role'];
-        $image;
+        $image = "";
         if(isset($_FILES['image']) and !$_FILES['image']['error']){
             $image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
         }
@@ -106,9 +106,6 @@
                     echo "Verification code is expired";
                 }
                 else{
-                    
-                    
-                    
                     //save account details to the database
                      $sql = "INSERT INTO user
                      (user_id,fname,lname,email,

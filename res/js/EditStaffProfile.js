@@ -11,9 +11,6 @@ function readURL(input) {
     }
 }
 
-
-
-
 var AQprog = "";
 var AQprogID = "";
 var AQins = "";
