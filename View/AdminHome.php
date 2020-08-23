@@ -16,14 +16,16 @@
         <div class="col-lg-9 col-md-8 col-sm-12">
             <h4>Manage Users</h4>
                 <div class="contacts-list">
-                    <a href="ManageStudents.php"><button>Manage Staff</button></a>
-                    <a href=""><button>Manage Students</button></a>
+                    <a href="ManageStudents.php"><button>Manage Students</button></a>
+                    <a href="ManageStaff.php"><button>Manage Staff</button></a>
                 </div>
                 <h4>View Reports</h4>
                 <div class="contacts-list">
                     <a href="../res/FPDF/students.php" target="_blank"><button href= "">View Students</button></a>
                     <a href="../res/FPDF/lecturers.php" target="_blank"><button href= "">View Lecturers</button></a>
                 </div>
+                <h4>Post a Job Opportunity</h4>
+                <button onclick="window.location.href='../View/job.php'">Job Posting</button>
             </div>
             </div>
         </div>

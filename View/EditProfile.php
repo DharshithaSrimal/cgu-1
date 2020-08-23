@@ -73,6 +73,7 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 <!--                <label>Gender</label>-->
 <!--                <input  type="input" class="form-control" id="gender" value="--><?PHP //echo unserialize($_SESSION['student_user'])->getGender(); ?><!--"><br>-->
 <!--                -->
+
                 <button style="" class="btn btn-info" id="btnPersonal">Update Personal Information</button>
                 <br><br>
 <!--                <p>Educational Qualifications</p><hr>-->
@@ -200,7 +201,22 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
     </div>
 
     <button id="btnSoft" class="btn btn-info" >Update Skills & Qualifications</button>
+    <br><br>
+    
+    <div class="row decor-default contacts-labels card bg-light mb-3  card-user">
+        <h4 class="card-header h5">Tags</h4>
+        <div>
+            <div class="row" style="margin:0 auto;padding-right: 10px; padding-left: 10px;">
+                <div class="autocomplete" style="width:400px;">
+                    <input id="myInput" class="form-control" type="text" name="myCountry" placeholder="Search tags">
+                </div>
 
+                <textarea id="tags" class="form-control" rows="2" maxlength="100"></textarea>
+                <button onclick="AddToTextBox()" style="margin-top: 10px;">Add</button>
+            </div>
+        </div>
+    </div>
+    <button id="updateTags" style="margin-left: 5px;" class="btn btn-info">Update Tags</button>
 </div>
 <br>
 <br>
@@ -219,5 +235,11 @@ if (!isset($_SESSION["current_user"]) || $_SESSION["current_user"] == null) {
 ?>
 
 </body>
+<script>
+    function AddToTextBox(){
+            var tagval = document.getElementById("myInput").value;
+            document.getElementById("tags").append(tagval + ",");
+        }
+</script>
 </html>
 
