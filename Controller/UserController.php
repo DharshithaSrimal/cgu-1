@@ -33,9 +33,9 @@ function loadData()
                 ua.description,aq.aq_title,aq.aq_id,
                 up.pq_institute,up.pq_level,
                 pq.pq_title,pq.pq_id,up.description AS pq_description from user u
-                inner join student s on u.user_id = s.stu_id 
-                inner join faculty f on s.fac_id = f.fac_id
-                inner join degree d on s.deg_id = d.deg_id
+                Left join student s on u.user_id = s.stu_id 
+                Left join faculty f on s.fac_id = f.fac_id
+                Left join degree d on s.deg_id = d.deg_id
                 Left join user_academic_qualification ua on ua.user_id = u.user_id
                 Left join academic_qualification aq on aq.aq_id = ua.aq_id
                 Left join user_proffesional_qualification up on up.user_id = u.user_id
@@ -112,8 +112,8 @@ function loadData()
                 ua.description,aq.aq_title,aq.aq_id,
                 up.pq_institute,up.pq_level,
                 pq.pq_title,pq.pq_id,up.description AS pq_description from user u
-                inner join staff_member s on u.user_id = s.staff_id 
-                inner join faculty f on s.fac_id = f.fac_id
+                Left join staff_member s on u.user_id = s.staff_id 
+                Left join faculty f on s.fac_id = f.fac_id
                 Left join user_academic_qualification ua on ua.user_id = u.user_id
                 Left join academic_qualification aq on aq.aq_id = ua.aq_id
                 Left join user_proffesional_qualification up on up.user_id = u.user_id

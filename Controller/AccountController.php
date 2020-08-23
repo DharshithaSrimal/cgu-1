@@ -119,8 +119,36 @@
                     try{
                         $res=$con->query($sql);
                     }catch (PDOException $e){
+                         if(preg_match("/Duplicate/i", $e)){
+                             echo "User already exist";
+                         }
+                        else
+                         {
+                             echo $e;
+                         }
+                     return null;
+                    }
+                    $sql1 = "";
+                    if($user_role=="student"){
+
+
+
+//                  faculty
+//                degree
+//                user_academic_qualification
+//               academic_qualification
+//                user_proffesional_qualification
+//               proffesional_qualification
+                    }
+                    if($user_role=="lecturer"){
+                        $sql1 = "INSERT INTO staff_member(staff_id, experience, fac_id, specialised_area, academic_position, cgu_position) VALUES ('".$user_id."','','','','','')";
+                    }
+                    try{
+                        $res=$con->query($sql);
+                    }catch (PDOException $e) {
 
                     }
+
                     echo "Account created";
                 }
             }
