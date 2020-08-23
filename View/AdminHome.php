@@ -24,6 +24,8 @@
                     <a href="../res/FPDF/students.php" target="_blank"><button href= "">View Students</button></a>
                     <a href="../res/FPDF/lecturers.php" target="_blank"><button href= "">View Lecturers</button></a>
                 </div>
+                <h4>Post a Job Opportunity</h4>
+                <button onclick="window.location.href='../View/job.php'">Job Posting</button>
             </div>
             </div>
         </div>
