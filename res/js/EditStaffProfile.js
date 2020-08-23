@@ -108,7 +108,7 @@ $("#saveProfileBtn").click(async function(){
     dataSet.append('academic_qualifications', JSON.stringify(academic_qualifications));
     dataSet.append('professional_qualifications',  JSON.stringify(professional_qualifications));
     dataSet.append('specialized_areas', specialized_areas);
-    console.log(academic_qualifications);
+    // console.log(academic_qualifications);
     $.ajax({
         type: "POST",
         url: "../Controller/EditProfileController.php",

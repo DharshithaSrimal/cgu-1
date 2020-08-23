@@ -64,8 +64,11 @@ $(document).ready(function(){
     });
 
 
+    drawStarRating("",3);
+    // drawStarRating("AQ",2.5);
+    // drawStarRating("PQ",3.5);
+    // drawStarRating("SQ",3);
 
-    drawStarRating(3);
 });
 
 function readURL(input) {
@@ -80,8 +83,39 @@ function readURL(input) {
     }
 }
 
+//
+// function drawStarRating(Rating) {
+// //#IM2014030star1half
+//     starRating = Rating;
+//     console.log(Rating);
+//     starRating = Rating==0.5?"starhalf":starRating;
+//     starRating = Rating==1?"star1":starRating;
+//     starRating = Rating==1.5?"star1half":starRating;
+//     starRating = Rating==2?"star2":starRating;
+//     starRating = Rating==2.5?"star2half":starRating;
+//     starRating = Rating==3?"star3":starRating;
+//     starRating = Rating==3.5?"star3half":starRating;
+//     starRating = Rating==4?"star4":starRating;
+//     starRating = Rating==4.5?"star4half":starRating;
+//     starRating = Rating==5?"star5":starRating;
+//
+//     var id = '#'+starRating;
+//     $(id).prop( "checked", true );
+//
+//      id = '#AQ'+starRating;
+//     $(id).prop( "checked", true );
+//
+//      id = '#PQ'+starRating;
+//     $(id).prop( "checked", true );
+//
+//      id = '#SQ'+starRating;
+//     $(id).prop( "checked", true );
+// }
 
-function drawStarRating(Rating) {
+
+
+
+function drawStarRating(elementID,Rating) {
 //#IM2014030star1half
     starRating = Rating;
     console.log(Rating);
@@ -96,15 +130,39 @@ function drawStarRating(Rating) {
     starRating = Rating==4.5?"star4half":starRating;
     starRating = Rating==5?"star5":starRating;
 
-    var id = '#'+starRating;
-    $(id).prop( "checked", true );
-
-     id = '#AQ'+starRating;
-    $(id).prop( "checked", true );
-
-     id = '#PQ'+starRating;
-    $(id).prop( "checked", true );
-
-     id = '#SQ'+starRating;
+    var id = '#'+elementID+""+starRating;
+    console.log(id);
     $(id).prop( "checked", true );
 }
+
+
+$('#rateprofile').click(function (){
+
+    var starRating = "";
+
+    if(document.getElementById("starhalf").checked){starRating="0.5"}
+    if(document.getElementById("star1").checked){starRating="1"}
+    if(document.getElementById("star1half").checked){starRating="1.5"}
+    if(document.getElementById("star2").checked){starRating="2"}
+    if(document.getElementById("star2half").checked){starRating="2.5"}
+    if(document.getElementById("star3").checked){starRating="3"}
+    if(document.getElementById("star3half").checked){starRating="3.5"}
+    if(document.getElementById("star4").checked){starRating="4"}
+    if(document.getElementById("star4half").checked){starRating="4.5"}
+    if(document.getElementById("star5").checked){starRating="5"}
+//starRating
+    $.ajax({
+        type: "POST",
+        url: "../Controller/ProfileController.php",
+        data: '&method=updateRatiing&profUid='+ $("#id_div").val()+"&rating="+starRating,
+        cache: false,
+        success: function(result){
+            window.location.replace("../View/Home.php");
+        }
+    });
+
+});
+
+$('#commentprofile').click(function (){
+    window.open('../View/Inquiry.php', '_blank');
+});

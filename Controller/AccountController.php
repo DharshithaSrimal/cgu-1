@@ -130,25 +130,16 @@
                     }
                     $sql1 = "";
                     if($user_role=="student"){
-
-
-
-//                  faculty
-//                degree
-//                user_academic_qualification
-//               academic_qualification
-//                user_proffesional_qualification
-//               proffesional_qualification
+                        $sql1 = "INSERT INTO student(stu_id, fac_id, deg_id, description, status)VALUES('".$user_id."','','','','')";
                     }
                     if($user_role=="lecturer"){
-                        $sql1 = "INSERT INTO staff_member(staff_id, experience, fac_id, specialised_area, academic_position, cgu_position) VALUES ('".$user_id."','','','','','')";
+                        $sql1 = "INSERT INTO  staff_member(staff_id, experience, fac_id, specialised_area, academic_position, cgu_position)VALUES('".$user_id."','','','','','')";
                     }
                     try{
-                        $res=$con->query($sql);
+                        $res=$con->query($sql1);
                     }catch (PDOException $e) {
-
+                        
                     }
-
                     echo "Account created";
                 }
             }
@@ -157,7 +148,6 @@
             }
         }
         $con = null; //closing connection
-
     }
 
     function generateVerificationCode(){
