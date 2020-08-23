@@ -14,9 +14,17 @@
             </div>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-12">
-            <div class="contacts-list">
-                <a href= ""><h5 class="title">Manage Staff</h5></a>
-                <a href= ""><h5 class="title">Manage Students</h5></a> 
+            <h4>Manage Users</h4>
+                <div class="contacts-list">
+                    <button href= "">Manage Staff</button>
+                    <button href= "">Manage Students</button> 
+                </div>
+                <h4>View Reports</h4>
+                <div class="contacts-list">
+                    <a href="../res/FPDF/students.php" target="_blank"><button href= "">View Students</button></a>
+                    <a href="../res/FPDF/lecturers.php" target="_blank"><button href= "">View Lecturers</button></a>
+                </div>
+            </div>
             </div>
         </div>
     </div>
