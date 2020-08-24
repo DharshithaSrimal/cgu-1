@@ -172,9 +172,8 @@ function studentList(){
 
     $con = DbCon::connection();
     $sql = "SELECT user.*,student.*,faculty.fac_name,degree.degree_title 
-            FROM student_counselor,user,student ,faculty ,degree
+            FROM user,student ,faculty ,degree
             WHERE user.user_id = student.stu_id AND 
-             student.stu_id = student_counselor.stu_id AND 
              faculty.fac_id = student.fac_id AND 
              user.status = 1 AND 
              student.deg_id = degree.deg_id";
