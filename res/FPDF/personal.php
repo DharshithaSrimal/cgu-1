@@ -42,10 +42,10 @@ function viewTable($conn)
     $fetch_student=$conn->query("SELECT u.*, s.fac_id, s.deg_id, 
     f.fac_name, d.degree_title, d.degree_duration 
     FROM user u 
-    JOIN student s ON u.user_id = s.stu_id
-    JOIN faculty f ON f.fac_id = s.fac_id
-    JOIN degree d ON f.fac_id = d.fac_id
-    JOIN student_counselor c ON s.stu_id = c.stu_id
+    LEFT JOIN student s ON u.user_id = s.stu_id
+    LEFT JOIN faculty f ON f.fac_id = s.fac_id
+    LEFT JOIN degree d ON f.fac_id = d.fac_id
+    LEFT JOIN student_counselor c ON s.stu_id = c.stu_id
     WHERE user_id = '".$id."'");
     
 	$data = $fetch_student->fetch(PDO::FETCH_OBJ);
