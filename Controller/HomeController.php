@@ -172,11 +172,11 @@ function studentList(){
 
     $con = DbCon::connection();
     $sql = "SELECT user.*,student.*,faculty.fac_name,degree.degree_title 
-            FROM user,student ,faculty ,degree
-            WHERE user.user_id = student.stu_id AND 
-             faculty.fac_id = student.fac_id AND 
-             user.status = 1 AND 
-             student.deg_id = degree.deg_id";
+            FROM user
+            INNER JOIN student ON user.user_id = student.stu_id 
+            LEFT JOIN faculty ON faculty.fac_id = student.fac_id 
+            LEFT JOIN degree ON student.deg_id = degree.deg_id
+            WHERE user.status = 1";
     try{
         $student_array = array();
 
