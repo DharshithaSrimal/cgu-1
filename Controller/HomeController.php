@@ -20,7 +20,7 @@ function loadStaffList(){
             staff_member.staff_id = student_counselor.staff_id AND 
             student_counselor.stu_id = '".unserialize($_SESSION['current_user'])->getUser_id()."' AND 
             user.status = 1 AND
-            faculty.fac_id = staff_member.fac_id AND
+            faculty.fac_id = staff_member.fac_id
             UNION
             SELECT u.*,s.*,f.fac_name
             FROM user u
@@ -121,15 +121,25 @@ function loadStaff(){
 function loadStudentList(){
 
     $con = DbCon::connection();
-    $sql = "SELECT user.*,student.*,faculty.fac_name,degree.degree_title,student_counselor.given_rating 
+
+    $sql = "SELECT user.*,student.*,faculty.fac_name,degree.degree_title,student_counselor.given_rating
             FROM student_counselor,user,student ,faculty ,degree
-            WHERE user.user_id = student.stu_id AND 
-             student.stu_id = student_counselor.stu_id AND 
-             student_counselor.staff_id = '".unserialize($_SESSION['current_user'])->getUser_id()."' AND 
-             faculty.fac_id = student.fac_id AND 
-             student.deg_id = degree.deg_id AND 
-             user.status = 1 AND  
-             student_counselor.relationship = 'counselor'";
+            WHERE user.user_id = student.stu_id AND
+             student.stu_id = student_counselor.stu_id AND
+             student_counselor.staff_id = '".unserialize($_SESSION['current_user'])->getUser_id()."' AND
+             faculty.fac_id = student.fac_id AND
+             student.deg_id = degree.deg_id AND
+             user.status = 1";
+
+    if(unserialize($_SESSION['current_user'])->getRole() == "admin"){
+        $sql = "SELECT user.*,student.*,faculty.fac_name,degree.degree_title
+                FROM user,student ,faculty ,degree
+                WHERE user.user_id = student.stu_id AND
+                 faculty.fac_id = student.fac_id AND
+                 student.deg_id = degree.deg_id AND
+                 user.status = 1";
+    }
+
     try{
         $student_array = array();
 

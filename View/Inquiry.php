@@ -107,7 +107,7 @@ if (isset($_GET['newMsg'])) {
                 <label for="to">To:</label>
                 <select id="receiverList" class="custom-select" style="font-size: inherit !important;">
                     <?php
-                        if( unserialize($_SESSION['current_user'])->getRole() == "lecturer"){
+                        if( unserialize($_SESSION['current_user'])->getRole() == "lecturer" || unserialize($_SESSION['current_user'])->getRole() == "admin"){
                             $stu_list = loadStudentList();
 
                             foreach ( $stu_list as $stu){
