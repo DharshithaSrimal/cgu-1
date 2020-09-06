@@ -14,6 +14,8 @@ var dob;
 var tpnumber;
 var password;
 var user_role;
+var facID;
+var degID;
 
 $("#user_role").change(function () {
     user_role =$("#user_role").is(":checked") == true?"student":"lecturer";
@@ -63,6 +65,9 @@ $("#btnNextCreateAccount").click(async function () {
              dob=$("#birthDate").val();
              tpnumber=$("#phoneNumber").val();
              user_role =$("#user_role").is(":checked") == true?"student":"lecturer";
+
+            facId = document.querySelector('#faculty option[value="'+$("input[name=faculty]").val()+'"]').getAttribute('id');
+            degID = document.querySelector('#degree option[value="'+$("input[name=degree]").val()+'"]').getAttribute('id');
 
             let msg  =[];
 
@@ -167,6 +172,8 @@ $("#btnNextCreateAccount").click(async function () {
                  dataSet.append('user_role', user_role);
                  dataSet.append('password', password);
                  dataSet.append('image', image);
+                 dataSet.append('facID', facID);
+                 dataSet.append('degID', degID);
                  $.ajax({
                      type: "POST",
                      url: "../Controller/AccountController.php",

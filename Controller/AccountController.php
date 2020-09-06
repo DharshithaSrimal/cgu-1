@@ -72,6 +72,9 @@
         $tpnumber=$_POST['tpnumber'];
         $user_role=$_POST['user_role'];
         $image = "";
+        $facID=$_POST['facID'];
+        $degID=$_POST['degID'];
+
         if(isset($_FILES['image']) and !$_FILES['image']['error']){
             $image= addslashes(file_get_contents($_FILES['image']['tmp_name']));
         }
@@ -130,7 +133,7 @@
                     }
                     $sql1 = "";
                     if($user_role=="student"){
-                        $sql1 = "INSERT INTO student(stu_id, fac_id, deg_id, description, status)VALUES('".$user_id."','','','','')";
+                        $sql1 = "INSERT INTO student(stu_id, fac_id, deg_id, description, status)VALUES('".$user_id."','".$facID."','".$degID."','','')";
                     }
                     if($user_role=="lecturer"){
                         $sql1 = "INSERT INTO  staff_member(staff_id, experience, fac_id, specialised_area, academic_position, cgu_position)VALUES('".$user_id."','','','','','')";

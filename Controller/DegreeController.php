@@ -14,8 +14,8 @@ $method;
     if($method == 'load') {
         function loadData()
         {
-            $facultyId;
-            $degreeId;
+            $facultyId  = "";
+            $degreeId  = "";
             if(!empty($_POST['faculty'])) {
                 $facultyId =$_POST['faculty'];
             }
@@ -27,8 +27,8 @@ $method;
             $con = DbCon::connection();
 
             
-            //$sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = '".$facultyId."' and d.deg_id = '".$degreeId."'";
-            $sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = 1 and d.deg_id = 1";
+            $sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = '".$facultyId."' and d.deg_id = '".$degreeId."'";
+            //$sql = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = 1 and d.deg_id = 1";
             $res = $con->query($sql);
             $conn = null; //closing connection
             if ($res) {
@@ -51,31 +51,25 @@ $method;
     }
 
     if($method == 'loadDegree') {
-        //echo "<script>alert('hi');</script>";
-        function loadDegree()
-        {
-            $facultyId;
+
+            $facultyId = "";
             if(!empty($_POST['faculty'])) {
                 $facultyId =$_POST['faculty'];
             }
-
-                $userName = unserialize($_SESSION['student_user'])->getUser_id();
+//                $userName = unserialize($_SESSION['student_user'])->getUser_id();
                 try{
                     $con = DbCon::connection();
-                    $query = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id = 1";            
+                    $query = "select * from degree d inner join faculty f on d.fac_id = f.fac_id where d.fac_id =".$facultyId;
                     $stmt = $con->prepare($query);
                     $stmt->execute(); 
                     $result = $stmt->fetchAll();
                     
-                    $_SESSION["student_user"] = serialize($result);
-                   // echo json_encode($result);
+//                    $_SESSION["student_user"] = serialize($result);
+                    echo json_encode($result);
                 }
                 catch(Exception $ex){                    
                     echo($ex->getMessage());
                 }
-                
-        }
-       
          
     }
      

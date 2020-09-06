@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../res/css/CreateAccount.css">
 
   <?php $loadingPositon = 'header'; include '../Common/CommonResources.php'; ?>
-
+    <?php include_once '../Common/DbCon.php'; ?>
 </head>
 
 <body>
@@ -42,6 +42,64 @@
                     </div>
                     <p class="errorInputDisplay" id="indexNoError"></p>
                 </div>
+
+
+                <div class="form-group">
+                    <label for="faculty" class="col-sm-3 control-label">Faculty</label>
+                    <div class="col-sm-9">
+                        <input id="facList" class="form-control" list="faculty" name="faculty" placeholder="faculty.." style="    width: 100%;" >
+                    </div>
+                    <datalist id="faculty">
+                    <?php
+                        $con = DbCon::connection();
+                        $sql = "select * from faculty";
+                        $res = $con->query($sql);
+                        $conn = null; //closing connection
+                        if ($res) {
+                            while ($row = $res->fetch(PDO::FETCH_BOTH)) {
+                                echo "<option id =".$row["fac_id"]." value='".$row["fac_name"]."'>"  ;
+                            }
+                        }
+                         ?>
+                    </datalist>
+                </div>
+
+                <div class="form-group">
+                    <label for="degree" class="col-sm-3 control-label">Degree</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" list="degree" name="degree" placeholder="degree.." style="    width: 100%;" >
+                    </div>
+                    <datalist id="degree">
+
+                    </datalist>
+
+                    <script>
+                        var facultyid= 1;
+
+                        $("input[name=faculty]").focusout(function(){
+                            facultyid = document.querySelector('#faculty option[value="'+$(this).val()+'"]').getAttribute('id');
+                            // alert(facultyid)
+
+                            var method = 'loadDegree'
+                            $.ajax({
+                                type: "POST",
+                                url: "../Controller/DegreeController.php",
+                                data: 'faculty='+facultyid+'&method='+method,
+                                cache: false,
+                                success: function(result){
+                                    //console.log(JSON.parse(result)[0].degree_title);
+                                    $("#degree").empty();
+                                    var jsonObj = JSON.parse(result);
+
+                                    for(var i = 0; i < jsonObj.length; i++){
+                                        $("#degree").append("<option id ="+jsonObj[i].deg_id+" value='"+jsonObj[i].degree_title+"'>");
+                                    }
+                                }
+                            });
+                        })
+                    </script>
+                </div>
+
 
                 <div class="form-group">
                     <label for="firstName" class="col-sm-3 control-label">First Name*</label>
